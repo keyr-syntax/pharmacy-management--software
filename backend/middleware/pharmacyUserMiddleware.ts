@@ -49,9 +49,9 @@ export const userAuthenticationMiddleware = async (
           message: "Access denied",
         });
       } else if (
-        (user.role === "pharmacist" && user.isBlocked === false) ||
-        (user.role === "manager" && user.isBlocked === false) ||
-        (user.role === "admin" && user.isBlocked === false)
+        (user.role === "pharmacist" && user.isBlocked === "Not Blocked") ||
+        (user.role === "manager" && user.isBlocked === "Not Blocked") ||
+        (user.role === "admin" && user.isBlocked === "Not Blocked")
       ) {
         (req as AuthenticatedRequest).user = user;
         next();
@@ -96,8 +96,8 @@ export const managerAuthenticationMiddleware = async (
         });
         return;
       } else if (
-        (user.role === "manager" && user.isBlocked === false) ||
-        (user.role === "admin" && user.isBlocked === false)
+        (user.role === "manager" && user.isBlocked === "Not Blocked") ||
+        (user.role === "admin" && user.isBlocked === "Not Blocked")
       ) {
         (req as AuthenticatedRequest).user = user;
         next();
@@ -141,7 +141,7 @@ export const adminAuthenticationMiddleware = async (
           message: "Access denied",
         });
         return;
-      } else if (user.role === "admin" && user.isBlocked === false) {
+      } else if (user.role === "admin" && user.isBlocked === "Not Blocked") {
         (req as AuthenticatedRequest).user = user;
         next();
       } else {

@@ -5,6 +5,7 @@ export type RegisterUserformInput = {
   password: string;
   phoneNumber: number;
   role: string;
+  isBlocked: string;
 };
 
 export type LoginformInput = {
@@ -20,5 +21,16 @@ export interface PharmacyUser {
   password: string;
   phoneNumber: number;
   role: string;
-  isBlocked: boolean;
+  isBlocked: string;
+}
+
+export interface EditPharmacyUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+
+  phoneNumber: string;
+  role: string;
+  isBlocked: string;
 }

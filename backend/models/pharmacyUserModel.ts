@@ -10,7 +10,7 @@ export interface pharmacyUserInterface {
   password: string;
   phoneNumber: number;
   role: string;
-  isBlocked: boolean;
+  isBlocked: string;
 }
 
 class pharmacyUser
@@ -24,7 +24,7 @@ class pharmacyUser
   public password!: string;
   public phoneNumber!: number;
   public role!: string;
-  public isBlocked!: boolean;
+  public isBlocked!: string;
 }
 pharmacyUser.init(
   {
@@ -67,9 +67,9 @@ pharmacyUser.init(
       defaultValue: "pharmacist",
     },
     isBlocked: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: "Not Blocked",
     },
   },
   {

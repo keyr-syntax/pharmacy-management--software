@@ -6,6 +6,7 @@ import {
   updateUserProfile,
   fetchAllPharmacyUsers,
   updatePharmacyUserProfileByAdmin,
+  fetchOneUserByID,
 } from "../controllers/pharmacyUserControllers";
 import {
   adminAuthenticationMiddleware,
@@ -16,7 +17,7 @@ const router: Router = express.Router();
 router.post("/create_user", createPharmacyUser);
 router.post("/login", loginPharmacyUser);
 router.get("/logout", userAuthenticationMiddleware, logoutUser);
-router.put("/update_profile", userAuthenticationMiddleware, updateUserProfile);
+// router.put("/update_profile", userAuthenticationMiddleware, updateUserProfile);
 router.put(
   "/admin/update_user_profile/:userID",
   adminAuthenticationMiddleware,
@@ -33,5 +34,11 @@ router.put(
   "/update_user_profile/:userID",
   userAuthenticationMiddleware,
   updateUserProfile
+);
+
+router.get(
+  "/admin/fetch_user_byid/:userID",
+  adminAuthenticationMiddleware,
+  fetchOneUserByID
 );
 export default router;

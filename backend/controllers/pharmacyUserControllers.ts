@@ -29,7 +29,8 @@ passport.use(
 
 export const createPharmacyUser = async (req: Request, res: Response) => {
   console.log("req.body", req.body);
-  const { firstName, lastName, email, password, phoneNumber, role } = req.body;
+  const { firstName, lastName, email, password, phoneNumber, role, isBlocked } =
+    req.body;
 
   if (
     !firstName ||
@@ -42,7 +43,9 @@ export const createPharmacyUser = async (req: Request, res: Response) => {
     password.trim() === "" ||
     !phoneNumber ||
     !role ||
-    role.trim() === ""
+    role.trim() === "" ||
+    !isBlocked ||
+    isBlocked.trim() === ""
   ) {
     res.json({ success: false, message: "All fields are required" });
     return;
@@ -70,8 +73,8 @@ export const createPharmacyUser = async (req: Request, res: Response) => {
       email,
       password,
       phoneNumber,
-      role: role,
-      isBlocked: false,
+      role,
+      isBlocked,
     });
 
     if (newUser) {
@@ -132,7 +135,7 @@ export const loginPharmacyUser = async (
         message: "Password is incorrect",
       });
       return;
-    } else if (checkIfUserExists.isBlocked === true) {
+    } else if (checkIfUserExists.isBlocked === "Blocked") {
       res.status(404).json({
         success: false,
         message: "Access denied! You are blocked!",
@@ -190,10 +193,13 @@ export const updatePharmacyUserProfileByAdmin = async (
       });
 
       if (updatePharmacyUser) {
+        const findAllUsers = await pharmacyUser.findAll({
+          order: [["createdAt", "DESC"]],
+        });
         res.status(200).json({
           success: true,
           message: "Profile updated successfully",
-          user: updatePharmacyUser,
+          users: findAllUsers,
         });
       } else {
         res.status(404).json({
@@ -210,7 +216,7 @@ export const updatePharmacyUserProfileByAdmin = async (
       return;
     }
   } catch (error) {
-    console.log("Error while updating user profile");
+    console.log("Error while updating user profile", error);
     res.status(500).json({
       success: false,
       message: "Profile update failed",
@@ -301,6 +307,32 @@ export const fetchAllPharmacyUsers = async (req: Request, res: Response) => {
       res.status(200).json({
         success: true,
         users: [],
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+
+export const fetchOneUserByID = async (req: Request, res: Response) => {
+  const { userID } = req.params;
+  try {
+    const findUserByPK = await pharmacyUser.findByPk(userID);
+
+    if (findUserByPK) {
+      res.status(200).json({
+        success: true,
+        user: findUserByPK,
+      });
+      return;
+    } else {
+      res.status(200).json({
+        success: false,
+        message: "User not found",
       });
       return;
     }

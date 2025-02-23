@@ -38,6 +38,7 @@ export default function RegisterPharmacyUser() {
           password: formData.password,
           phoneNumber: formData.phoneNumber,
           role: formData.role,
+          isBlocked: formData.isBlocked,
         }),
       });
       if (!data.ok) {
@@ -168,6 +169,31 @@ export default function RegisterPharmacyUser() {
             </select>
             {errors.role && (
               <p className="text-red-500 text-sm">{errors.role.message}</p>
+            )}
+          </div>
+          <div className="grid gap-2">
+            <Label className="text-md" htmlFor="role">
+              Status
+            </Label>
+            <select
+              id="isBlocked"
+              className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
+              {...register("isBlocked", {
+                required: "Block status is required",
+              })}
+            >
+              <option className="text-white bg-[#151533]" value="">
+                Select status
+              </option>
+              <option className="text-white bg-[#151533]" value="Blocked">
+                Blocked
+              </option>
+              <option className="text-white bg-[#151533]" value="Not Blocked">
+                Not Blocked
+              </option>
+            </select>
+            {errors.isBlocked && (
+              <p className="text-red-500 text-sm">{errors.isBlocked.message}</p>
             )}
           </div>
           <div className="grid gap-2 ">

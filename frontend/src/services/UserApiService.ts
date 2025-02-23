@@ -1,6 +1,9 @@
 import { baseURL } from "@/lib/utils";
 import toast from "react-hot-toast";
-import { PharmacyUserGlobalState } from "@/stores/GlobalState";
+import {
+  PharmacyUserGlobalState,
+  EditPharmacyUserGlobalState,
+} from "@/stores/GlobalState";
 
 export const getAllPharmacyUsers = async () => {
   try {
@@ -26,12 +29,12 @@ export const getAllPharmacyUsers = async () => {
   }
 };
 
-export const ApprovePharmacyUsers = async (userID: number): Promise<void> => {
+export const findPharmacyUserByID = async (userID: number): Promise<void> => {
   try {
     const data = await fetch(
-      `${baseURL}/pharmacy_user/admin/approve_user/${userID}`,
+      `${baseURL}/pharmacy_user/admin/fetch_user_byid/${userID}`,
       {
-        method: "PUT",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,44 +44,80 @@ export const ApprovePharmacyUsers = async (userID: number): Promise<void> => {
 
     const response = await data.json();
     if (response.success) {
-      toast.success(response.message);
-      PharmacyUserGlobalState.setState({ usersList: response.users });
+      EditPharmacyUserGlobalState.setState({
+        firstName: response.user.firstName,
+        lastName: response.user.lastName,
+        email: response.user.email,
+        phoneNumber: response.user.phoneNumber,
+        role: response.user.role,
+        isBlocked: response.user.isBlocked,
+      });
     } else {
       toast.error(response.message);
-      PharmacyUserGlobalState.setState({ usersList: null });
+      EditPharmacyUserGlobalState.setState({
+        firstName: null,
+        lastName: null,
+        email: null,
+        phoneNumber: null,
+        role: null,
+        isBlocked: null,
+      });
     }
   } catch (error) {
     console.log("Error while fetching pharmacy users", error);
-    PharmacyUserGlobalState.setState({ usersList: null });
+    EditPharmacyUserGlobalState.setState({
+      firstName: null,
+      lastName: null,
+      email: null,
+      phoneNumber: null,
+      role: null,
+      isBlocked: null,
+    });
   }
 };
 
-export const BlockPharmacyUsers = async (userID: number): Promise<void> => {
-  try {
-    const data = await fetch(
-      `${baseURL}/pharmacy_user/admin/block_user/${userID}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }
-    );
+// export const updatePharmacyUser = async (
+//   userID: number,
+//   firstName: string | null,
+//   lastName: string | null,
+//   email: string | null,
+//   phoneNumber: string | null,
+//   role: string | null,
+//   isBlocked: string | null
+// ): Promise<void> => {
+//   try {
+//     const data = await fetch(
+//       `${baseURL}/pharmacy_user/admin/update_user_profile/${userID}`,
+//       {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         credentials: "include",
+//         body: JSON.stringify({
+//           firstName: firstName,
+//           lastName: lastName,
+//           email: email,
+//           phoneNumber: phoneNumber,
+//           role: role,
+//           isBlocked: isBlocked,
+//         }),
+//       }
+//     );
 
-    const response = await data.json();
-    if (response.success) {
-      toast.success(response.message);
-      PharmacyUserGlobalState.setState({ usersList: response.users });
-    } else {
-      toast.error(response.message);
-      PharmacyUserGlobalState.setState({ usersList: null });
-    }
-  } catch (error) {
-    console.log("Error while fetching pharmacy users", error);
-    PharmacyUserGlobalState.setState({ usersList: null });
-  }
-};
+//     const response = await data.json();
+//     if (response.success) {
+//       toast.success(response.message);
+//       PharmacyUserGlobalState.setState({ usersList: response.users });
+//     } else {
+//       toast.error(response.message);
+//       PharmacyUserGlobalState.setState({ usersList: null });
+//     }
+//   } catch (error) {
+//     console.log("Error while fetching pharmacy users", error);
+//     PharmacyUserGlobalState.setState({ usersList: null });
+//   }
+// };
 
 export const PromotePharmacyUserToAdmin = async (
   userID: number
