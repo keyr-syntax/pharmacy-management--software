@@ -75,6 +75,7 @@ export const createPharmacyUser = async (req: Request, res: Response) => {
       phoneNumber,
       role,
       isBlocked,
+      isSoftDeleted: false,
     });
 
     if (newUser) {
@@ -235,7 +236,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(user.id);
 
-    if (findPharmacyUserByID) {
+    if (findPharmacyUserByID && !findPharmacyUserByID.isSoftDeleted) {
       const updatePharmacyUser = await findPharmacyUserByID.update({
         firstName: firstName,
         lastName: lastName,
@@ -297,6 +298,9 @@ export const logoutUser = (req: Request, res: Response) => {
 export const fetchAllPharmacyUsers = async (req: Request, res: Response) => {
   try {
     const findAllUsers = await pharmacyUser.findAll({
+where:{
+isSoftDeleted: false,
+},
       order: [["createdAt", "DESC"]],
     });
 
@@ -326,7 +330,7 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
   try {
     const findUserByPK = await pharmacyUser.findByPk(userID);
 
-    if (findUserByPK) {
+    if (findUserByPK && !findUserByPK.isSoftDeleted) {
       res.status(200).json({
         success: true,
         user: findUserByPK,
