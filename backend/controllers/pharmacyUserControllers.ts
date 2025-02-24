@@ -358,3 +358,53 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const { userID } = req.params;
+  
+  try {
+    const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
+
+    if (findPharmacyUserByID && !findPharmacyUserByID.isSoftDeleted) {
+      const softDeletePharmacyUser = await findPharmacyUserByID.update({
+        isSoftDeleted: true,
+        
+      });
+
+      if (softDeletePharmacyUser) {
+
+const findAllUsers = await pharmacyUser.findAll({
+where:{
+isSoftDeleted: false,
+},
+      order: [["createdAt", "DESC"]],
+    });
+        res.status(200).json({
+          success: true,
+          message: "Deleted",
+          users: findAllUsers,
+        });
+return;
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Failed to delete user",
+        });
+        return;
+      }
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+      return;
+    }
+  } catch (error) {
+    console.log("Error while deleting user");
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete user",
+    });
+  }
+};
