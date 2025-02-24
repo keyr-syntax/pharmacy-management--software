@@ -11,6 +11,7 @@ export interface pharmacyUserInterface {
   phoneNumber: number;
   role: string;
   isBlocked: string;
+isSoftDeleted:boolean;
 }
 
 class pharmacyUser
@@ -25,6 +26,7 @@ class pharmacyUser
   public phoneNumber!: number;
   public role!: string;
   public isBlocked!: string;
+  public isSoftDeleted!:boolean;
 }
 pharmacyUser.init(
   {
