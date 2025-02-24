@@ -225,7 +225,7 @@ export const updatePharmacyUserProfileByAdmin = async (
 };
 
 export const updateUserProfile = async (req: Request, res: Response) => {
-  const { firstName, lastName, email, phoneNumber, role , isBlocked} = req.body;
+  const { firstName, lastName, email, phoneNumber, role} = req.body;
   const user: pharmacyUserInterface | undefined =
     req.user as pharmacyUserInterface;
   if (!user) {
@@ -241,8 +241,8 @@ export const updateUserProfile = async (req: Request, res: Response) => {
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
-        role: role,
-        isBlocked:isBlocked
+        role: role
+        
       });
 
       if (updatePharmacyUser) {
