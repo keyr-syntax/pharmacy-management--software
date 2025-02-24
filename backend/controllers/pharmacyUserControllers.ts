@@ -191,7 +191,7 @@ export const updatePharmacyUserProfileByAdmin = async (
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
 
-    if (findPharmacyUserByID) {
+    if (findPharmacyUserByID && findPharmacyUserByID.isSoftDeleted ) {
       const updatePharmacyUser = await findPharmacyUserByID.update({
         firstName: firstName,
         lastName: lastName,
