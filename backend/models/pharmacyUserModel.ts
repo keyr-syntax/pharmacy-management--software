@@ -73,6 +73,12 @@ pharmacyUser.init(
       allowNull: false,
       defaultValue: "Not Blocked",
     },
+    isSoftDeleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+
+}
   },
   {
     sequelize,
