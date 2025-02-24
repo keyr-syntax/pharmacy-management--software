@@ -36,8 +36,6 @@ router.get(
   fetchAllPharmacyUsers
 );
 
-
-
 router.get(
   "/admin/fetch_user_byid/:userID",
   adminAuthenticationMiddleware,
