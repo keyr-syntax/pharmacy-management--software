@@ -41,4 +41,12 @@ router.get(
   adminAuthenticationMiddleware,
   fetchOneUserByID
 );
+
+router.get(
+  "/fetch_user_byid/:userID",
+  userAuthenticationMiddleware,
+  fetchOneUserByID
+);
+
+
 export default router;
