@@ -223,6 +223,7 @@ export const updatePharmacyUserProfileByAdmin = async (
     });
   }
 };
+
 export const updateUserProfile = async (req: Request, res: Response) => {
   const { firstName, lastName, email, phoneNumber, role , isBlocked} = req.body;
   const user: pharmacyUserInterface | undefined =
@@ -250,6 +251,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
           message: "Profile updated successfully",
           user: updatePharmacyUser,
         });
+return;
       } else {
         res.status(404).json({
           success: false,
