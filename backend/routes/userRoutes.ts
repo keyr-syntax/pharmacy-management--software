@@ -17,7 +17,7 @@ const router: Router = express.Router();
 router.post("/create_user", createPharmacyUser);
 router.post("/login", loginPharmacyUser);
 router.get("/logout", userAuthenticationMiddleware, logoutUser);
-// router.put("/update_profile", userAuthenticationMiddleware, updateUserProfile);
+
 router.put(
   "/admin/update_user_profile/:userID",
   adminAuthenticationMiddleware,
@@ -31,7 +31,7 @@ router.get(
 );
 
 router.put(
-  "/update_user_profile/:userID",
+  "/update_user_profile",
   userAuthenticationMiddleware,
   updateUserProfile
 );
