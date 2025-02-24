@@ -24,17 +24,19 @@ router.put(
   updatePharmacyUserProfileByAdmin
 );
 
+router.put(
+  "/update_user_profile",
+  userAuthenticationMiddleware,
+  updateUserProfile
+);
+
 router.get(
   "/admin/fetch_all_users",
   adminAuthenticationMiddleware,
   fetchAllPharmacyUsers
 );
 
-router.put(
-  "/update_user_profile",
-  userAuthenticationMiddleware,
-  updateUserProfile
-);
+
 
 router.get(
   "/admin/fetch_user_byid/:userID",
