@@ -142,7 +142,15 @@ export const loginPharmacyUser = async (
         message: "Access denied! You are blocked!",
       });
       return;
-    } else {
+    } else if (checkIfUserExists.isSoftDeleted) {
+      res.status(404).json({
+        success: false,
+        message: "This account has been deleted. Contact admin for account recovery",
+      });
+      return;
+    }
+
+ else {
       const token = jwt.sign(
         { id: checkIfUserExists.id },
         process.env.TOKEN_SECRET!,
