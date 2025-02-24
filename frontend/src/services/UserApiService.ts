@@ -119,31 +119,35 @@ export const findPharmacyUserByID = async (userID: number): Promise<void> => {
 //   }
 // };
 
-export const PromotePharmacyUserToAdmin = async (
+export const DeletePharmacyUserByAdmin = async (
   userID: number
 ): Promise<void> => {
-  try {
-    const data = await fetch(
-      `${baseURL}/pharmacy_user/admin/promote_user_to_admin/${userID}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }
-    );
+  if (window.confirm("Are you sure?")) {
+    try {
+      const data = await fetch(
+        `${baseURL}/pharmacy_user/admin/delete_user/${userID}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
-    const response = await data.json();
-    if (response.success) {
-      toast.success(response.message);
-      PharmacyUserGlobalState.setState({ usersList: response.users });
-    } else {
-      toast.error(response.message);
+      const response = await data.json();
+      if (response.success) {
+        toast.success(response.message);
+        PharmacyUserGlobalState.setState({ usersList: response.users });
+      } else {
+        toast.error(response.message);
+        PharmacyUserGlobalState.setState({ usersList: null });
+      }
+    } catch (error) {
+      console.log("Error while updating pharmacy users", error);
       PharmacyUserGlobalState.setState({ usersList: null });
     }
-  } catch (error) {
-    console.log("Error while updating pharmacy users", error);
-    PharmacyUserGlobalState.setState({ usersList: null });
+  } else {
+    return;
   }
 };

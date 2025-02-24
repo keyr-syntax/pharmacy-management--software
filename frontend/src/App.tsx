@@ -27,6 +27,11 @@ function App() {
           }
         >
           <Route path="/dashboard/users" element={<PharmacyUsersList />} />
+          <Route path="/dashboard/login" element={<LoginPharmacyUser />} />
+          <Route
+            path="/dashboard/register"
+            element={<RegisterPharmacyUser />}
+          />
         </Route>
       </Routes>
     </>

@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { pharmacyUserInterface } from "../models/pharmacyUserModel";
+
 dotenv.config();
 
 const opts = {
@@ -341,5 +342,39 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
       success: false,
       message: "Failed to fetch users",
     });
+  }
+};
+
+export const deletePharmacyUser = async (req: Request, res: Response) => {
+  const { userID } = req.params;
+
+  try {
+    const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
+
+    if (findPharmacyUserByID) {
+      await findPharmacyUserByID.destroy();
+      const findAllUsers = await pharmacyUser.findAll({
+        order: [["createdAt", "DESC"]],
+      });
+      res.status(200).json({
+        success: true,
+        message: "Deleted",
+        users: findAllUsers,
+      });
+      return;
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Failed to delete",
+      });
+      return;
+    }
+  } catch (error) {
+    console.log("Error while deleting user", error);
+    res.status(500).json({
+      success: true,
+      message: "Failed to delete",
+    });
+    return;
   }
 };
