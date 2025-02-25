@@ -13,6 +13,7 @@ import {
   getAllPharmacyUsers,
   findPharmacyUserByID,
   DeletePharmacyUserByAdmin,
+  updatePharmacyUser,
 } from "@/services/UserApiService";
 import {
   EditPharmacyUserGlobalState,
@@ -25,7 +26,6 @@ import { Input } from "@/components/ui/input";
 export default function PharmacyUsersList() {
   const { usersList } = PharmacyUserGlobalState();
   const {
-    updatePharmacyUser,
     userEditID,
     firstName,
     lastName,
