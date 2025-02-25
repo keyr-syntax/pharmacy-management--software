@@ -232,7 +232,6 @@ export const updatePharmacyUserProfileByAdmin = async (
     });
   }
 };
-
 export const updateUserProfile = async (req: Request, res: Response) => {
   const { firstName, lastName, email, phoneNumber, role } = req.body;
   const user: pharmacyUserInterface | undefined =
@@ -332,6 +331,36 @@ export const fetchAllPharmacyUsers = async (req: Request, res: Response) => {
   }
 };
 
+export const fetchAllDeletedItems = async (req: Request, res: Response) => {
+  try {
+    const findAllUsers = await pharmacyUser.findAll({
+      where: {
+        SoftDeleted: true,
+      },
+      order: [["createdAt", "DESC"]],
+    });
+
+    if (findAllUsers.length > 0) {
+      res.status(200).json({
+        success: true,
+        users: findAllUsers,
+      });
+      return;
+    } else {
+      res.status(200).json({
+        success: true,
+        users: [],
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+    });
+  }
+};
+
 export const fetchOneUserByID = async (req: Request, res: Response) => {
   const { userID } = req.params;
   try {
@@ -401,6 +430,52 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Failed to delete user",
+    });
+  }
+};
+export const undoDeletedUser = async (req: Request, res: Response) => {
+  const { userID } = req.params;
+
+  try {
+    const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
+
+    if (findPharmacyUserByID && findPharmacyUserByID.SoftDeleted) {
+      const softDeletePharmacyUser = await findPharmacyUserByID.update({
+        SoftDeleted: false,
+      });
+
+      if (softDeletePharmacyUser) {
+        const findAllUsers = await pharmacyUser.findAll({
+          where: {
+            SoftDeleted: true,
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        res.status(200).json({
+          success: true,
+          message: "User restored",
+          users: findAllUsers,
+        });
+        return;
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Failed to undo user",
+        });
+        return;
+      }
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+      return;
+    }
+  } catch (error) {
+    console.log("Error while restoring user", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to undo user",
     });
   }
 };

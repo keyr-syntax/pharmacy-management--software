@@ -8,6 +8,8 @@ import {
   updatePharmacyUserProfileByAdmin,
   fetchOneUserByID,
   deleteUser,
+  fetchAllDeletedItems,
+  undoDeletedUser,
 } from "../controllers/pharmacyUserControllers";
 import {
   adminAuthenticationMiddleware,
@@ -53,6 +55,18 @@ router.delete(
   "/admin/delete_user/:userID",
   adminAuthenticationMiddleware,
   deleteUser
+);
+
+router.get(
+  "/admin/deleted_items",
+  adminAuthenticationMiddleware,
+  fetchAllDeletedItems
+);
+
+router.put(
+  "/admin/undo_deleted_user/:userID",
+  adminAuthenticationMiddleware,
+  undoDeletedUser
 );
 
 export default router;

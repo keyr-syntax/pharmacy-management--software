@@ -27,6 +27,9 @@ interface EditPharmacyUserApiResponse {
   ) => Promise<void>;
 }
 
+interface DeletedItemsApiResponse {
+  deltedUsersList: PharmacyUser[] | null;
+}
 export const PharmacyUserGlobalState = create<PharmacyUserApiResponse>(() => ({
   usersList: null,
 }));
@@ -73,18 +76,47 @@ export const EditPharmacyUserGlobalState = create<EditPharmacyUserApiResponse>(
         const response = await data.json();
         if (response.success) {
           toast.success(response.message);
-          set({ userEditID: null });
+          set({
+            userEditID: null,
+            firstName: null,
+            lastName: null,
+            email: null,
+            phoneNumber: null,
+            role: null,
+            isBlocked: null,
+          });
           PharmacyUserGlobalState.setState({ usersList: response.users });
         } else {
           toast.error(response.message);
-          set({ userEditID: null });
-          PharmacyUserGlobalState.setState({ usersList: null });
+          set({
+            userEditID: null,
+
+            firstName: null,
+            lastName: null,
+            email: null,
+            phoneNumber: null,
+            role: null,
+            isBlocked: null,
+          });
+          // PharmacyUserGlobalState.setState({ usersList: null });
         }
       } catch (error) {
         console.log("Error while fetching pharmacy users", error);
-        set({ userEditID: null });
-        PharmacyUserGlobalState.setState({ usersList: null });
+        set({
+          userEditID: null,
+          firstName: null,
+          lastName: null,
+          email: null,
+          phoneNumber: null,
+          role: null,
+          isBlocked: null,
+        });
+        // PharmacyUserGlobalState.setState({ usersList: null });
       }
     },
   })
 );
+
+export const DeletedItemsGlobalState = create<DeletedItemsApiResponse>(() => ({
+  deltedUsersList: null,
+}));

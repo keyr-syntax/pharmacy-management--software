@@ -271,6 +271,12 @@ export default function PharmacyUsersList() {
                           onClick={() => {
                             EditPharmacyUserGlobalState.setState({
                               userEditID: null,
+                              firstName: null,
+                              lastName: null,
+                              email: null,
+                              phoneNumber: null,
+                              role: null,
+                              isBlocked: null,
                             });
                           }}
                           size={32}

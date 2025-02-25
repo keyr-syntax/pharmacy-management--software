@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import {
   PharmacyUserGlobalState,
   EditPharmacyUserGlobalState,
+  DeletedItemsGlobalState,
 } from "@/stores/GlobalState";
 
 export const getAllPharmacyUsers = async () => {
@@ -141,11 +142,68 @@ export const DeletePharmacyUserByAdmin = async (
         PharmacyUserGlobalState.setState({ usersList: response.users });
       } else {
         toast.error(response.message);
-        PharmacyUserGlobalState.setState({ usersList: null });
+        // PharmacyUserGlobalState.setState({ usersList: null });
       }
     } catch (error) {
+      toast.error("Failed to delete user");
       console.log("Error while updating pharmacy users", error);
-      PharmacyUserGlobalState.setState({ usersList: null });
+      // PharmacyUserGlobalState.setState({ usersList: null });
+    }
+  } else {
+    return;
+  }
+};
+
+export const getAllDeletedUsers = async () => {
+  try {
+    const data = await fetch(`${baseURL}/pharmacy_user/admin/deleted_items`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const response = await data.json();
+
+    if (response.success) {
+      DeletedItemsGlobalState.setState({ deltedUsersList: response.users });
+    } else {
+      toast.error(response.message);
+      DeletedItemsGlobalState.setState({ deltedUsersList: null });
+    }
+  } catch (error) {
+    console.log("Error while fetching pharmacy users", error);
+    DeletedItemsGlobalState.setState({ deltedUsersList: null });
+  }
+};
+
+export const undoDeletedPharmacyUser = async (
+  userID: number
+): Promise<void> => {
+  if (window.confirm("Are you sure you want to undo deleted user?")) {
+    try {
+      const data = await fetch(
+        `${baseURL}/pharmacy_user/admin/undo_deleted_user/${userID}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      const response = await data.json();
+      if (response.success) {
+        toast.success(response.message);
+        DeletedItemsGlobalState.setState({ deltedUsersList: response.users });
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete user");
+      console.log("Error while updating pharmacy users", error);
     }
   } else {
     return;

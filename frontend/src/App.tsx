@@ -6,6 +6,7 @@ import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import RegisterPharmacyUser from "./components/pages/auth/RegisterUser";
 import LoginPharmacyUser from "./components/pages/auth/LoginUser";
 import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
+import RecycleBin from "./components/pages/recycleBin/RecycleBin";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           }
         >
           <Route path="/dashboard/users" element={<PharmacyUsersList />} />
+          <Route path="/dashboard/recycle_bin" element={<RecycleBin />} />
         </Route>
       </Routes>
     </>

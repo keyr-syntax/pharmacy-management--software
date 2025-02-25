@@ -38,12 +38,12 @@ pharmacyUser.init(
     },
     firstName: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
     lastName: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
     email: {
