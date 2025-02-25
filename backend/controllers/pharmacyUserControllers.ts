@@ -76,6 +76,7 @@ export const createPharmacyUser = async (req: Request, res: Response) => {
       phoneNumber,
       role,
       isBlocked,
+      SoftDeleted: false,
     });
 
     if (newUser) {
@@ -142,6 +143,13 @@ export const loginPharmacyUser = async (
         message: "Access denied! You are blocked!",
       });
       return;
+    } else if (checkIfUserExists.SoftDeleted) {
+      res.status(404).json({
+        success: false,
+        message:
+          "This account has been deleted. Contact admin for account recovery",
+      });
+      return;
     } else {
       const token = jwt.sign(
         { id: checkIfUserExists.id },
@@ -183,7 +191,7 @@ export const updatePharmacyUserProfileByAdmin = async (
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
 
-    if (findPharmacyUserByID) {
+    if (findPharmacyUserByID && !findPharmacyUserByID.SoftDeleted) {
       const updatePharmacyUser = await findPharmacyUserByID.update({
         firstName: firstName,
         lastName: lastName,
@@ -224,6 +232,7 @@ export const updatePharmacyUserProfileByAdmin = async (
     });
   }
 };
+
 export const updateUserProfile = async (req: Request, res: Response) => {
   const { firstName, lastName, email, phoneNumber, role } = req.body;
   const user: pharmacyUserInterface | undefined =
@@ -235,7 +244,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(user.id);
 
-    if (findPharmacyUserByID) {
+    if (findPharmacyUserByID && !findPharmacyUserByID.SoftDeleted) {
       const updatePharmacyUser = await findPharmacyUserByID.update({
         firstName: firstName,
         lastName: lastName,
@@ -250,6 +259,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
           message: "Profile updated successfully",
           user: updatePharmacyUser,
         });
+        return;
       } else {
         res.status(404).json({
           success: false,
@@ -295,6 +305,9 @@ export const logoutUser = (req: Request, res: Response) => {
 export const fetchAllPharmacyUsers = async (req: Request, res: Response) => {
   try {
     const findAllUsers = await pharmacyUser.findAll({
+      where: {
+        SoftDeleted: false,
+      },
       order: [["createdAt", "DESC"]],
     });
 
@@ -324,7 +337,7 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
   try {
     const findUserByPK = await pharmacyUser.findByPk(userID);
 
-    if (findUserByPK) {
+    if (findUserByPK && !findUserByPK.SoftDeleted) {
       res.status(200).json({
         success: true,
         user: findUserByPK,
@@ -345,36 +358,49 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
   }
 };
 
-export const deletePharmacyUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   const { userID } = req.params;
 
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
 
-    if (findPharmacyUserByID) {
-      await findPharmacyUserByID.destroy();
-      const findAllUsers = await pharmacyUser.findAll({
-        order: [["createdAt", "DESC"]],
+    if (findPharmacyUserByID && !findPharmacyUserByID.SoftDeleted) {
+      const softDeletePharmacyUser = await findPharmacyUserByID.update({
+        SoftDeleted: true,
       });
-      res.status(200).json({
-        success: true,
-        message: "Deleted",
-        users: findAllUsers,
-      });
-      return;
+
+      if (softDeletePharmacyUser) {
+        const findAllUsers = await pharmacyUser.findAll({
+          where: {
+            SoftDeleted: false,
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        res.status(200).json({
+          success: true,
+          message: "Deleted",
+          users: findAllUsers,
+        });
+        return;
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Failed to delete user",
+        });
+        return;
+      }
     } else {
       res.status(404).json({
         success: false,
-        message: "Failed to delete",
+        message: "User not found",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while deleting user", error);
+    console.log("Error while deleting user");
     res.status(500).json({
-      success: true,
-      message: "Failed to delete",
+      success: false,
+      message: "Failed to delete user",
     });
-    return;
   }
 };

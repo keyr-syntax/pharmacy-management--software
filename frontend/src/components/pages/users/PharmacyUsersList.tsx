@@ -212,61 +212,74 @@ export default function PharmacyUsersList() {
                   <TableCell>Not blocked</TableCell>
                 )}
 
-                {userEditID === null && userEditID !== user.id && (
-                  <>
-                    <TableCell>
-                      <Pencil
-                        onClick={() => {
-                          EditPharmacyUserGlobalState.setState({
-                            userEditID: user.id,
-                          });
-                          findPharmacyUserByID(user.id);
-                        }}
-                        size={22}
-                        className="inline cursor-pointer mr-4"
-                      />{" "}
-                      <Trash2
-                        onClick={() => {
-                          DeletePharmacyUserByAdmin(user.id);
-                        }}
-                        size={28}
-                        className="inline cursor-pointer text-red-700"
-                      />
-                    </TableCell>
-                    <TableCell></TableCell>
-                  </>
-                )}
-                {userEditID !== null && userEditID === user.id && (
-                  <>
-                    <TableCell>
-                      <Check
-                        onClick={() => {
-                          updatePharmacyUser(
-                            user.id,
-                            firstName,
-                            lastName,
-                            email,
-                            phoneNumber,
-                            role,
-                            isBlocked
-                          );
-                        }}
-                        size={30}
-                        className="inline cursor-pointer mr-3"
-                      />{" "}
-                      <X
-                        onClick={() => {
-                          EditPharmacyUserGlobalState.setState({
-                            userEditID: null,
-                          });
-                        }}
-                        size={32}
-                        className="inline cursor-pointer text-red-700"
-                      />{" "}
-                    </TableCell>
-                    <TableCell></TableCell>
-                  </>
-                )}
+                {userEditID === null &&
+                  userEditID !== user.id &&
+                  firstName === null &&
+                  lastName === null &&
+                  phoneNumber === null &&
+                  email === null &&
+                  isBlocked === null &&
+                  role === null && (
+                    <>
+                      <TableCell>
+                        <Pencil
+                          onClick={() => {
+                            EditPharmacyUserGlobalState.setState({
+                              userEditID: user.id,
+                            });
+                            findPharmacyUserByID(user.id);
+                          }}
+                          size={22}
+                          className="inline cursor-pointer mr-4"
+                        />{" "}
+                        <Trash2
+                          onClick={() => {
+                            DeletePharmacyUserByAdmin(user.id);
+                          }}
+                          size={28}
+                          className="inline cursor-pointer text-red-700"
+                        />
+                      </TableCell>
+                    </>
+                  )}
+                {userEditID !== null &&
+                  userEditID === user.id &&
+                  firstName &&
+                  lastName &&
+                  phoneNumber &&
+                  email &&
+                  isBlocked &&
+                  role && (
+                    <>
+                      <TableCell>
+                        <Check
+                          onClick={() => {
+                            updatePharmacyUser(
+                              user.id,
+                              firstName,
+                              lastName,
+                              email,
+                              phoneNumber,
+                              role,
+                              isBlocked
+                            );
+                          }}
+                          size={30}
+                          className="inline cursor-pointer mr-3"
+                        />{" "}
+                        <X
+                          onClick={() => {
+                            EditPharmacyUserGlobalState.setState({
+                              userEditID: null,
+                            });
+                          }}
+                          size={32}
+                          className="inline cursor-pointer text-red-700"
+                        />{" "}
+                      </TableCell>
+                      <TableCell></TableCell>
+                    </>
+                  )}
               </TableRow>
             ))}
           </TableBody>

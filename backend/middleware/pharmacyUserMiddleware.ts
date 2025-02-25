@@ -49,9 +49,15 @@ export const userAuthenticationMiddleware = async (
           message: "Access denied",
         });
       } else if (
-        (user.role === "pharmacist" && user.isBlocked === "Not Blocked") ||
-        (user.role === "manager" && user.isBlocked === "Not Blocked") ||
-        (user.role === "admin" && user.isBlocked === "Not Blocked")
+        (user.role === "pharmacist" &&
+          user.isBlocked === "Not Blocked" &&
+          !user.SoftDeleted) ||
+        (user.role === "manager" &&
+          user.isBlocked === "Not Blocked" &&
+          !user.SoftDeleted) ||
+        (user.role === "admin" &&
+          user.isBlocked === "Not Blocked" &&
+          !user.SoftDeleted)
       ) {
         (req as AuthenticatedRequest).user = user;
         next();
@@ -96,8 +102,12 @@ export const managerAuthenticationMiddleware = async (
         });
         return;
       } else if (
-        (user.role === "manager" && user.isBlocked === "Not Blocked") ||
-        (user.role === "admin" && user.isBlocked === "Not Blocked")
+        (user.role === "manager" &&
+          user.isBlocked === "Not Blocked" &&
+          !user.SoftDeleted) ||
+        (user.role === "admin" &&
+          user.isBlocked === "Not Blocked" &&
+          !user.SoftDeleted)
       ) {
         (req as AuthenticatedRequest).user = user;
         next();
@@ -141,7 +151,11 @@ export const adminAuthenticationMiddleware = async (
           message: "Access denied",
         });
         return;
-      } else if (user.role === "admin" && user.isBlocked === "Not Blocked") {
+      } else if (
+        user.role === "admin" &&
+        user.isBlocked === "Not Blocked" &&
+        !user.SoftDeleted
+      ) {
         (req as AuthenticatedRequest).user = user;
         next();
       } else {

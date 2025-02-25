@@ -7,7 +7,7 @@ import {
   fetchAllPharmacyUsers,
   updatePharmacyUserProfileByAdmin,
   fetchOneUserByID,
-  deletePharmacyUser,
+  deleteUser,
 } from "../controllers/pharmacyUserControllers";
 import {
   adminAuthenticationMiddleware,
@@ -18,15 +18,17 @@ const router: Router = express.Router();
 router.post("/create_user", createPharmacyUser);
 router.post("/login", loginPharmacyUser);
 router.get("/logout", userAuthenticationMiddleware, logoutUser);
-router.delete(
-  "/admin/delete_user/:userID",
-  adminAuthenticationMiddleware,
-  deletePharmacyUser
-);
+
 router.put(
   "/admin/update_user_profile/:userID",
   adminAuthenticationMiddleware,
   updatePharmacyUserProfileByAdmin
+);
+
+router.put(
+  "/update_user_profile",
+  userAuthenticationMiddleware,
+  updateUserProfile
 );
 
 router.get(
@@ -35,15 +37,22 @@ router.get(
   fetchAllPharmacyUsers
 );
 
-router.put(
-  "/update_user_profile/:userID",
-  userAuthenticationMiddleware,
-  updateUserProfile
-);
-
 router.get(
   "/admin/fetch_user_byid/:userID",
   adminAuthenticationMiddleware,
   fetchOneUserByID
 );
+
+router.get(
+  "/fetch_user_byid/:userID",
+  userAuthenticationMiddleware,
+  fetchOneUserByID
+);
+
+router.delete(
+  "/admin/delete_user/:userID",
+  adminAuthenticationMiddleware,
+  deleteUser
+);
+
 export default router;

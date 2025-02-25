@@ -11,6 +11,7 @@ export interface pharmacyUserInterface {
   phoneNumber: number;
   role: string;
   isBlocked: string;
+  SoftDeleted: boolean;
 }
 
 class pharmacyUser
@@ -25,6 +26,7 @@ class pharmacyUser
   public phoneNumber!: number;
   public role!: string;
   public isBlocked!: string;
+  public SoftDeleted!: boolean;
 }
 pharmacyUser.init(
   {
@@ -70,6 +72,11 @@ pharmacyUser.init(
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "Not Blocked",
+    },
+    SoftDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
