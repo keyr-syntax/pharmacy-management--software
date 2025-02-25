@@ -1,4 +1,4 @@
-import { Home, Search, Settings, Contact2, Trash2Icon } from "lucide-react";
+import { Home, Contact2, Trash2Icon } from "lucide-react";
 
 export const DashboardMenuItems = [
   {
@@ -21,16 +21,7 @@ export const DashboardMenuItems = [
     url: "/login",
     icon: Contact2,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
+
   {
     title: "Recycle Bin",
     url: "/dashboard/recycle_bin",

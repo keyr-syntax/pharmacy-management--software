@@ -1,8 +1,18 @@
 import { create } from "zustand";
-import { PharmacyUser, EditPharmacyUser } from "../types/types";
+
+import {
+  PharmacyUser,
+  EditPharmacyUser,
+  RegisterUserformInput,
+} from "../types/types";
 
 interface PharmacyUserApiResponse {
   usersList: PharmacyUser[] | null;
+}
+
+interface RegisterPharmacyUserApiResponse {
+  registerUserFormData: RegisterUserformInput | null;
+  loading: boolean;
 }
 
 interface EditPharmacyUserApiResponse {
@@ -39,3 +49,9 @@ export const EditPharmacyUserGlobalState = create<EditPharmacyUserApiResponse>(
 export const DeletedItemsGlobalState = create<DeletedItemsApiResponse>(() => ({
   deltedUsersList: null,
 }));
+
+export const RegisterPharmacyUserGlobalState =
+  create<RegisterPharmacyUserApiResponse>(() => ({
+    registerUserFormData: null,
+    loading: false,
+  }));

@@ -56,10 +56,10 @@ export default function LoginPharmacyUser() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center mt-16">
+      <div className="flex flex-col justify-center items-center mt-16 ">
         <form
           onSubmit={handleSubmit(LoginPharmacyUser)}
-          className="flex flex-col gap-2 mx-auto mt-5 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded-lg"
+          className="flex flex-col gap-2 mx-auto mt-5 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
         >
           <p className="text-center text-[24px] font-bold">Login</p>
 
@@ -68,7 +68,7 @@ export default function LoginPharmacyUser() {
               Email
             </Label>
             <Input
-              className="block border border-solid border-[rgb(255,255,255,0.2)]"
+              className="block border border-solid border-[rgb(255,255,255,0.2)] rounded"
               type="email"
               placeholder="Your email address"
               {...register("email", {
@@ -89,7 +89,7 @@ export default function LoginPharmacyUser() {
             </Label>
             <div className="relative">
               <Input
-                className="block border border-solid border-[rgb(255,255,255,0.2)]"
+                className="block border border-solid border-[rgb(255,255,255,0.2)] rounded"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 {...register("password", {
@@ -112,7 +112,7 @@ export default function LoginPharmacyUser() {
           <Button
             disabled={loading}
             type="submit"
-            className="bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md mt-5"
+            className="bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md mt-5 rounded"
           >
             {loading ? "Please wait" : "Submit"}
           </Button>

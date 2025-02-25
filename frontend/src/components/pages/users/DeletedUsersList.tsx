@@ -36,6 +36,7 @@ export default function DeletedUsersList() {
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Date modified</TableHead>
                 <TableHead>Actions </TableHead>
               </TableRow>
             </TableHeader>
@@ -49,6 +50,10 @@ export default function DeletedUsersList() {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.role}</TableCell>
                   <TableCell>{user.isBlocked}</TableCell>
+
+                  <TableCell>
+                    {new Date(user.updatedAt).toLocaleDateString()}
+                  </TableCell>
                   <TableCell
                     onClick={() => {
                       undoDeletedPharmacyUser(user.id);

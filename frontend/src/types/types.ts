@@ -22,6 +22,7 @@ export interface PharmacyUser {
   phoneNumber: number;
   role: string;
   isBlocked: string;
+  updatedAt: Date;
 }
 
 export interface EditPharmacyUser {

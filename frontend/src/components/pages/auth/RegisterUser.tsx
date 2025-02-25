@@ -1,72 +1,35 @@
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff } from "lucide-react";
-import { baseURL } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterUserformInput } from "../../../types/types";
 import { Button } from "@/components/ui/button";
-
+import { HandleRegisterPharmacyUser } from "@/services/UserApiService";
+import { RegisterPharmacyUserGlobalState } from "@/stores/GlobalState";
 export default function RegisterPharmacyUser() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading } = RegisterPharmacyUserGlobalState();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<RegisterUserformInput>();
-
-  const navigate = useNavigate();
-
-  const RegisterPharmacyUser = async (formData: RegisterUserformInput) => {
-    setLoading(true);
-    console.log("firstName", formData.firstName);
-    try {
-      const data = await fetch(`${baseURL}/pharmacy_user/create_user`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-          phoneNumber: formData.phoneNumber,
-          role: formData.role,
-          isBlocked: formData.isBlocked,
-        }),
-      });
-      if (!data.ok) {
-        throw new Error(`HTTP error! status: ${data.status}`);
-      }
-
-      const response = await data.json();
-
-      if (response.success) {
-        toast.success(response.message);
-        reset();
-        setLoading(false);
-        navigate("/dashboard");
-      } else {
-        toast.error(response.message);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log("Error while submitting form data", error);
-      setLoading(false);
+  const handleSubmitRegisterPharmacyUser = async (
+    formData: RegisterUserformInput
+  ) => {
+    const success = await HandleRegisterPharmacyUser(formData);
+    if (success) {
+      navigate("/dashboard");
     }
   };
-
   return (
     <>
       <div className="flex flex-col justify-center items-center mt-1 mb-8 ">
         <form
-          onSubmit={handleSubmit(RegisterPharmacyUser)}
+          onSubmit={handleSubmit(handleSubmitRegisterPharmacyUser)}
           className="flex flex-col gap-2 mx-auto mt-5 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
         >
           <p className="text-center text-[24px] font-bold">Register User</p>

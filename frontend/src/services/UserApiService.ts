@@ -4,7 +4,56 @@ import {
   PharmacyUserGlobalState,
   EditPharmacyUserGlobalState,
   DeletedItemsGlobalState,
+  RegisterPharmacyUserGlobalState,
 } from "@/stores/GlobalState";
+import { RegisterUserformInput } from "@/types/types";
+
+export const HandleRegisterPharmacyUser = async (
+  formData: RegisterUserformInput
+): Promise<boolean> => {
+  RegisterPharmacyUserGlobalState.setState({ loading: true });
+  console.log("firstName", formData.firstName);
+  try {
+    const data = await fetch(`${baseURL}/pharmacy_user/create_user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: formData.phoneNumber,
+        role: formData.role,
+        isBlocked: formData.isBlocked,
+      }),
+    });
+    if (!data.ok) {
+      throw new Error(`HTTP error! status: ${data.status}`);
+    }
+
+    const response = await data.json();
+
+    if (response.success) {
+      toast.success(response.message);
+
+      RegisterPharmacyUserGlobalState.setState({ loading: false });
+
+      console.log("formData", formData);
+      return true;
+    } else {
+      toast.error(response.message);
+      RegisterPharmacyUserGlobalState.setState({ loading: false });
+      return false;
+    }
+  } catch (error) {
+    console.log("Error while submitting form data", error);
+    RegisterPharmacyUserGlobalState.setState({ loading: false });
+    return false;
+  }
+};
 
 export const getAllPharmacyUsers = async () => {
   try {
@@ -210,15 +259,6 @@ export const updatePharmacyUser = async (
       PharmacyUserGlobalState.setState({ usersList: response.users });
     } else {
       toast.error(response.message);
-      EditPharmacyUserGlobalState.setState({
-        userEditID: null,
-        firstName: null,
-        lastName: null,
-        email: null,
-        phoneNumber: null,
-        role: null,
-        isBlocked: null,
-      });
     }
   } catch (error) {
     console.log("Error while fetching pharmacy users", error);

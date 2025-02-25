@@ -53,6 +53,7 @@ export default function PharmacyUsersList() {
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Joined</TableHead>
               <TableHead>Actions </TableHead>
             </TableRow>
           </TableHeader>
@@ -141,7 +142,7 @@ export default function PharmacyUsersList() {
                     <select
                       title="role"
                       id="role"
-                      className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
+                      className="block   border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
                       value={role}
                       onChange={(e) => {
                         EditPharmacyUserGlobalState.setState({
@@ -177,7 +178,7 @@ export default function PharmacyUsersList() {
                     <select
                       title="block/unblock"
                       id="isBlocked"
-                      className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
+                      className="block   border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
                       value={isBlocked}
                       onChange={(e) => {
                         EditPharmacyUserGlobalState.setState({
@@ -211,7 +212,9 @@ export default function PharmacyUsersList() {
                 {userEditID !== user.id && user.isBlocked === "Not Blocked" && (
                   <TableCell>Not blocked</TableCell>
                 )}
-
+                <TableCell>
+                  {new Date(user.updatedAt).toLocaleDateString()}
+                </TableCell>
                 {userEditID === null &&
                   userEditID !== user.id &&
                   firstName === null &&
