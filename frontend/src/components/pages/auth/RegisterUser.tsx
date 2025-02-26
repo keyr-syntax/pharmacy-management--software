@@ -27,10 +27,10 @@ export default function RegisterPharmacyUser() {
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center mt-1 mb-8 ">
+      <div className="flex flex-col justify-center items-center mt-1 mb-8 w-full">
         <form
           onSubmit={handleSubmit(handleSubmitRegisterPharmacyUser)}
-          className="flex flex-col gap-2 mx-auto mt-5 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
+          className="flex flex-col gap-2 mx-auto mt-1 w-[90%] max-w-[500px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
         >
           <p className="text-center text-[24px] font-bold">Register User</p>
           <div className="grid gap-2 ">
@@ -196,7 +196,7 @@ export default function RegisterPharmacyUser() {
           >
             {loading ? "Please wait" : "Submit"}
           </Button>
-          <Link className="text-center mt-3 text-lg" to="/login">
+          <Link className="text-center mt-3 text-lg" to="/dashboard/login">
             Login
           </Link>
         </form>

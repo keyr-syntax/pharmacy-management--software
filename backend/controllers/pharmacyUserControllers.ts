@@ -191,8 +191,17 @@ export const updatePharmacyUserProfileByAdmin = async (
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
 
-    if (findPharmacyUserByID && !findPharmacyUserByID.SoftDeleted) {
-      const updatePharmacyUser = await findPharmacyUserByID.update({
+    if (
+      (findPharmacyUserByID &&
+        !findPharmacyUserByID.SoftDeleted &&
+        firstName !== findPharmacyUserByID?.firstName) ||
+      lastName !== findPharmacyUserByID?.lastName ||
+      email !== findPharmacyUserByID?.email ||
+      phoneNumber !== findPharmacyUserByID?.phoneNumber ||
+      role !== findPharmacyUserByID?.role ||
+      isBlocked !== findPharmacyUserByID?.isBlocked
+    ) {
+      const updatePharmacyUser = await findPharmacyUserByID?.update({
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -203,11 +212,14 @@ export const updatePharmacyUserProfileByAdmin = async (
 
       if (updatePharmacyUser) {
         const findAllUsers = await pharmacyUser.findAll({
+          where: {
+            SoftDeleted: false,
+          },
           order: [["createdAt", "DESC"]],
         });
         res.status(200).json({
           success: true,
-          message: "Profile updated successfully",
+          message: "Profile updated",
           users: findAllUsers,
         });
       } else {
@@ -218,9 +230,16 @@ export const updatePharmacyUserProfileByAdmin = async (
         return;
       }
     } else {
+      const findAllUsers = await pharmacyUser.findAll({
+        where: {
+          SoftDeleted: false,
+        },
+        order: [["createdAt", "DESC"]],
+      });
       res.status(404).json({
-        success: false,
-        message: "User not found",
+        success: true,
+        message: "You have made no changes",
+        users: findAllUsers,
       });
       return;
     }
@@ -229,6 +248,39 @@ export const updatePharmacyUserProfileByAdmin = async (
     res.status(500).json({
       success: false,
       message: "Profile update failed",
+    });
+  }
+};
+export const fetchOneUserByIDForProfileUpdate = async (
+  req: Request,
+  res: Response
+) => {
+  const user: pharmacyUserInterface | undefined =
+    req.user as pharmacyUserInterface;
+  if (!user) {
+    res.status(401).json({ success: false, message: "Access denied!" });
+    return;
+  }
+  try {
+    const findUserByPK = await pharmacyUser.findByPk(user.id);
+
+    if (findUserByPK && !findUserByPK.SoftDeleted) {
+      res.status(200).json({
+        success: true,
+        user: findUserByPK,
+      });
+      return;
+    } else {
+      res.status(200).json({
+        success: false,
+        message: "User not found",
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
     });
   }
 };
@@ -242,9 +294,16 @@ export const updateUserProfile = async (req: Request, res: Response) => {
   }
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(user.id);
-
-    if (findPharmacyUserByID && !findPharmacyUserByID.SoftDeleted) {
-      const updatePharmacyUser = await findPharmacyUserByID.update({
+    if (
+      (findPharmacyUserByID &&
+        !findPharmacyUserByID.SoftDeleted &&
+        firstName !== findPharmacyUserByID?.firstName) ||
+      lastName !== findPharmacyUserByID?.lastName ||
+      email !== findPharmacyUserByID?.email ||
+      phoneNumber !== findPharmacyUserByID?.phoneNumber ||
+      role !== findPharmacyUserByID?.role
+    ) {
+      const updatePharmacyUser = await findPharmacyUserByID?.update({
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -255,7 +314,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
       if (updatePharmacyUser) {
         res.status(200).json({
           success: true,
-          message: "Profile updated successfully",
+          message: "Profile updated",
           user: updatePharmacyUser,
         });
         return;
@@ -269,7 +328,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "You have made no changes",
       });
       return;
     }
@@ -330,7 +389,6 @@ export const fetchAllPharmacyUsers = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const fetchAllDeletedItems = async (req: Request, res: Response) => {
   try {
     const findAllUsers = await pharmacyUser.findAll({
@@ -360,7 +418,6 @@ export const fetchAllDeletedItems = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const fetchOneUserByID = async (req: Request, res: Response) => {
   const { userID } = req.params;
   try {
@@ -386,7 +443,6 @@ export const fetchOneUserByID = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const deleteUser = async (req: Request, res: Response) => {
   const { userID } = req.params;
 

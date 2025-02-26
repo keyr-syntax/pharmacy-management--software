@@ -41,8 +41,13 @@ export default function LoginPharmacyUser() {
 
       if (response.success) {
         toast.success(response.message);
+        localStorage.setItem(
+          "name",
+          `${response.user.firstName} ${response.user.lastName}`
+        );
         reset();
         setLoading(false);
+
         navigate("/dashboard");
       } else {
         toast.error(response.message);
@@ -56,10 +61,10 @@ export default function LoginPharmacyUser() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center mt-16 ">
+      <div className="flex flex-col justify-center items-center mt-16 w-full">
         <form
           onSubmit={handleSubmit(LoginPharmacyUser)}
-          className="flex flex-col gap-2 mx-auto mt-5 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
+          className="flex flex-col gap-2 mx-auto mt-2 w-[80%] max-w-[400px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
         >
           <p className="text-center text-[24px] font-bold">Login</p>
 
@@ -116,7 +121,7 @@ export default function LoginPharmacyUser() {
           >
             {loading ? "Please wait" : "Submit"}
           </Button>
-          <Link className="text-center mt-5 text-lg" to="/register">
+          <Link className="text-center mt-5 text-lg" to="/dashboard/register">
             Create account
           </Link>
         </form>

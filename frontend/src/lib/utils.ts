@@ -7,3 +7,5 @@ export function cn(...inputs: ClassValue[]) {
 
 export const baseURL = "http://localhost:8000";
 
+export const getFirstLetterOfName = (username: string) =>
+  username.charAt(0).toUpperCase();

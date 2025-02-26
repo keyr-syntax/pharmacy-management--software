@@ -1,4 +1,4 @@
-import DeletedUsersList from "../users/DeletedUsersList";
+import DeletedUsersList from "./DeletedUsersList";
 
 export default function RecycleBin() {
   return (

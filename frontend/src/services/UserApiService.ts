@@ -5,6 +5,7 @@ import {
   EditPharmacyUserGlobalState,
   DeletedItemsGlobalState,
   RegisterPharmacyUserGlobalState,
+  UpdatePharmacyUserProfileGlobalState,
 } from "@/stores/GlobalState";
 import { RegisterUserformInput } from "@/types/types";
 
@@ -40,7 +41,10 @@ export const HandleRegisterPharmacyUser = async (
       toast.success(response.message);
 
       RegisterPharmacyUserGlobalState.setState({ loading: false });
-
+      localStorage.setItem(
+        "name",
+        `${response.user.firstName} ${response.user.lastName}`
+      );
       console.log("formData", formData);
       return true;
     } else {
@@ -54,7 +58,6 @@ export const HandleRegisterPharmacyUser = async (
     return false;
   }
 };
-
 export const getAllPharmacyUsers = async () => {
   try {
     const data = await fetch(`${baseURL}/pharmacy_user/admin/fetch_all_users`, {
@@ -78,7 +81,6 @@ export const getAllPharmacyUsers = async () => {
     PharmacyUserGlobalState.setState({ usersList: null });
   }
 };
-
 export const findPharmacyUserByID = async (userID: number): Promise<void> => {
   try {
     const data = await fetch(
@@ -125,7 +127,6 @@ export const findPharmacyUserByID = async (userID: number): Promise<void> => {
     });
   }
 };
-
 export const DeletePharmacyUserByAdmin = async (
   userID: number
 ): Promise<void> => {
@@ -159,7 +160,6 @@ export const DeletePharmacyUserByAdmin = async (
     return;
   }
 };
-
 export const getAllDeletedUsers = async () => {
   try {
     const data = await fetch(`${baseURL}/pharmacy_user/admin/deleted_items`, {
@@ -183,7 +183,6 @@ export const getAllDeletedUsers = async () => {
     DeletedItemsGlobalState.setState({ deltedUsersList: null });
   }
 };
-
 export const undoDeletedPharmacyUser = async (
   userID: number
 ): Promise<void> => {
@@ -215,7 +214,7 @@ export const undoDeletedPharmacyUser = async (
     return;
   }
 };
-export const updatePharmacyUser = async (
+export const updatePharmacyUserByAdmin = async (
   userID: number,
   firstName: string | null,
   lastName: string | null,
@@ -271,5 +270,128 @@ export const updatePharmacyUser = async (
       role: null,
       isBlocked: null,
     });
+  }
+};
+export const findPharmacyUserByIDForProfileUpdate = async (): Promise<void> => {
+  try {
+    UpdatePharmacyUserProfileGlobalState.setState({
+      loading: true,
+    });
+    const data = await fetch(
+      `${baseURL}/pharmacy_user/fetch_user_byid_for_profile_update`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+
+    const response = await data.json();
+    if (response.success) {
+      UpdatePharmacyUserProfileGlobalState.setState({
+        firstName: response.user.firstName,
+        lastName: response.user.lastName,
+        email: response.user.email,
+        phoneNumber: response.user.phoneNumber,
+        loading: false,
+      });
+    } else {
+      toast.error(response.message);
+      UpdatePharmacyUserProfileGlobalState.setState({
+        firstName: null,
+        lastName: null,
+        email: null,
+        phoneNumber: null,
+        loading: false,
+      });
+    }
+  } catch (error) {
+    console.log("Error while fetching pharmacy users", error);
+    UpdatePharmacyUserProfileGlobalState.setState({
+      firstName: null,
+      lastName: null,
+      email: null,
+      phoneNumber: null,
+      loading: false,
+    });
+  }
+};
+
+export const updatePharmacyUserProfile = async (
+  firstName: string | null,
+  lastName: string | null,
+  email: string | null,
+  phoneNumber: string | null
+): Promise<void> => {
+  UpdatePharmacyUserProfileGlobalState.setState({ loading: true });
+
+  try {
+    const data = await fetch(`${baseURL}/pharmacy_user/update_user_profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+      }),
+    });
+    if (!data.ok) {
+      throw new Error(`HTTP error! status: ${data.status}`);
+    }
+
+    const response = await data.json();
+
+    if (response.success) {
+      toast.success(response.message);
+      UpdatePharmacyUserProfileGlobalState.setState({
+        firstName: response.user.firstName,
+        lastName: response.user.lastName,
+        email: response.user.email,
+        phoneNumber: response.user.phoneNumber,
+        loading: false,
+      });
+      localStorage.setItem(
+        "name",
+        `${response.user.firstName} ${response.user.lastName}`
+      );
+    } else {
+      toast.error(response.message);
+      UpdatePharmacyUserProfileGlobalState.setState({ loading: false });
+    }
+  } catch (error) {
+    console.log("Error while submitting form data", error);
+    UpdatePharmacyUserProfileGlobalState.setState({ loading: false });
+  }
+};
+
+export const logoutPharmacyUser = async (): Promise<boolean> => {
+  try {
+    const data = await fetch(`${baseURL}/pharmacy_user/logout`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const response = await data.json();
+
+    if (response.success) {
+      toast.success(response.message);
+      localStorage.removeItem("name");
+      return true;
+    } else {
+      toast.error(response.message);
+      return false;
+    }
+  } catch (error) {
+    console.log("Error while logging-out user", error);
+    toast.error("Failed to Logout user");
+    return false;
   }
 };

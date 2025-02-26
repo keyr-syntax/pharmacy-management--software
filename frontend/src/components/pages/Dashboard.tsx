@@ -26,9 +26,23 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutPharmacyUser } from "@/services/UserApiService";
 
 export function AppSidebar() {
+  const name: string | null = localStorage.getItem("name");
+  const navigate = useNavigate();
+
+  const handlePharmacyUserLogout = async () => {
+    const success = await logoutPharmacyUser();
+
+    if (success) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -71,7 +85,14 @@ export function AppSidebar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  <User2 /> Username
+                  {name ? (
+                    <span className="text-xl">{name}</span>
+                  ) : (
+                    <>
+                      <User2 /> <span className="text-xl">Username</span>{" "}
+                    </>
+                  )}
+
                   <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -79,14 +100,17 @@ export function AppSidebar() {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem>
-                  <span>Account</span>
+                <DropdownMenuItem className="cursor-pointer text-lg">
+                  <Link to="/dashboard/edit_my_account">Edit My Account</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Sign out</span>
+
+                <DropdownMenuItem
+                  onClick={() => {
+                    handlePharmacyUserLogout();
+                  }}
+                  className="cursor-pointer text-lg"
+                >
+                  <span>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

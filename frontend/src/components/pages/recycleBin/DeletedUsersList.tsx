@@ -29,7 +29,7 @@ export default function DeletedUsersList() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>User ID</TableHead>
+                <TableHead>ID</TableHead>
                 <TableHead>First name</TableHead>
                 <TableHead>Last name</TableHead>
                 <TableHead>Phone</TableHead>

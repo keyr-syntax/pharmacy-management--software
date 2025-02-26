@@ -13,7 +13,7 @@ import {
   getAllPharmacyUsers,
   findPharmacyUserByID,
   DeletePharmacyUserByAdmin,
-  updatePharmacyUser,
+  updatePharmacyUserByAdmin,
 } from "@/services/UserApiService";
 import {
   EditPharmacyUserGlobalState,
@@ -46,7 +46,7 @@ export default function PharmacyUsersList() {
           <TableCaption>A list of Employees</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>User ID</TableHead>
+              <TableHead>ID</TableHead>
               <TableHead>First name</TableHead>
               <TableHead>Last name</TableHead>
               <TableHead>Phone</TableHead>
@@ -257,7 +257,7 @@ export default function PharmacyUsersList() {
                       <TableCell>
                         <Check
                           onClick={() => {
-                            updatePharmacyUser(
+                            updatePharmacyUserByAdmin(
                               user.id,
                               firstName,
                               lastName,
@@ -267,8 +267,8 @@ export default function PharmacyUsersList() {
                               isBlocked
                             );
                           }}
-                          size={30}
-                          className="inline cursor-pointer mr-3"
+                          size={32}
+                          className="inline cursor-pointer mr-3 font-bold text-green-700"
                         />{" "}
                         <X
                           onClick={() => {

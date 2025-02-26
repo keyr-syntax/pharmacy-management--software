@@ -4,6 +4,7 @@ import {
   PharmacyUser,
   EditPharmacyUser,
   RegisterUserformInput,
+  UpdateUserProfileformInput,
 } from "../types/types";
 
 interface PharmacyUserApiResponse {
@@ -29,6 +30,16 @@ interface EditPharmacyUserApiResponse {
 interface DeletedItemsApiResponse {
   deltedUsersList: PharmacyUser[] | null;
 }
+
+interface UpdateUserProfileApiResponse {
+  UpdateUserProfile: UpdateUserProfileformInput | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  phoneNumber: string | null;
+  loading: boolean;
+}
+
 export const PharmacyUserGlobalState = create<PharmacyUserApiResponse>(() => ({
   usersList: null,
 }));
@@ -53,5 +64,15 @@ export const DeletedItemsGlobalState = create<DeletedItemsApiResponse>(() => ({
 export const RegisterPharmacyUserGlobalState =
   create<RegisterPharmacyUserApiResponse>(() => ({
     registerUserFormData: null,
+    loading: false,
+  }));
+
+export const UpdatePharmacyUserProfileGlobalState =
+  create<UpdateUserProfileApiResponse>(() => ({
+    UpdateUserProfile: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    phoneNumber: null,
     loading: false,
   }));

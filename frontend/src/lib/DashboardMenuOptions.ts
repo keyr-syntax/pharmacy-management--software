@@ -13,12 +13,12 @@ export const DashboardMenuItems = [
   },
   {
     title: "Register user",
-    url: "/register",
+    url: "/dashboard/register",
     icon: Contact2,
   },
   {
     title: "Login user",
-    url: "/login",
+    url: "/dashboard/login",
     icon: Contact2,
   },
 

@@ -7,6 +7,12 @@ export type RegisterUserformInput = {
   role: string;
   isBlocked: string;
 };
+export type UpdateUserProfileformInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: number;
+};
 
 export type LoginformInput = {
   email: string;
