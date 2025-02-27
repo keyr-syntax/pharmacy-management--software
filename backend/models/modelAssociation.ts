@@ -8,7 +8,7 @@ import DRUG_CLASS from "./drugClassModel";
 const modelAssociation = () => {
   DRUGS.belongsTo(DRUG_DOSAGE_FORM, {
     foreignKey: "dosageFormID",
-    as: "dosageForm",
+    as: "dosage_form",
   });
   DRUG_DOSAGE_FORM.hasMany(DRUGS, {
     foreignKey: "dosageFormID",
@@ -16,7 +16,7 @@ const modelAssociation = () => {
   });
   DRUGS.belongsTo(DRUG_TYPES, {
     foreignKey: "drugTypeID",
-    as: "drugType",
+    as: "drug_type",
   });
   DRUG_TYPES.hasMany(DRUGS, {
     foreignKey: "drugTypeID",
@@ -24,7 +24,7 @@ const modelAssociation = () => {
   });
   DRUGS.belongsTo(ROUTE_OF_DRUG_ADMINISTRATION, {
     foreignKey: "routeOfDrugAdministrationID",
-    as: "routeOfDrugAdministration",
+    as: "route_of_drug_administration",
   });
   ROUTE_OF_DRUG_ADMINISTRATION.hasMany(DRUGS, {
     foreignKey: "routeOfDrugAdministrationID",
@@ -32,7 +32,7 @@ const modelAssociation = () => {
   });
   DRUGS.belongsTo(DRUG_MANUFACTURERS, {
     foreignKey: "manufacturerID",
-    as: "manufacturer",
+    as: "manufacturer_name",
   });
   DRUG_MANUFACTURERS.hasMany(DRUGS, {
     foreignKey: "manufacturerID",
@@ -40,7 +40,7 @@ const modelAssociation = () => {
   });
   DRUGS.belongsTo(DRUG_CLASS, {
     foreignKey: "drugClassID",
-    as: "drugClass",
+    as: "drug_class",
   });
   DRUG_CLASS.hasMany(DRUGS, {
     foreignKey: "drugClassID",

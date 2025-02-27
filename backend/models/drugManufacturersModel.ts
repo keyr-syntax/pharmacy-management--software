@@ -2,8 +2,12 @@ import { DataTypes, Model, STRING } from "sequelize";
 import { sequelize } from "../config/dbMySQLconfig";
 
 export interface drugManufacturersInterface {
-  manufacturerID: string;
-  manufacturer: string;
+  manufacturerID?: string;
+  manufacturerName: string;
+  contactName: string;
+  phoneNumber: string;
+  licenseNumber: string;
+  softDeleted: boolean;
 }
 
 class DRUG_MANUFACTURERS
@@ -11,7 +15,11 @@ class DRUG_MANUFACTURERS
   implements drugManufacturersInterface
 {
   public manufacturerID!: string;
-  public manufacturer!: string;
+  public manufacturerName!: string;
+  public contactName!: string;
+  public phoneNumber!: string;
+  public licenseNumber!: string;
+  public softDeleted!: boolean;
 }
 
 DRUG_MANUFACTURERS.init(
@@ -22,9 +30,26 @@ DRUG_MANUFACTURERS.init(
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
     },
-    manufacturer: {
-      type: STRING,
+    manufacturerName: {
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    contactName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    licenseNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

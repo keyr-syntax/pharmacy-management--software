@@ -1,9 +1,10 @@
-import { DataTypes, Model, STRING } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/dbMySQLconfig";
 
 export interface drugsDosageFormInterface {
-  dosageFormID: string;
+  dosageFormID?: string;
   dosageForm: string;
+  softDeleted: boolean;
 }
 
 class DRUG_DOSAGE_FORM
@@ -12,6 +13,7 @@ class DRUG_DOSAGE_FORM
 {
   public dosageFormID!: string;
   public dosageForm!: string;
+  public softDeleted!: boolean;
 }
 
 DRUG_DOSAGE_FORM.init(
@@ -23,8 +25,13 @@ DRUG_DOSAGE_FORM.init(
       allowNull: false,
     },
     dosageForm: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

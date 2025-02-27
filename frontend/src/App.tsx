@@ -1,7 +1,7 @@
 // import ThemeToggle from "./ThemeToggle";
 
 import { Outlet, Route, Routes } from "react-router-dom";
-import { AppSidebar } from "./components/pages/Dashboard";
+import { AppSidebar } from "./components/pages/dashboard/Dashboard";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import RegisterPharmacyUser from "./components/pages/auth/RegisterUser";
 import LoginPharmacyUser from "./components/pages/auth/LoginUser";

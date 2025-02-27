@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 import syncDatabase from "./config/databaseSync";
 import userRoutes from "./routes/userRoutes";
+import dosageFormRoutes from "./routes/drugDosageFormRoutes";
 import modelAssociation from "./models/modelAssociation";
 
 const PORT = process.env.PORT || 8000;
@@ -24,6 +25,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/pharmacy_user", userRoutes);
+app.use("/dosage_form", dosageFormRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

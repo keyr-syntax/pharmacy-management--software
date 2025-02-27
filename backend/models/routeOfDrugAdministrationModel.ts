@@ -4,6 +4,7 @@ import { sequelize } from "../config/dbMySQLconfig";
 export interface routeOfDrugAdministrationInterface {
   routeOfDrugAdministrationID: string;
   routeOfDrugAdministration: string;
+  softDeleted: boolean;
 }
 
 class ROUTE_OF_DRUG_ADMINISTRATION
@@ -12,6 +13,7 @@ class ROUTE_OF_DRUG_ADMINISTRATION
 {
   public routeOfDrugAdministrationID!: string;
   public routeOfDrugAdministration!: string;
+  public softDeleted!: boolean;
 }
 
 ROUTE_OF_DRUG_ADMINISTRATION.init(
@@ -23,8 +25,13 @@ ROUTE_OF_DRUG_ADMINISTRATION.init(
       allowNull: false,
     },
     routeOfDrugAdministration: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

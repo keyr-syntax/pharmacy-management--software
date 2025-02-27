@@ -11,7 +11,7 @@
       "driver": "MySQL",
       "name": "pharmacy",
       "database": "keyr",
-      "username": "keyr"
+      "username": "root"
     }
   ]
 }

@@ -14,6 +14,7 @@ export interface drugsInterface {
   manufacturer: string;
   drugClass: string;
   status: string;
+  softDeleted: boolean;
 }
 
 class DRUGS extends Model<drugsInterface> implements drugsInterface {
@@ -29,6 +30,7 @@ class DRUGS extends Model<drugsInterface> implements drugsInterface {
   public manufacturer!: string;
   public drugClass!: string;
   public status!: string;
+  public softDeleted!: boolean;
 }
 
 DRUGS.init(
@@ -40,11 +42,11 @@ DRUGS.init(
       allowNull: false,
     },
     genericName: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     brandName: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     dosageForm: {
@@ -64,7 +66,7 @@ DRUGS.init(
       },
     },
     dosageStrength: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     routeOfDrugAdministration: {
@@ -103,6 +105,11 @@ DRUGS.init(
       type: DataTypes.ENUM("Active", "Discontinued", "Out of Stock"),
       allowNull: false,
       defaultValue: "Active",
+    },
+    softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
