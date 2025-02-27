@@ -5,9 +5,12 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 import syncDatabase from "./config/databaseSync";
 import userRoutes from "./routes/userRoutes";
+import modelAssociation from "./models/modelAssociation";
 
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
+
+modelAssociation();
 syncDatabase();
 app.use(express());
 app.use(express.json());
