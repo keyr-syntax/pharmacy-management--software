@@ -1,42 +1,42 @@
 import { Request, Response } from "express";
-import DRUG_DOSAGE_FORM from "../models/dosageFormModel";
+import DRUG_CLASS from "../models/drugClassModel";
 
-export const addNewDrugDosageForm = async (req: Request, res: Response) => {
-  const { dosageForm } = req.body;
+export const addNewDrugClass = async (req: Request, res: Response) => {
+  const { drugClass } = req.body;
   try {
-    const doesDosageFormExist = await DRUG_DOSAGE_FORM.findOne({
+    const checkIfDrugClassExists = await DRUG_CLASS.findOne({
       where: {
-        dosageForm: dosageForm,
+        drugClass: drugClass,
         softDeleted: false,
       },
     });
 
-    if (doesDosageFormExist) {
+    if (checkIfDrugClassExists) {
       res.status(400).json({
         success: false,
-        message: "Dosage Form already exists",
+        message: "Drug class already exists",
       });
       return;
     } else {
-      const newDosageForm = await DRUG_DOSAGE_FORM.create({
-        dosageForm,
+      const newDrugClass = await DRUG_CLASS.create({
+        drugClass,
         softDeleted: false,
       });
-      const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
+      const findAllDrugClass = await DRUG_CLASS.findAll({
         where: { softDeleted: false },
-        order: [["dosageForm", "ASC"]],
+        order: [["drugClass", "ASC"]],
       });
-      if (newDosageForm) {
+      if (newDrugClass) {
         res.status(200).json({
           success: true,
-          dosageForm: newDosageForm,
-          findAllDosageForms: findAllDosageForms,
+          newDrugClass: newDrugClass,
+          findAllDrugClass: findAllDrugClass,
         });
         return;
       } else {
         res.status(404).json({
           success: false,
-          message: "Failed to add dosage form",
+          message: "Failed to add drug class",
         });
         return;
       }
