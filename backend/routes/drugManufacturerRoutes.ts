@@ -37,14 +37,14 @@ router.get(
   findDrugManufacturerByUUID
 );
 router.get(
-  "/admin/deleted_dosage_forms",
+  "/admin/deleted_drug_manufacturers",
   adminAuthenticationMiddleware,
-  fetchAllDeletedDosageForms
+  fetchAllDeletedDrugManufacturers
 );
 router.delete(
-  "/admin/delete_dosage_form/:dosageFormID",
+  "/admin/delete_drug_manufacturer/:manufacturerID",
   adminAuthenticationMiddleware,
-  deleteDosageForm
+  deleteDrugManufacturer
 );
 
 export default router;
