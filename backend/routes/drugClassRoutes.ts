@@ -21,15 +21,17 @@ router.post(
   addNewDrugClass
 );
 router.put(
-  "/admin/update_dosage_form/:dosageFormID",
+  "/admin/update_drug_class/:drugClassID",
   adminAuthenticationMiddleware,
-  updateDosageForm
+  updateDrugClass
 );
 router.put(
-  "/admin/restore_deleted_dosage_form/:dosageFormID",
+  "/admin/restore_deleted_drug_class/:drugClassID",
   adminAuthenticationMiddleware,
   undoDeletedDosageForm
 );
+
+
 router.get(
   "/find_all_dosage_forms",
   userAuthenticationMiddleware,
