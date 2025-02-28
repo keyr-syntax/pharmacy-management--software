@@ -5,13 +5,13 @@ import {
   userAuthenticationMiddleware,
 } from "../middleware/pharmacyUserMiddleware";
 import {
-  addNewDrugDosageForm,
-  findAllDrugDosageForms,
-  findDosageFormByUUID,
-  updateDosageForm,
-  deleteDosageForm,
-  undoDeletedDosageForm,
-  fetchAllDeletedDosageForms,
+  addNewDrugClass,
+  findAllDrugClass,
+  findDrugClassByUUID,
+  updateDrugClass,
+  deleteDrugClass,
+  undoDeletedDrugClass,
+  fetchAllDeletedDrugClass,
 } from "../controllers/drugDosageFormControllers";
 const router: Router = express.Router();
 
