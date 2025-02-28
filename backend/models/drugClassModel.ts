@@ -2,8 +2,9 @@ import { DataTypes, Model, STRING } from "sequelize";
 import { sequelize } from "../config/dbMySQLconfig";
 
 export interface drugClassInterface {
-  drugClassID: string;
+  drugClassID?: string;
   drugClass: string;
+  softDeleted: boolean;
 }
 
 class DRUG_CLASS
@@ -12,6 +13,7 @@ class DRUG_CLASS
 {
   public drugClassID!: string;
   public drugClass!: string;
+  public softDeleted!: boolean;
 }
 
 DRUG_CLASS.init(
@@ -23,8 +25,13 @@ DRUG_CLASS.init(
       allowNull: false,
     },
     drugClass: {
-      type: STRING,
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

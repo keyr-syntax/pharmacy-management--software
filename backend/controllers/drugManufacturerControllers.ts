@@ -269,3 +269,36 @@ export const undoDeletedDrugManufacturer = async (
     });
   }
 };
+
+export const fetchAllDeletedDrugManufacturers = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const findAllDeletedDrugManufacturers = await DRUG_MANUFACTURERS.findAll({
+      where: {
+        softDeleted: true,
+      },
+      order: [["manufacturerName", "ASC"]],
+    });
+
+    if (findAllDeletedDrugManufacturers) {
+      res.status(200).json({
+        success: true,
+        findAllDeletedDrugManufacturers: findAllDeletedDrugManufacturers,
+      });
+      return;
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "No deleted drug manufacturer",
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch deleted drug manufacturer",
+    });
+  }
+};
