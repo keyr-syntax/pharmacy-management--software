@@ -49,31 +49,31 @@ export const addNewDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
-export const findAllDrugDosageForms = async (req: Request, res: Response) => {
+export const findAllDrugClass = async (req: Request, res: Response) => {
   try {
-    const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
-      where: { softDeleted: false },
-      order: [["dosageForm", "ASC"]],
-    });
+    const findAllDrugClass = await DRUG_CLASS.findAll({
+        where: { softDeleted: false },
+        order: [["drugClass", "ASC"]],
+      });
 
-    if (findAllDosageForms) {
+    if (findAllDrugClass) {
       res.status(200).json({
         success: true,
-        findAllDosageForms: findAllDosageForms,
+        findAllDrugClass: findAllDrugClass,
       });
       return;
     } else {
       res.status(404).json({
         success: false,
-        message: "Failed to find dosage forms",
+        message: "Failed to find drug class",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while finding all dosage forms", error);
+    console.log("Error while finding all drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to find dosage forms",
+      message: "Failed to find drug class",
     });
   }
 };
