@@ -12,7 +12,7 @@ import {
   deleteDrugClass,
   undoDeletedDrugClass,
   fetchAllDeletedDrugClass,
-} from "../controllers/drugDosageFormControllers";
+} from "../controllers/drugDrugClassControllers";
 const router: Router = express.Router();
 
 router.post(
