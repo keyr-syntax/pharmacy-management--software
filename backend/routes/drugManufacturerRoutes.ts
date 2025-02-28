@@ -16,25 +16,25 @@ router.post(
   addNewDrugManufacturer
 );
 router.put(
-  "/admin/update_drug_manufacturer"/:ID",
+  "/admin/update_drug_manufacturer"/:manufacturerID",
   adminAuthenticationMiddleware,
-  updateDosageForm
+  updateDrugManufacturer
 );
 router.put(
-  "/admin/restore_dosage_form/:dosageFormID",
+  "/admin/restore_drug_manufacturer/:manufacturerID",
   adminAuthenticationMiddleware,
-  undoDeletedDosageForm
+  undoDeletedDrugManufacturer
 );
 router.get(
-  "/find_all_dosage_forms",
+  "/find_all_drug_manufacturers",
   userAuthenticationMiddleware,
-  findAllDrugDosageForms
+  findAllDrugManufacturers
 );
 
 router.get(
-  "/admin/find_all_dosage_forms/:dosageFormID",
+  "/admin/find_drug_manufacturer"/:manufacturerID",
   adminAuthenticationMiddleware,
-  findDosageFormByUUID
+  findDrugManufacturerByUUID
 );
 router.get(
   "/admin/deleted_dosage_forms",
