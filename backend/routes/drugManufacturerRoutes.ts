@@ -16,7 +16,7 @@ router.post(
   addNewDrugManufacturer
 );
 router.put(
-  "/admin/update_dosage_form/:dosageFormID",
+  "/admin/update_drug_manufacturer"/:ID",
   adminAuthenticationMiddleware,
   updateDosageForm
 );
