@@ -109,25 +109,25 @@ export const updateDrugClass = async (req: Request, res: Response) => {
     const { drugClass } = req.body;
     const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClassID);
 
-    if (drugClassID && findDrugClassByPK.drugClass !== drugClass) {
-      const updateDosageForm = await findDosageFormByPK.update({
-        dosageForm: dosageForm,
+    if (findDrugClassByPK && findDrugClassByPK.drugClass !== drugClass) {
+      const updateDrugClass = await findDrugClassByPK.update({
+        drugClass: drugClass,
       });
-      const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
+      const findAllDrugClass = await DRUG_CLASS.findAll({
         where: { softDeleted: false },
-        order: [["dosageForm", "ASC"]],
+        order: [["drugClass", "ASC"]],
       });
-      if (updateDosageForm) {
+      if (updateDrugClass) {
         res.status(200).json({
           success: true,
-          dosageForm: updateDosageForm,
-          findAllDosageForms: findAllDosageForms,
+          updateDrugClass: updateDrugClass,
+          findAllDrugClass: findAllDrugClass,
         });
         return;
       } else {
         res.status(404).json({
           success: true,
-          message: "Failed to update dosage form",
+          message: "Failed to update drug class",
         });
         return;
       }
@@ -139,13 +139,14 @@ export const updateDrugClass = async (req: Request, res: Response) => {
       return;
     }
   } catch (error) {
-    console.log("Error while updating dosage forms", error);
+    console.log("Error while updating drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to update dosage form",
+      message: "Failed to update drug class",
     });
   }
 };
+
 export const deleteDosageForm = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
