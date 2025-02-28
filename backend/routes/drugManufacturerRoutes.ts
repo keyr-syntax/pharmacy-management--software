@@ -21,7 +21,7 @@ router.put(
   updateDrugManufacturer
 );
 router.put(
-  "/admin/restore_drug_manufacturer/:manufacturerID",
+  "/admin/restore_deleted_drug_manufacturer/:manufacturerID",
   adminAuthenticationMiddleware,
   undoDeletedDrugManufacturer
 );
