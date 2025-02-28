@@ -2,7 +2,7 @@ import { DataTypes, Model, STRING } from "sequelize";
 import { sequelize } from "../config/dbMySQLconfig";
 
 export interface drugsInterface {
-  drugID: string;
+  drugID?: string;
   genericName: string;
   brandName: string;
   dosageForm: string;
@@ -58,12 +58,8 @@ DRUGS.init(
       },
     },
     drugType: {
-      type: DataTypes.UUID,
+      type: DataTypes.ENUM("OTC", "Prescription"),
       allowNull: false,
-      references: {
-        model: "DRUG_TYPES",
-        key: "drugTypeID",
-      },
     },
     dosageStrength: {
       type: DataTypes.STRING,
