@@ -237,35 +237,35 @@ export const undoDeletedDrugClass = async (req: Request, res: Response) => {
 
 
 
-export const fetchAllDeletedDosageForms = async (
+export const fetchAllDeletedDrugClass = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const findAllDeletedDosageForms = await DRUG_DOSAGE_FORM.findAll({
+    const findAllDeletedDrugClass = await DRUG_CLASS.findAll({
       where: {
         softDeleted: true,
       },
-      order: [["dosageForm", "ASC"]],
+      order: [["drugClass", "ASC"]],
     });
 
-    if (findAllDeletedDosageForms) {
+    if (findAllDeletedDrugClass) {
       res.status(200).json({
         success: true,
-        findAllDeletedDosageForms: findAllDeletedDosageForms,
+        findAllDeletedDrugClass: findAllDeletedDrugClass,
       });
       return;
     } else {
       res.status(200).json({
         success: true,
-        message: "No deleted dosage forms",
+        message: "No deleted drug class",
       });
       return;
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to fetch deleted dosage forms",
+      message: "Failed to fetch deleted drug class",
     });
   }
 };
