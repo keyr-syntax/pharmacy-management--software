@@ -189,52 +189,54 @@ export const deleteDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
-export const undoDeletedDosageForm = async (req: Request, res: Response) => {
-  const { dosageFormID } = req.params;
+export const undoDeletedDrugClass = async (req: Request, res: Response) => {
+  const { drugClassID } = req.params;
 
   try {
-    const findDosageFormByID = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
+    const findDrugClassByID = await DRUG_CLASS.findByPk(drugClassID);
 
-    if (findDosageFormByID && findDosageFormByID.softDeleted) {
-      const softDeleteDosageForm = await findDosageFormByID.update({
+    if (findDrugClassByID && findDrugClassByID.softDeleted) {
+      const softDeleteDrugClass = await findDrugClassByID.update({
         softDeleted: false,
       });
 
-      if (softDeleteDosageForm) {
-        const findAllDosageForm = await DRUG_DOSAGE_FORM.findAll({
-          where: {
-            softDeleted: true,
-          },
-          order: [["dosageForm", "ASC"]],
-        });
+      if (softDeleteDrugClass) {
+        const findAllDrugClass = await DRUG_CLASS.findAll({
+        where: { softDeleted: false },
+        order: [["drugClass", "ASC"]],
+      });
+
         res.status(200).json({
           success: true,
-          message: "Dosage form restored",
-          findAllDosageForm: findAllDosageForm,
+          message: "Drug class restored",
+          findAllDrugClass: findAllDrugClass,
         });
         return;
       } else {
         res.status(404).json({
           success: false,
-          message: "Failed to restore dosage form",
+          message: "Failed to restore drug class",
         });
         return;
       }
     } else {
       res.status(404).json({
         success: false,
-        message: "Dosage form not found",
+        message: "Drug class not found",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while restoring dosage form", error);
+    console.log("Error while restoring drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to restore dosage form",
+      message: "Failed to restore drug class",
     });
   }
 };
+
+
+
 export const fetchAllDeletedDosageForms = async (
   req: Request,
   res: Response
