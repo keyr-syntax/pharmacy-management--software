@@ -77,29 +77,29 @@ export const findAllDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
-export const findDosageFormByUUID = async (req: Request, res: Response) => {
+export const findDrugClassByUUID = async (req: Request, res: Response) => {
   try {
-    const { dosageFormID } = req.params;
-    const findDosageFormByPK = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
+    const { drugClass } = req.params;
+    const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClass);
 
-    if (findDosageFormByPK && !findDosageFormByPK.softDeleted) {
+    if (findDrugClassByPK && !findDrugClassByPK.softDeleted) {
       res.status(200).json({
         success: true,
-        dosageForm: findDosageFormByPK,
+        findDrugClassByPK: findDrugClassByPK,
       });
       return;
     } else {
       res.status(404).json({
         success: false,
-        message: "Dosage form not found",
+        message: "Drug class not found",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while finding dosage form", error);
+    console.log("Error while finding drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to find dosage form by UUID",
+      message: "Failed to find drug class by UUID",
     });
   }
 };
