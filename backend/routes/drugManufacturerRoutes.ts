@@ -5,7 +5,7 @@ import {
   userAuthenticationMiddleware,
 } from "../middleware/pharmacyUserMiddleware";
 
-import {
+import {addNewDrugManufacturer, findAllDrugManufacturers, findDrugManufacturerByUUID, updateDrugManufacturer, deleteDrugManufacturer, undoDeletedDrugManufacturer, fetchAllDeletedDrugManufacturers
   
 } from "../controllers/drugManufacturerControllers";
 const router: Router = express.Router();
