@@ -11,9 +11,9 @@ import {addNewDrugManufacturer, findAllDrugManufacturers, findDrugManufacturerBy
 const router: Router = express.Router();
 
 router.post(
-  "/admin/new_dosage_form",
+  "/admin/new_drug_manufacturer",
   adminAuthenticationMiddleware,
-  addNewDrugDosageForm
+  addNewDrugManufacturer
 );
 router.put(
   "/admin/update_dosage_form/:dosageFormID",
