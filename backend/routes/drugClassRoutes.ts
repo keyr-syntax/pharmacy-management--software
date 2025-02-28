@@ -16,9 +16,9 @@ import {
 const router: Router = express.Router();
 
 router.post(
-  "/admin/new_dosage_form",
+  "/admin/new_drug_class",
   adminAuthenticationMiddleware,
-  addNewDrugDosageForm
+  addNewDrugClass
 );
 router.put(
   "/admin/update_dosage_form/:dosageFormID",
