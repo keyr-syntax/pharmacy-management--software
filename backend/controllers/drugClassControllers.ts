@@ -79,8 +79,8 @@ export const findAllDrugClass = async (req: Request, res: Response) => {
 };
 export const findDrugClassByUUID = async (req: Request, res: Response) => {
   try {
-    const { drugClass } = req.params;
-    const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClass);
+    const { drugClassID } = req.params;
+    const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClassID);
 
     if (findDrugClassByPK && !findDrugClassByPK.softDeleted) {
       res.status(200).json({
@@ -103,13 +103,13 @@ export const findDrugClassByUUID = async (req: Request, res: Response) => {
     });
   }
 };
-export const updateDosageForm = async (req: Request, res: Response) => {
+export const updateDrugClass = async (req: Request, res: Response) => {
   try {
-    const { dosageFormID } = req.params;
-    const { dosageForm } = req.body;
-    const findDosageFormByPK = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
+    const { drugClassID } = req.params;
+    const { drugClass } = req.body;
+    const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClassID);
 
-    if (findDosageFormByPK && findDosageFormByPK.dosageForm !== dosageForm) {
+    if (drugClassID && findDrugClassByPK.drugClass !== drugClass) {
       const updateDosageForm = await findDosageFormByPK.update({
         dosageForm: dosageForm,
       });
