@@ -147,45 +147,45 @@ export const updateDrugClass = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteDosageForm = async (req: Request, res: Response) => {
+export const deleteDrugClass = async (req: Request, res: Response) => {
   try {
-    const { dosageFormID } = req.params;
-    const findDosageFormByPK = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
+    const { drugClassID } = req.params;
+    const findDrugClassByPK = await DRUG_CLASS.findByPk(drugClassID);
 
-    if (findDosageFormByPK) {
-      const softDeleteDosageForm = await findDosageFormByPK.update({
+    if (findDrugClassByPK) {
+      const softDeleteDrugClass = await findDrugClassByPK.update({
         softDeleted: true,
       });
-      const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
+      const findAllDrugClass = await DRUG_CLASS.findAll({
         where: { softDeleted: false },
-        order: [["dosageForm", "ASC"]],
+        order: [["drugClass", "ASC"]],
       });
-      if (softDeleteDosageForm) {
+      if (softDeleteDrugClass) {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          findAllDosageForms: findAllDosageForms,
+          findAllDrugClass: findAllDrugClass,
         });
         return;
       } else {
         res.status(200).json({
           success: true,
-          message: "Failed to delete dosage form",
+          message: "Failed to delete drug class",
         });
         return;
       }
     } else {
       res.status(404).json({
         success: false,
-        message: "Dosage form not found",
+        message: "Drug class not found",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while deleting dosage form", error);
+    console.log("Error while deleting drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to delete dosage form",
+      message: "Failed to delete drug class",
     });
   }
 };
