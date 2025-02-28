@@ -13,7 +13,7 @@ import {
   deleteDosageForm,
   undoDeletedDosageForm,
   fetchAllDeletedDosageForms,
-} from "../controllers/drugDosageFormControllers";
+} from "../controllers/drugManufacturerControllers";
 const router: Router = express.Router();
 
 router.post(
