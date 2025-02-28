@@ -52,9 +52,15 @@ export const addNewDrugClass = async (req: Request, res: Response) => {
 export const findAllDrugClass = async (req: Request, res: Response) => {
   try {
     const findAllDrugClass = await DRUG_CLASS.findAll({
+<<<<<<< HEAD
       where: { softDeleted: false },
       order: [["drugClass", "ASC"]],
     });
+=======
+        where: { softDeleted: false },
+        order: [["drugClass", "ASC"]],
+      });
+>>>>>>> 27aca0e7054af98b2698bcf3405eb6155e4cd127
 
     if (findAllDrugClass) {
       res.status(200).json({
@@ -202,9 +208,15 @@ export const undoDeletedDrugClass = async (req: Request, res: Response) => {
 
       if (softDeleteDrugClass) {
         const findAllDrugClass = await DRUG_CLASS.findAll({
+<<<<<<< HEAD
           where: { softDeleted: false },
           order: [["drugClass", "ASC"]],
         });
+=======
+        where: { softDeleted: false },
+        order: [["drugClass", "ASC"]],
+      });
+>>>>>>> 27aca0e7054af98b2698bcf3405eb6155e4cd127
 
         res.status(200).json({
           success: true,
@@ -235,7 +247,16 @@ export const undoDeletedDrugClass = async (req: Request, res: Response) => {
   }
 };
 
+<<<<<<< HEAD
 export const fetchAllDeletedDrugClass = async (req: Request, res: Response) => {
+=======
+
+
+export const fetchAllDeletedDrugClass = async (
+  req: Request,
+  res: Response
+) => {
+>>>>>>> 27aca0e7054af98b2698bcf3405eb6155e4cd127
   try {
     const findAllDeletedDrugClass = await DRUG_CLASS.findAll({
       where: {
@@ -264,3 +285,7 @@ export const fetchAllDeletedDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 27aca0e7054af98b2698bcf3405eb6155e4cd127
