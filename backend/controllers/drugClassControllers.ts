@@ -42,10 +42,10 @@ export const addNewDrugClass = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    console.log("Error while adding new dosage form", error);
+    console.log("Error while adding new drug class", error);
     res.status(500).json({
       success: false,
-      message: "Failed to add dosage form",
+      message: "Failed to add drug class",
     });
   }
 };
