@@ -16,12 +16,12 @@ import {
 const router: Router = express.Router();
 
 router.post(
-  "/admin/new_dosage_form",
+  "/admin/new_route_of_drug_administration",
   adminAuthenticationMiddleware,
   addNewRouteOfDrugAdministration
 );
 router.put(
-  "/admin/update_dosage_form/:dosageFormID",
+  "/admin/update_route_of_drug_administration/:routeOfDrugAdministrationID",
   adminAuthenticationMiddleware,
   updateDosageForm
 );
