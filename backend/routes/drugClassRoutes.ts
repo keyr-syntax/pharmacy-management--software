@@ -28,30 +28,31 @@ router.put(
 router.put(
   "/admin/restore_deleted_drug_class/:drugClassID",
   adminAuthenticationMiddleware,
-  undoDeletedDosageForm
+  undoDeletedDrugClass
 );
 
 
 router.get(
-  "/find_all_dosage_forms",
+  "/find_all_drug_class",
   userAuthenticationMiddleware,
-  findAllDrugDosageForms
+  findAllDrugClass
 );
 
 router.get(
-  "/admin/dosage_form/:dosageFormID",
+  "/admin/drug_class/:drugClassID",
   adminAuthenticationMiddleware,
-  findDosageFormByUUID
+  findDrugClassByUUID
 );
+
 router.get(
-  "/admin/deleted_dosage_forms",
+  "/admin/deleted_drug_class",
   adminAuthenticationMiddleware,
-  fetchAllDeletedDosageForms
+  fetchAllDeletedDrugClass
 );
 router.delete(
-  "/admin/delete_dosage_form/:dosageFormID",
+  "/admin/delete_drug_class/:drugClassID",
   adminAuthenticationMiddleware,
-  deleteDosageForm
+  deleteDrugClass
 );
 
 export default router;
