@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../config/dbMySQLconfig";
+import { sequelize } from "../../config/dbMySQLconfig";
 
 export interface drugsDosageFormInterface {
   dosageFormID?: string;

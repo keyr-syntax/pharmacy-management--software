@@ -7,11 +7,13 @@ import syncDatabase from "./config/databaseSync";
 import userRoutes from "./routes/user_routes/userRoutes";
 import dosageFormRoutes from "./routes/drug_routes/drugDosageFormRoutes";
 import drugManufacturerRoutes from "./routes/drug_routes/drugManufacturerRoutes";
-
+import drugRoutes from "./routes/drug_routes/drugRoutes";
+import modelAssociation from "./models/model_associations/modelAssociation";
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
 
 syncDatabase();
+modelAssociation();
 app.use(express());
 app.use(express.json());
 app.use(
@@ -27,6 +29,7 @@ app.use(cookieParser());
 app.use("/pharmacy_user", userRoutes);
 app.use("/dosage_form", dosageFormRoutes);
 app.use("/drug_manufacturer", drugManufacturerRoutes);
+app.use("/drugs", drugRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

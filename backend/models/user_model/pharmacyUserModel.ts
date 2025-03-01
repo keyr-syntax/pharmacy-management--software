@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../config/dbMySQLconfig";
+import { sequelize } from "../../config/dbMySQLconfig";
 import bcrypt from "bcrypt";
 
 export interface pharmacyUserInterface {

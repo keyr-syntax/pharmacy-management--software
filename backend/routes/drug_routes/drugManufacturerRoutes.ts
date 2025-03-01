@@ -3,7 +3,7 @@ import express, { Router } from "express";
 import {
   adminAuthenticationMiddleware,
   userAuthenticationMiddleware,
-} from "../middleware/pharmacyUserMiddleware";
+} from "../../middleware/pharmacyUserMiddleware";
 
 import {
   addNewDrugManufacturer,
@@ -13,7 +13,7 @@ import {
   deleteDrugManufacturer,
   undoDeletedDrugManufacturer,
   fetchAllDeletedDrugManufacturers,
-} from "../controllers/drugManufacturerControllers";
+} from "../../controllers/drug_controllers/drugManufacturerControllers";
 const router: Router = express.Router();
 
 router.post(

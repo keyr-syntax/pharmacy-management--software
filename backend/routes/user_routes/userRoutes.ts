@@ -11,11 +11,11 @@ import {
   fetchAllDeletedItems,
   undoDeletedUser,
   fetchOneUserByIDForProfileUpdate,
-} from "../controllers/pharmacyUserControllers";
+} from "../../controllers/user_controllers/pharmacyUserControllers";
 import {
   adminAuthenticationMiddleware,
   userAuthenticationMiddleware,
-} from "../middleware/pharmacyUserMiddleware";
+} from "../../middleware/pharmacyUserMiddleware";
 const router: Router = express.Router();
 
 router.post("/create_user", createPharmacyUser);
