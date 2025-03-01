@@ -46,7 +46,7 @@ router.get(
   adminAuthenticationMiddleware,
   fetchAllDeletedDosageForms
 );
-router.delete(
+router.put(
   "/admin/delete_dosage_form/:dosageFormID",
   adminAuthenticationMiddleware,
   deleteDosageForm

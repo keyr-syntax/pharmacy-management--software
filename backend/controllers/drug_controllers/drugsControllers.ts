@@ -254,123 +254,113 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
 };
 export const deleteDrug = async (req: Request, res: Response) => {
   try {
-    const { dosageFormID } = req.params;
-    const findDosageFormByPK = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
-
-    if (findDosageFormByPK) {
-      const softDeleteDosageForm = await findDosageFormByPK.update({
+    const { drugID } = req.params;
+    const findDrugByPK = await DRUGS.findByPk(drugID);
+    if (findDrugByPK) {
+      const softDeleteDrug = await findDrugByPK.update({
         softDeleted: true,
       });
-      const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
+      const findAllDrugs = await DRUGS.findAll({
         where: { softDeleted: false },
-        order: [["dosageForm", "ASC"]],
+        order: [["genericName", "ASC"]],
       });
-      if (softDeleteDosageForm) {
+      if (softDeleteDrug) {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          findAllDosageForms: findAllDosageForms,
+          allDrugs: findAllDrugs,
         });
         return;
       } else {
         res.status(200).json({
           success: true,
-          message: "Failed to delete dosage form",
+          message: "Failed to delete drug",
         });
         return;
       }
     } else {
       res.status(404).json({
         success: false,
-        message: "Dosage form not found",
+        message: "Drug not found",
       });
       return;
     }
   } catch (error) {
-    console.log("Error while deleting dosage form", error);
+    console.log("Error while deleting drug", error);
     res.status(500).json({
       success: false,
-      message: "Failed to delete dosage form",
+      message: "Failed to delete drug",
     });
   }
 };
+export const undoDeletedDrug = async (req: Request, res: Response) => {
+  try {
+    const { drugID } = req.params;
+    const findDrugByPK = await DRUGS.findByPk(drugID);
 
-// export const undoDeletedDosageForm = async (req: Request, res: Response) => {
-//   const { dosageFormID } = req.params;
+    if (findDrugByPK && findDrugByPK.softDeleted) {
+      const softDeleteDrug = await findDrugByPK.update({
+        softDeleted: false,
+      });
 
-//   try {
-//     const findDosageFormByID = await DRUG_DOSAGE_FORM.findByPk(dosageFormID);
+      if (softDeleteDrug) {
+        const findAllDrugs = await DRUGS.findAll({
+          where: { softDeleted: true },
+          order: [["genericName", "ASC"]],
+        });
 
-//     if (findDosageFormByID && findDosageFormByID.softDeleted) {
-//       const softDeleteDosageForm = await findDosageFormByID.update({
-//         softDeleted: false,
-//       });
+        res.status(200).json({
+          success: true,
+          message: "Drug restored",
+          allDrugs: findAllDrugs,
+        });
+        return;
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Failed to restore drug",
+        });
+        return;
+      }
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Drug not found",
+      });
+      return;
+    }
+  } catch (error) {
+    console.log("Error while restoring drug", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to restore drug",
+    });
+  }
+};
+export const fetchAllDeletedDrugs = async (req: Request, res: Response) => {
+  try {
+    const findAllDrugs = await DRUGS.findAll({
+      where: { softDeleted: true },
+      order: [["genericName", "ASC"]],
+    });
 
-//       if (softDeleteDosageForm) {
-//         const findAllDosageForm = await DRUG_DOSAGE_FORM.findAll({
-//           where: {
-//             softDeleted: true,
-//           },
-//           order: [["dosageForm", "ASC"]],
-//         });
-//         res.status(200).json({
-//           success: true,
-//           message: "Dosage form restored",
-//           findAllDosageForm: findAllDosageForm,
-//         });
-//         return;
-//       } else {
-//         res.status(404).json({
-//           success: false,
-//           message: "Failed to restore dosage form",
-//         });
-//         return;
-//       }
-//     } else {
-//       res.status(404).json({
-//         success: false,
-//         message: "Dosage form not found",
-//       });
-//       return;
-//     }
-//   } catch (error) {
-//     console.log("Error while restoring dosage form", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to restore dosage form",
-//     });
-//   }
-// };
-
-// export const fetchAllDeletedDosageForms = async (
-//   req: Request,
-//   res: Response
-// ) => {
-//   try {
-//     const findAllDeletedDosageForms = await DRUG_DOSAGE_FORM.findAll({
-//       where: {
-//         softDeleted: true,
-//       },
-//       order: [["dosageForm", "ASC"]],
-//     });
-
-//     if (findAllDeletedDosageForms) {
-//       res.status(200).json({
-//         success: true,
-//         findAllDeletedDosageForms: findAllDeletedDosageForms,
-//       });
-//       return;
-//     } else {
-//       res.status(200).json({
-//         success: true,
-//         message: "No deleted dosage forms",
-//       });
-//       return;
-//     }
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch deleted dosage forms",
-//     });
-//   }
-// };
+    if (findAllDrugs) {
+      res.status(200).json({
+        success: true,
+        allDrugs: findAllDrugs,
+      });
+      return;
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "No deleted drugs",
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch deleted drugs",
+    });
+  }
+};
