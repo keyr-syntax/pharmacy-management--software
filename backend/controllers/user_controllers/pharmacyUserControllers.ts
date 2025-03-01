@@ -1,4 +1,4 @@
-import pharmacyUser from "../models/pharmacyUserModel";
+import pharmacyUser from "../../models/user_model/pharmacyUserModel";
 import { Request, Response } from "express";
 import validator from "validator";
 import passport from "passport";
@@ -6,7 +6,7 @@ import { Strategy as JwtStrategy } from "passport-jwt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import { pharmacyUserInterface } from "../models/pharmacyUserModel";
+import { pharmacyUserInterface } from "../../models/user_model/pharmacyUserModel";
 
 dotenv.config();
 

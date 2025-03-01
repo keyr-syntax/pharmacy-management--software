@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ROUTE_OF_DRUG_ADMINISTRATION from "../models/routeOfDrugAdministrationModel";
+import ROUTE_OF_DRUG_ADMINISTRATION from "../../models/drug_model/routeOfDrugAdministrationModel";
 
 export const addNewRouteOfDrugAdministration = async (
   req: Request,
