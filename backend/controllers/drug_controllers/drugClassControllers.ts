@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DRUG_CLASS from "../models/drugClassModel";
+import DRUG_CLASS from "../../models/drug_model/drugClassModel";
 
 export const addNewDrugClass = async (req: Request, res: Response) => {
   const { drugClass } = req.body;
@@ -49,6 +49,7 @@ export const addNewDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const findAllDrugClass = async (req: Request, res: Response) => {
   try {
     const findAllDrugClass = await DRUG_CLASS.findAll({
@@ -77,6 +78,7 @@ export const findAllDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const findDrugClassByUUID = async (req: Request, res: Response) => {
   try {
     const { drugClassID } = req.params;
@@ -103,6 +105,7 @@ export const findDrugClassByUUID = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const updateDrugClass = async (req: Request, res: Response) => {
   try {
     const { drugClassID } = req.params;
@@ -146,6 +149,7 @@ export const updateDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const deleteDrugClass = async (req: Request, res: Response) => {
   try {
     const { drugClassID } = req.params;
@@ -188,6 +192,7 @@ export const deleteDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const undoDeletedDrugClass = async (req: Request, res: Response) => {
   const { drugClassID } = req.params;
 
@@ -233,6 +238,7 @@ export const undoDeletedDrugClass = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const fetchAllDeletedDrugClass = async (req: Request, res: Response) => {
   try {
     const findAllDeletedDrugClass = await DRUG_CLASS.findAll({

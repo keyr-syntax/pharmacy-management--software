@@ -1,4 +1,4 @@
-import pharmacyUser from "../models/pharmacyUserModel";
+import pharmacyUser from "../models/user_model/pharmacyUserModel";
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import { Strategy as JwtStrategy } from "passport-jwt";

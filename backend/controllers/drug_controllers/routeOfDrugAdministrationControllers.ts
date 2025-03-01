@@ -55,6 +55,7 @@ export const addNewRouteOfDrugAdministration = async (
     });
   }
 };
+
 export const findAllRoutesOfDrugAdministration = async (
   req: Request,
   res: Response
@@ -87,6 +88,7 @@ export const findAllRoutesOfDrugAdministration = async (
     });
   }
 };
+
 export const findRouteOfDrugAdministrationByUUID = async (
   req: Request,
   res: Response
@@ -120,6 +122,7 @@ export const findRouteOfDrugAdministrationByUUID = async (
     });
   }
 };
+
 export const updateRouteOfDrugAdministration = async (
   req: Request,
   res: Response
@@ -173,6 +176,7 @@ export const updateRouteOfDrugAdministration = async (
     });
   }
 };
+
 export const deleteRouteOfDrugAdministration = async (
   req: Request,
   res: Response
@@ -221,6 +225,7 @@ export const deleteRouteOfDrugAdministration = async (
     });
   }
 };
+
 export const undoDeletedRouteOfDrugAdministration = async (
   req: Request,
   res: Response
@@ -274,6 +279,7 @@ export const undoDeletedRouteOfDrugAdministration = async (
     });
   }
 };
+
 export const fetchAllDeletedRouteOfDrugAdministration = async (
   req: Request,
   res: Response

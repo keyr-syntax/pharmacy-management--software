@@ -1,5 +1,5 @@
 import { DataTypes, Model, STRING } from "sequelize";
-import { sequelize } from "../config/dbMySQLconfig";
+import { sequelize } from "../../config/dbMySQLconfig";
 
 export interface routeOfDrugAdministrationInterface {
   routeOfDrugAdministrationID?: string;

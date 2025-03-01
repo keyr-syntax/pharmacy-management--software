@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DRUG_DOSAGE_FORM from "../models/dosageFormModel";
+import DRUG_DOSAGE_FORM from "../../models/drug_model/dosageFormModel";
 
 export const addNewDrugDosageForm = async (req: Request, res: Response) => {
   const { dosageForm } = req.body;
@@ -49,6 +49,7 @@ export const addNewDrugDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const findAllDrugDosageForms = async (req: Request, res: Response) => {
   try {
     const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
@@ -77,6 +78,7 @@ export const findAllDrugDosageForms = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const findDosageFormByUUID = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -103,6 +105,7 @@ export const findDosageFormByUUID = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const updateDosageForm = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -146,6 +149,7 @@ export const updateDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const deleteDosageForm = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -188,6 +192,7 @@ export const deleteDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const undoDeletedDosageForm = async (req: Request, res: Response) => {
   const { dosageFormID } = req.params;
 
@@ -234,6 +239,7 @@ export const undoDeletedDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const fetchAllDeletedDosageForms = async (
   req: Request,
   res: Response

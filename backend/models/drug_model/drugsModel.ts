@@ -9,9 +9,8 @@ export interface drugsInterface {
   drugType: string;
   dosageStrength: string;
   routeOfDrugAdministration: string;
-  isPrescriptionRequired: boolean;
   unitsPerPack: number;
-  manufacturer: string;
+  manufacturerID: string;
   drugClass: string;
   status: string;
   softDeleted: boolean;
@@ -25,9 +24,8 @@ class DRUGS extends Model<drugsInterface> implements drugsInterface {
   public drugType!: string;
   public dosageStrength!: string;
   public routeOfDrugAdministration!: string;
-  public isPrescriptionRequired!: boolean;
   public unitsPerPack!: number;
-  public manufacturer!: string;
+  public manufacturerID!: string;
   public drugClass!: string;
   public status!: string;
   public softDeleted!: boolean;
@@ -50,12 +48,8 @@ DRUGS.init(
       allowNull: false,
     },
     dosageForm: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: "DRUG_DOSAGE_FORM",
-        key: "dosageFormID",
-      },
     },
     drugType: {
       type: DataTypes.ENUM("OTC", "Prescription"),
@@ -66,22 +60,15 @@ DRUGS.init(
       allowNull: false,
     },
     routeOfDrugAdministration: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: "ROUTE_OF_DRUG_ADMINISTRATION",
-        key: "routeOfDrugAdministrationID",
-      },
-    },
-    isPrescriptionRequired: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
     },
+
     unitsPerPack: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    manufacturer: {
+    manufacturerID: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -90,12 +77,8 @@ DRUGS.init(
       },
     },
     drugClass: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: "DRUG_CLASS",
-        key: "drugClassID",
-      },
     },
     status: {
       type: DataTypes.ENUM("Active", "Discontinued", "Out of Stock"),

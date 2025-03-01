@@ -4,14 +4,13 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 dotenv.config();
 import syncDatabase from "./config/databaseSync";
-import userRoutes from "./routes/userRoutes";
-import dosageFormRoutes from "./routes/drugDosageFormRoutes";
-import modelAssociation from "./models/modelAssociation";
+import userRoutes from "./routes/user_routes/userRoutes";
+import dosageFormRoutes from "./routes/drug_routes/drugDosageFormRoutes";
+import drugManufacturerRoutes from "./routes/drug_routes/drugManufacturerRoutes";
 
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
 
-modelAssociation();
 syncDatabase();
 app.use(express());
 app.use(express.json());
@@ -24,8 +23,10 @@ app.use(
   })
 );
 app.use(cookieParser());
+
 app.use("/pharmacy_user", userRoutes);
 app.use("/dosage_form", dosageFormRoutes);
+app.use("/drug_manufacturer", drugManufacturerRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

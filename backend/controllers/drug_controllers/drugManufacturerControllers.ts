@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DRUG_MANUFACTURERS from "../models/drugManufacturersModel";
+import DRUG_MANUFACTURERS from "../../models/drug_model/drugManufacturersModel";
 
 export const addNewDrugManufacturer = async (
   req: Request,
@@ -34,7 +34,7 @@ export const addNewDrugManufacturer = async (
       });
       const findAllDrugManufacturers = await DRUG_MANUFACTURERS.findAll({
         where: { softDeleted: false },
-        order: [["dosageForm", "ASC"]],
+        order: [["manufacturerName", "ASC"]],
       });
       if (findAllDrugManufacturers) {
         res.status(200).json({
@@ -60,6 +60,7 @@ export const addNewDrugManufacturer = async (
     return;
   }
 };
+
 export const findAllDrugManufacturers = async (req: Request, res: Response) => {
   try {
     const findAllDrugManufacturers = await DRUG_MANUFACTURERS.findAll({
@@ -88,6 +89,7 @@ export const findAllDrugManufacturers = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const findDrugManufacturerByUUID = async (
   req: Request,
   res: Response
@@ -119,6 +121,7 @@ export const findDrugManufacturerByUUID = async (
     });
   }
 };
+
 export const updateDrugManufacturer = async (req: Request, res: Response) => {
   try {
     const { manufacturerID } = req.params;
@@ -174,6 +177,7 @@ export const updateDrugManufacturer = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const deleteDrugManufacturer = async (req: Request, res: Response) => {
   try {
     const { manufacturerID } = req.params;
@@ -218,6 +222,7 @@ export const deleteDrugManufacturer = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const undoDeletedDrugManufacturer = async (
   req: Request,
   res: Response

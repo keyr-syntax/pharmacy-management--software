@@ -16,40 +16,40 @@ import {
 const router: Router = express.Router();
 
 router.post(
-  "/admin/new_dosage_form",
+  "/admin/new_route_of_drug_administration",
   adminAuthenticationMiddleware,
   addNewRouteOfDrugAdministration
 );
 router.put(
-  "/admin/update_dosage_form/:dosageFormID",
+  "/admin/update_route_of_drug_administration/:routeOfDrugAdministrationID",
   adminAuthenticationMiddleware,
-  updateDosageForm
+  updateRouteOfDrugAdministration
 );
 router.put(
-  "/admin/restore_deleted_dosage_form/:dosageFormID",
+  "/admin/restore_route_of_drug_administration/:routeOfDrugAdministrationID",
   adminAuthenticationMiddleware,
-  undoDeletedDosageForm
+  undoDeletedRouteOfDrugAdministration
 );
 router.get(
-  "/find_all_dosage_forms",
+  "/find_all_route_of_drug_administration",
   userAuthenticationMiddleware,
-  findAllDrugDosageForms
+  findAllRoutesOfDrugAdministration
 );
 
 router.get(
-  "/admin/dosage_form/:dosageFormID",
+  "/admin/routeOfDrugAdministration/:routeOfDrugAdministrationID",
   adminAuthenticationMiddleware,
-  findDosageFormByUUID
+  findRouteOfDrugAdministrationByUUID
 );
 router.get(
-  "/admin/deleted_dosage_forms",
+  "/admin/find_all_deleted_route_of_drug_administration",
   adminAuthenticationMiddleware,
-  fetchAllDeletedDosageForms
+  fetchAllDeletedRouteOfDrugAdministration
 );
 router.delete(
-  "/admin/delete_dosage_form/:dosageFormID",
+  "/admin/delete_route_of_drug_administration/:routeOfDrugAdministrationID",
   adminAuthenticationMiddleware,
-  deleteDosageForm
+  deleteRouteOfDrugAdministration
 );
 
 export default router;
