@@ -25,11 +25,7 @@ router.put(
   adminAuthenticationMiddleware,
   updateDosageForm
 );
-router.put(
-  "/admin/restore_deleted_dosage_form/:dosageFormID",
-  adminAuthenticationMiddleware,
-  undoDeletedDosageForm
-);
+
 router.get(
   "/find_all_dosage_forms",
   userAuthenticationMiddleware,
@@ -37,7 +33,7 @@ router.get(
 );
 
 router.get(
-  "/admin/dosage_form/:dosageFormID",
+  "/admin/find_dosage_form/:dosageFormID",
   adminAuthenticationMiddleware,
   findDosageFormByUUID
 );
@@ -51,5 +47,9 @@ router.put(
   adminAuthenticationMiddleware,
   deleteDosageForm
 );
-
+router.put(
+  "/admin/restore_deleted_dosage_form/:dosageFormID",
+  adminAuthenticationMiddleware,
+  undoDeletedDosageForm
+);
 export default router;

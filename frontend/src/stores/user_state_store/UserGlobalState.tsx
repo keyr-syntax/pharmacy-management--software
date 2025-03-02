@@ -5,7 +5,7 @@ import {
   EditPharmacyUser,
   RegisterUserformInput,
   UpdateUserProfileformInput,
-} from "../types/types";
+} from "../../types/userTypes";
 
 interface PharmacyUserApiResponse {
   usersList: PharmacyUser[] | null;

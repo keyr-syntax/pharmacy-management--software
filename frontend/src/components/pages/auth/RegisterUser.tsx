@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterUserformInput } from "../../../types/types";
+import { RegisterUserformInput } from "../../../types/userTypes";
 import { Button } from "@/components/ui/button";
 import { HandleRegisterPharmacyUser } from "@/services/UserApiService";
-import { RegisterPharmacyUserGlobalState } from "@/stores/GlobalState";
+import { RegisterPharmacyUserGlobalState } from "@/stores/user_state_store/UserGlobalState";
 export default function RegisterPharmacyUser() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const { loading } = RegisterPharmacyUserGlobalState();

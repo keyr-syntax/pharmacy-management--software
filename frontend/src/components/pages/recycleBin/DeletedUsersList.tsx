@@ -13,7 +13,7 @@ import {
 } from "@/services/UserApiService";
 
 import { useEffect } from "react";
-import { DeletedItemsGlobalState } from "@/stores/GlobalState";
+import { DeletedItemsGlobalState } from "@/stores/user_state_store/UserGlobalState";
 
 export default function DeletedUsersList() {
   const { deltedUsersList } = DeletedItemsGlobalState();

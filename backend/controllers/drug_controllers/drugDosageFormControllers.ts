@@ -30,7 +30,8 @@ export const addNewDrugDosageForm = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           dosageForm: newDosageForm,
-          findAllDosageForms: findAllDosageForms,
+          allDosageForms: findAllDosageForms,
+          message: "Dosage form added",
         });
         return;
       } else {
@@ -49,7 +50,6 @@ export const addNewDrugDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findAllDrugDosageForms = async (req: Request, res: Response) => {
   try {
     const findAllDosageForms = await DRUG_DOSAGE_FORM.findAll({
@@ -60,7 +60,7 @@ export const findAllDrugDosageForms = async (req: Request, res: Response) => {
     if (findAllDosageForms) {
       res.status(200).json({
         success: true,
-        findAllDosageForms: findAllDosageForms,
+        allDosageForms: findAllDosageForms,
       });
       return;
     } else {
@@ -78,7 +78,6 @@ export const findAllDrugDosageForms = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findDosageFormByUUID = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -88,6 +87,7 @@ export const findDosageFormByUUID = async (req: Request, res: Response) => {
       res.status(200).json({
         success: true,
         dosageForm: findDosageFormByPK,
+        message: "Dosage form added",
       });
       return;
     } else {
@@ -105,7 +105,6 @@ export const findDosageFormByUUID = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const updateDosageForm = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -124,7 +123,8 @@ export const updateDosageForm = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           dosageForm: updateDosageForm,
-          findAllDosageForms: findAllDosageForms,
+          allDosageForms: findAllDosageForms,
+          message: "Dosage form updated",
         });
         return;
       } else {
@@ -149,7 +149,6 @@ export const updateDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const deleteDosageForm = async (req: Request, res: Response) => {
   try {
     const { dosageFormID } = req.params;
@@ -167,7 +166,7 @@ export const deleteDosageForm = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          findAllDosageForms: findAllDosageForms,
+          allDosageForms: findAllDosageForms,
         });
         return;
       } else {
@@ -192,7 +191,6 @@ export const deleteDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const undoDeletedDosageForm = async (req: Request, res: Response) => {
   const { dosageFormID } = req.params;
 
@@ -214,7 +212,7 @@ export const undoDeletedDosageForm = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           message: "Dosage form restored",
-          findAllDosageForm: findAllDosageForm,
+          allDosageForm: findAllDosageForm,
         });
         return;
       } else {
@@ -239,7 +237,6 @@ export const undoDeletedDosageForm = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const fetchAllDeletedDosageForms = async (
   req: Request,
   res: Response
@@ -255,7 +252,7 @@ export const fetchAllDeletedDosageForms = async (
     if (findAllDeletedDosageForms) {
       res.status(200).json({
         success: true,
-        findAllDeletedDosageForms: findAllDeletedDosageForms,
+        allDeletedDosageForms: findAllDeletedDosageForms,
       });
       return;
     } else {

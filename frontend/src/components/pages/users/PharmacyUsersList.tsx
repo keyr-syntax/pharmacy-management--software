@@ -18,7 +18,7 @@ import {
 import {
   EditPharmacyUserGlobalState,
   PharmacyUserGlobalState,
-} from "@/stores/GlobalState";
+} from "@/stores/user_state_store/UserGlobalState";
 
 import { useEffect } from "react";
 import { Input } from "@/components/ui/input";

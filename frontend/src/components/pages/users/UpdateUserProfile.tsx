@@ -5,7 +5,7 @@ import {
   findPharmacyUserByIDForProfileUpdate,
   updatePharmacyUserProfile,
 } from "@/services/UserApiService";
-import { UpdatePharmacyUserProfileGlobalState } from "@/stores/GlobalState";
+import { UpdatePharmacyUserProfileGlobalState } from "@/stores/user_state_store/UserGlobalState";
 import { useEffect } from "react";
 export default function UpdateUserProfile() {
   const { loading, firstName, lastName, email, phoneNumber } =

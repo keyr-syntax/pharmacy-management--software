@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff } from "lucide-react";
 import { baseURL } from "@/lib/utils";
-import { LoginformInput } from "../../../types/types";
+import { LoginformInput } from "../../../types/userTypes";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 

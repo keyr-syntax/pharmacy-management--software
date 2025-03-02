@@ -6,8 +6,10 @@ import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import RegisterPharmacyUser from "./components/pages/auth/RegisterUser";
 import LoginPharmacyUser from "./components/pages/auth/LoginUser";
 import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
-import RecycleBin from "./components/pages/recycleBin/RecycleBin";
-import UpdateUserProfile from "./components/pages/users/updateUserProfile";
+import UpdateUserProfile from "./components/pages/users/UpdateUserProfile";
+import TableForDosageForm from "./components/pages/products/dosage_form/TableForDosageForm";
+import DeletedUsersList from "./components/pages/recycleBin/DeletedUsersList";
+import DeletedDosageForms from "./components/pages/recycleBin/DeletedDosageForms";
 
 function App() {
   return (
@@ -34,10 +36,21 @@ function App() {
             element={<RegisterPharmacyUser />}
           />
           <Route path="/dashboard/users" element={<PharmacyUsersList />} />
-          <Route path="/dashboard/recycle_bin" element={<RecycleBin />} />
+          <Route
+            path="/dashboard/users_recycle_bin"
+            element={<DeletedUsersList />}
+          />
+          <Route
+            path="/dashboard/dosage_form_recycle_bin"
+            element={<DeletedDosageForms />}
+          />
           <Route
             path="/dashboard/edit_my_account"
             element={<UpdateUserProfile />}
+          />
+          <Route
+            path="/dashboard/dosage_form"
+            element={<TableForDosageForm />}
           />
         </Route>
       </Routes>

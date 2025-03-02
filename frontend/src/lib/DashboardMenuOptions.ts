@@ -21,10 +21,34 @@ export const DashboardMenuItems = [
     url: "/dashboard/login",
     icon: Contact2,
   },
-
   {
-    title: "Recycle Bin",
-    url: "/dashboard/recycle_bin",
+    title: "Users Recycle Bin",
+    url: "/dashboard/users_recycle_bin",
+    icon: Trash2Icon,
+  },
+  {
+    title: "Drugs",
+    url: "/dashboard/drugs",
+    icon: Trash2Icon,
+  },
+  {
+    title: "Dosage form",
+    url: "/dashboard/dosage_form",
+    icon: Trash2Icon,
+  },
+  {
+    title: "Dosage form Recycle Bin",
+    url: "/dashboard/dosage_form_recycle_bin",
+    icon: Trash2Icon,
+  },
+  {
+    title: "Drug Manufacturer",
+    url: "/dashboard/drug_manufacturer",
+    icon: Trash2Icon,
+  },
+  {
+    title: "Route of Administration",
+    url: "/dashboard/drugs",
     icon: Trash2Icon,
   },
 ];

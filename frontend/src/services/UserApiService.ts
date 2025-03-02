@@ -1,13 +1,14 @@
 import { baseURL } from "@/lib/utils";
 import toast from "react-hot-toast";
+
 import {
   PharmacyUserGlobalState,
   EditPharmacyUserGlobalState,
   DeletedItemsGlobalState,
   RegisterPharmacyUserGlobalState,
   UpdatePharmacyUserProfileGlobalState,
-} from "@/stores/GlobalState";
-import { RegisterUserformInput } from "@/types/types";
+} from "@/stores/user_state_store/UserGlobalState";
+import { RegisterUserformInput } from "@/types/userTypes";
 
 export const HandleRegisterPharmacyUser = async (
   formData: RegisterUserformInput
