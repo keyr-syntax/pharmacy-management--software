@@ -8,8 +8,11 @@ import LoginPharmacyUser from "./components/pages/auth/LoginUser";
 import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
 import UpdateUserProfile from "./components/pages/users/UpdateUserProfile";
 import TableForDosageForm from "./components/pages/products/dosage_form/TableForDosageForm";
-import DeletedUsersList from "./components/pages/recycleBin/DeletedUsersList";
-import DeletedDosageForms from "./components/pages/recycleBin/DeletedDosageForms";
+import DeletedUsersList from "./components/pages/recycleBin/RecycleBinForDeletedUsers";
+import DeletedDosageForms from "./components/pages/recycleBin/RecycleBinForDeletedDosageForms";
+import { NewDrugManufacturer } from "./components/pages/products/drug_manufacturer/NewDrugManufacturer";
+import TableForDrugManufacturer from "./components/pages/products/drug_manufacturer/TableForDrugManufacturer";
+import RecycleBinForDeletedDrugManufacturers from "./components/pages/recycleBin/RecycleBinForDeletedDrugManufacturers";
 
 function App() {
   return (
@@ -51,6 +54,18 @@ function App() {
           <Route
             path="/dashboard/dosage_form"
             element={<TableForDosageForm />}
+          />
+          <Route
+            path="/dashboard/drug_manufacturer"
+            element={<NewDrugManufacturer />}
+          />
+          <Route
+            path="/dashboard/drug_manufacturer_list"
+            element={<TableForDrugManufacturer />}
+          />
+          <Route
+            path="/dashboard/drug_manufacturer_recycle_bin"
+            element={<RecycleBinForDeletedDrugManufacturers />}
           />
         </Route>
       </Routes>

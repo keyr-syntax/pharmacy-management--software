@@ -5,9 +5,12 @@ interface DrugManufacturerApiResponse {
   drugManufacturerList: DrugManufacturer[] | null;
   deletedDrugManufacturerList: DrugManufacturer[] | null;
   drugManufacturer: string | null;
-  newDrugManufacturer: string | null;
   loading: boolean;
   drugManufacturerIDForEdit: string | null;
+  manufacturerName: string | null;
+  contactName: string | null;
+  phoneNumber: string | null;
+  licenseNumber: string | null;
 }
 
 export const DrugManufacturerGlobalState = create<DrugManufacturerApiResponse>(
@@ -15,8 +18,11 @@ export const DrugManufacturerGlobalState = create<DrugManufacturerApiResponse>(
     drugManufacturerList: null,
     deletedDrugManufacturerList: null,
     drugManufacturer: null,
-    newDrugManufacturer: null,
     loading: false,
     drugManufacturerIDForEdit: null,
+    manufacturerName: null,
+    contactName: null,
+    phoneNumber: null,
+    licenseNumber: null,
   })
 );

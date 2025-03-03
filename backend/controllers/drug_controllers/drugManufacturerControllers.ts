@@ -1,65 +1,3 @@
-// import { Request, Response } from "express";
-// import DRUG_MANUFACTURERS from "../../models/drug_model/drugManufacturersModel";
-
-// export const addNewDrugManufacturer = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   const { manufacturerName, contactName, phoneNumber, licenseNumber } =
-//     req.body;
-//   try {
-//     const doesDrugManufacturerExist = await DRUG_MANUFACTURERS.findOne({
-//       where: {
-//         manufacturerName: manufacturerName,
-//         contactName: contactName,
-//         phoneNumber: phoneNumber,
-//         licenseNumber: licenseNumber,
-//         softDeleted: false,
-//       },
-//     });
-
-//     if (doesDrugManufacturerExist) {
-//       res.status(400).json({
-//         success: false,
-//         message: "Manufacturer already exists",
-//       });
-//       return;
-//     } else {
-//       const newDrugManufacturer = await DRUG_MANUFACTURERS.create({
-//         manufacturerName: manufacturerName,
-//         contactName: contactName,
-//         phoneNumber: phoneNumber,
-//         licenseNumber: licenseNumber,
-//         softDeleted: false,
-//       });
-//       const findAllDrugManufacturers = await DRUG_MANUFACTURERS.findAll({
-//         where: { softDeleted: false },
-//         order: [["manufacturerName", "ASC"]],
-//       });
-//       if (findAllDrugManufacturers) {
-//         res.status(200).json({
-//           success: true,
-//           drugManufacturer: newDrugManufacturer,
-//           findAllDrugManufacturers: findAllDrugManufacturers,
-//         });
-//         return;
-//       } else {
-//         res.status(404).json({
-//           success: false,
-//           message: "Failed to add drug manufacturer",
-//         });
-//         return;
-//       }
-//     }
-//   } catch (error) {
-//     console.log("Error while adding new drug manufacturer", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to add drug manufacturer",
-//     });
-//     return;
-//   }
-// };
 import { Request, Response } from "express";
 import DRUG_MANUFACTURERS from "../../models/drug_model/drugManufacturersModel";
 
@@ -69,9 +7,6 @@ export const addNewDrugManufacturer = async (
 ): Promise<void> => {
   const { manufacturerName, contactName, phoneNumber, licenseNumber } =
     req.body;
-
-  // Log the request body to debug
-  console.log("Request body:", req.body);
 
   try {
     const doesDrugManufacturerExist = await DRUG_MANUFACTURERS.findOne({
@@ -106,7 +41,8 @@ export const addNewDrugManufacturer = async (
         res.status(200).json({
           success: true,
           drugManufacturer: newDrugManufacturer,
-          findAllDrugManufacturers: findAllDrugManufacturers,
+          allDrugManufacturers: findAllDrugManufacturers,
+          message: "Manufacturer added",
         });
         return;
       } else {
@@ -126,7 +62,6 @@ export const addNewDrugManufacturer = async (
     return;
   }
 };
-
 export const findAllDrugManufacturers = async (req: Request, res: Response) => {
   try {
     const findAllDrugManufacturers = await DRUG_MANUFACTURERS.findAll({
@@ -137,7 +72,7 @@ export const findAllDrugManufacturers = async (req: Request, res: Response) => {
     if (findAllDrugManufacturers) {
       res.status(200).json({
         success: true,
-        findAllDrugManufacturers: findAllDrugManufacturers,
+        allDrugManufacturers: findAllDrugManufacturers,
       });
       return;
     } else {
@@ -155,7 +90,6 @@ export const findAllDrugManufacturers = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findDrugManufacturerByUUID = async (
   req: Request,
   res: Response
@@ -187,7 +121,6 @@ export const findDrugManufacturerByUUID = async (
     });
   }
 };
-
 export const updateDrugManufacturer = async (req: Request, res: Response) => {
   try {
     const { manufacturerID } = req.params;
@@ -218,7 +151,8 @@ export const updateDrugManufacturer = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           drugManufacturer: updateDrugManufacturer,
-          findAllDrugManufacturers: findAllDrugManufacturers,
+          allDrugManufacturers: findAllDrugManufacturers,
+          message: "Updated",
         });
         return;
       } else {
@@ -243,7 +177,6 @@ export const updateDrugManufacturer = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const deleteDrugManufacturer = async (req: Request, res: Response) => {
   try {
     const { manufacturerID } = req.params;
@@ -263,7 +196,7 @@ export const deleteDrugManufacturer = async (req: Request, res: Response) => {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          findAllDrugManufacturers: findAllDrugManufacturers,
+          allDrugManufacturers: findAllDrugManufacturers,
         });
         return;
       } else {
@@ -288,7 +221,6 @@ export const deleteDrugManufacturer = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const undoDeletedDrugManufacturer = async (
   req: Request,
   res: Response
@@ -315,7 +247,7 @@ export const undoDeletedDrugManufacturer = async (
         res.status(200).json({
           success: true,
           message: "Drug manufacturer restored",
-          findAllDrugManufacturers: findAllDrugManufacturers,
+          allDrugManufacturers: findAllDrugManufacturers,
         });
         return;
       } else {
@@ -340,7 +272,6 @@ export const undoDeletedDrugManufacturer = async (
     });
   }
 };
-
 export const fetchAllDeletedDrugManufacturers = async (
   req: Request,
   res: Response
@@ -356,7 +287,7 @@ export const fetchAllDeletedDrugManufacturers = async (
     if (findAllDeletedDrugManufacturers) {
       res.status(200).json({
         success: true,
-        findAllDeletedDrugManufacturers: findAllDeletedDrugManufacturers,
+        allDeletedDrugManufacturers: findAllDeletedDrugManufacturers,
       });
       return;
     } else {

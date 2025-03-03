@@ -47,7 +47,7 @@ router.get(
   adminAuthenticationMiddleware,
   fetchAllDeletedDrugManufacturers
 );
-router.delete(
+router.put(
   "/admin/delete_drug_manufacturer/:manufacturerID",
   adminAuthenticationMiddleware,
   deleteDrugManufacturer

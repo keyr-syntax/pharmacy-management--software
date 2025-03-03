@@ -10,4 +10,12 @@ export type DrugManufacturer = {
   contactName: string;
   phoneNumber: string;
   licenseNumber: string;
+  updatedAt?: string;
+};
+export type DrugManufacturerFormData = {
+  manufacturerID?: string;
+  manufacturerName: string;
+  contactName: string;
+  phoneNumber: string;
+  licenseNumber: string;
 };
