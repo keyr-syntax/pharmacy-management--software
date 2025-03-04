@@ -35,11 +35,11 @@ router.get(
   adminAuthenticationMiddleware,
   findInventoryByUUID
 );
-// router.get(
-//   "/admin/deleted_dosage_forms",
-//   adminAuthenticationMiddleware,
-//   fetchAllDeletedDosageForms
-// );
+
+router.get("/admin/deleted_drug_inventories",
+adminAuthenticationMiddleware,
+fetchAllDeletedDrugInventory);
+
 // router.put(
 //   "/admin/delete_dosage_form/:dosageFormID",
 //   adminAuthenticationMiddleware,
