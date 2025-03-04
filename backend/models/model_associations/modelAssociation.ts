@@ -34,10 +34,6 @@ foreignKey: "drugID",
 }
 );
 
-
-
-
-
   } catch (error) {
     console.log("Error while creating model association", error);
   }
