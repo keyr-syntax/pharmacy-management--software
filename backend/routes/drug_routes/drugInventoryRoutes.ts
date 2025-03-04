@@ -40,11 +40,9 @@ router.get("/admin/deleted_drug_inventories",
 adminAuthenticationMiddleware,
 fetchAllDeletedDrugInventory);
 
-// router.put(
-//   "/admin/delete_dosage_form/:dosageFormID",
-//   adminAuthenticationMiddleware,
-//   deleteDosageForm
-// );
+router.put("/admin/delete_drug_inventory/:drugInventoryID",   adminAuthenticationMiddleware,
+  deleteDrugInventory);
+
 router.put(
   "/admin/restore_deleted_inventory/:drugInventoryID",
   adminAuthenticationMiddleware,
