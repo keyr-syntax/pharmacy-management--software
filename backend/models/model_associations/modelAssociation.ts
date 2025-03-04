@@ -28,7 +28,19 @@ foreignKey: "drugID",
 }
 );
 
-DRUG_PRICING.belingsTo(DRUGS,{
+DRUG_PRICING.belongsTo(DRUGS,{
+foreignKey: "drugID",
+      as: "drug",
+}
+);
+
+DRUGS.hasOne(DRUG_SAFETY,{
+foreignKey: "drugID",
+      as: "drug_safety",
+}
+);
+
+DRUG_SAFETY.belongsTo(DRUGS,{
 foreignKey: "drugID",
       as: "drug",
 }
