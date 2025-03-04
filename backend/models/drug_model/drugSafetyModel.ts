@@ -1,5 +1,5 @@
 const DrugSafety = sequelize.define('DrugSafety', {
-  safetyID: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+  drugSafetyID: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
   drugID: { type: DataTypes.UUID, allowNull: false, references: { model: 'Drugs', key: 'drugID' } },
   contraindications: { type: DataTypes.TEXT, allowNull: true },
   
