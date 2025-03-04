@@ -9,6 +9,7 @@ export interface drugPricingInterface {
   taxRate: number;
   margin?: number;
   insuranceCoverage?: boolean;
+softDeleted: boolean;
 }
 
 class DRUG_PRICING
@@ -22,6 +23,7 @@ class DRUG_PRICING
   public taxRate!: number;
   public margin?: number;
   public insuranceCoverage?: boolean;
+public softDeleted!: boolean;
 }
 
 DRUG_PRICING.init(
@@ -61,6 +63,14 @@ DRUG_PRICING.init(
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
+
+softDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+defaultValue: false,
+    },
+
+
   },
   {
     sequelize,
