@@ -321,35 +321,27 @@ export const undoDeletedDrugInventory = async (req: Request, res: Response) => {
     });
   }
 };
-// export const fetchAllDeletedDosageForms = async (
-//   req: Request,
-//   res: Response
-// ) => {
-//   try {
-//     const findAllDeletedDosageForms = await DRUG_INVENTORY.findAll({
-//       where: {
-//         softDeleted: true,
-//       },
-//       order: [["dosageForm", "ASC"]],
-//     });
+export const fetchAllDeletedDrugInventory = async (
+ req: Request,res: Response) => { try {
+const allDeletedInventories = await DRUG_INVENTORY.findAll({
+ where: {
+  softDeleted: true,
+      },     order: [["createdAt", "ASC"]],     });
 
-//     if (findAllDeletedDosageForms) {
-//       res.status(200).json({
-//         success: true,
-//         allDeletedDosageForms: findAllDeletedDosageForms,
-//       });
-//       return;
-//     } else {
-//       res.status(200).json({
-//         success: true,
-//         message: "No deleted dosage forms",
-//       });
-//       return;
-//     }
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch deleted dosage forms",
-//     });
-//   }
-// };
+if (allDeletedInventories) {
+       res.status(200).json({
+        success: true,
+       allInventories: allDeletedInventories,      });
+      return;
+    } else {
+      res.status(200).json({
+        success: true,
+       message: "No deleted inventories",
+     });
+      return;
+   }  } catch (error) {
+     res.status(500).json({
+     success: false,
+     message: "Failed to fetch deleted inventories",
+    });
+  } };
