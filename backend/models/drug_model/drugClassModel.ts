@@ -1,45 +1,73 @@
-import { DataTypes, Model, STRING } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/dbMySQLconfig";
 
-export interface drugClassInterface {
-  drugClassID?: string;
-  drugClass: string;
-  softDeleted: boolean;
+export interface drugPricingInterface {
+  pricingID?: string;
+  drugID: string;
+  purchasePrice: number;
+  sellingPrice: number;
+  taxRate: number;
+  margin?: number;
+  insuranceCoverage?: boolean;
 }
 
-class DRUG_CLASS
-  extends Model<drugClassInterface>
-  implements drugClassInterface
+class DRUG_PRICING
+  extends Model<drugPricingInterface>
+  implements drugPricingInterface
 {
-  public drugClassID!: string;
-  public drugClass!: string;
-  public softDeleted!: boolean;
+  public pricingID!: string;
+  public drugID!: string;
+  public purchasePrice!: number;
+  public sellingPrice!: number;
+  public taxRate!: number;
+  public margin?: number;
+  public insuranceCoverage?: number;
 }
 
-DRUG_CLASS.init(
+DRUG_PRICING.init(
   {
-    drugClassID: {
+    pricingID: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
     },
-    drugClass: {
-      type: DataTypes.STRING,
+    drugID: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'DRUGS',
+        key: 'drugID',
+      },
+    },
+    purchasePrice: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    softDeleted: {
-      type: DataTypes.BOOLEAN,
+    sellingPrice: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      defaultValue: false,
+    },
+    taxRate: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      defaultValue: 0.0,
+    },
+    margin: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    insuranceCoverage: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
   },
   {
     sequelize,
-    modelName: "DRUG_CLASS",
-    tableName: "DRUG_CLASS",
+    modelName: "DRUG_PRICING",
+    tableName: "DRUG_PRICING",
     timestamps: true,
   }
 );
 
-export default DRUG_CLASS;
+export default DRUG_PRICING;
