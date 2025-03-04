@@ -10,6 +10,7 @@ import {
   findInventoryByUUID,
   updateDrugInventory,
   undoDeletedDrugInventory,
+fetchAllDeletedDrugInventory
 } from "../../controllers/drug_controllers/drugInventoryControllers";
 const router: Router = express.Router();
 
