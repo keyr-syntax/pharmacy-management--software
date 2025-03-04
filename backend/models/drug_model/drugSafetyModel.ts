@@ -1,0 +1,1 @@
+sideEffects: { type: DataTypes.TEXT, allowNull: true },
