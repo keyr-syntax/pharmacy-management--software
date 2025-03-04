@@ -21,7 +21,7 @@ class DRUG_PRICING
   public sellingPrice!: number;
   public taxRate!: number;
   public margin?: number;
-  public insuranceCoverage?: number;
+  public insuranceCoverage?: boolean;
 }
 
 DRUG_PRICING.init(
