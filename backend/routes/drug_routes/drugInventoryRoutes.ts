@@ -10,7 +10,8 @@ import {
   findInventoryByUUID,
   updateDrugInventory,
   undoDeletedDrugInventory,
-fetchAllDeletedDrugInventory
+  fetchAllDeletedDrugInventory,
+  deleteDrugInventory,
 } from "../../controllers/drug_controllers/drugInventoryControllers";
 const router: Router = express.Router();
 
@@ -36,12 +37,17 @@ router.get(
   findInventoryByUUID
 );
 
-router.get("/admin/deleted_drug_inventories",
-adminAuthenticationMiddleware,
-fetchAllDeletedDrugInventory);
+router.get(
+  "/admin/deleted_drug_inventories",
+  adminAuthenticationMiddleware,
+  fetchAllDeletedDrugInventory
+);
 
-router.put("/admin/delete_drug_inventory/:drugInventoryID",   adminAuthenticationMiddleware,
-  deleteDrugInventory);
+router.put(
+  "/admin/delete_drug_inventory/:drugInventoryID",
+  adminAuthenticationMiddleware,
+  deleteDrugInventory
+);
 
 router.put(
   "/admin/restore_deleted_inventory/:drugInventoryID",

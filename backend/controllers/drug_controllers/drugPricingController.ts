@@ -74,18 +74,15 @@ export const findAllDrugPricing = async (req: Request, res: Response) => {
     let pricingAlongWithItsDrug = [];
 
     for (const pricing of allDrugPricing) {
-      const findPricingByPK = await DRUG_PRICING.findByPk(
-        pricing.pricingID,
-        {
-          include: {
-            model: DRUGS,
-            as: "drug",
-            where: {
-              drugID: pricing.drugID,
-            },
+      const findPricingByPK = await DRUG_PRICING.findByPk(pricing.pricingID, {
+        include: {
+          model: DRUGS,
+          as: "drug",
+          where: {
+            drugID: pricing.drugID,
           },
-        }
-      );
+        },
+      });
       pricingAlongWithItsDrug.push(findPricingByPK);
     }
 
@@ -310,7 +307,10 @@ export const undoDeletedDrugPricing = async (req: Request, res: Response) => {
   }
 };
 
-export const fetchAllDeletedDrugPricing = async (req: Request, res: Response) => {
+export const fetchAllDeletedDrugPricing = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const allDeletedPricing = await DRUG_PRICING.findAll({
       where: {

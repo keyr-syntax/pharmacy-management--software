@@ -8,7 +8,8 @@ import userRoutes from "./routes/user_routes/userRoutes";
 import drugInventoryRoutes from "./routes/drug_routes/drugInventoryRoutes";
 import drugManufacturerRoutes from "./routes/drug_routes/drugManufacturerRoutes";
 import drugRoutes from "./routes/drug_routes/drugRoutes";
-import drugClassRoutes from "./routes/drug_routes/drugClassRoutes";
+import drugPricingRoutes from "./routes/drug_routes/drugPricingRoutes";
+import drugSafetyRoutes from "./routes/drug_routes/drugSafetyRoutes";
 import modelAssociation from "./models/model_associations/modelAssociation";
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
@@ -26,12 +27,12 @@ app.use(
   })
 );
 app.use(cookieParser());
-
 app.use("/pharmacy_user", userRoutes);
 app.use("/drug_inventory", drugInventoryRoutes);
 app.use("/drug_manufacturer", drugManufacturerRoutes);
 app.use("/drugs", drugRoutes);
-app.use("/drug_class", drugClassRoutes);
+app.use("/drug_pricing", drugPricingRoutes);
+app.use("/drug_safety", drugSafetyRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

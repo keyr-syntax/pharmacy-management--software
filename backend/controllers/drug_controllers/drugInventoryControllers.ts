@@ -270,7 +270,6 @@ export const deleteDrugInventory = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const undoDeletedDrugInventory = async (req: Request, res: Response) => {
   const { drugInventoryID } = req.params;
   try {
@@ -322,26 +321,34 @@ export const undoDeletedDrugInventory = async (req: Request, res: Response) => {
   }
 };
 export const fetchAllDeletedDrugInventory = async (
- req: Request,res: Response) => { try {
-const allDeletedInventories = await DRUG_INVENTORY.findAll({
- where: {
-  softDeleted: true,
-      },     order: [["createdAt", "ASC"]],     });
+  req: Request,
+  res: Response
+) => {
+  try {
+    const allDeletedInventories = await DRUG_INVENTORY.findAll({
+      where: {
+        softDeleted: true,
+      },
+      order: [["createdAt", "ASC"]],
+    });
 
-if (allDeletedInventories) {
-       res.status(200).json({
+    if (allDeletedInventories) {
+      res.status(200).json({
         success: true,
-       allInventories: allDeletedInventories,      });
+        allInventories: allDeletedInventories,
+      });
       return;
     } else {
       res.status(200).json({
         success: true,
-       message: "No deleted inventories",
-     });
+        message: "No deleted inventories",
+      });
       return;
-   }  } catch (error) {
-     res.status(500).json({
-     success: false,
-     message: "Failed to fetch deleted inventories",
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch deleted inventories",
     });
-  } };
+  }
+};

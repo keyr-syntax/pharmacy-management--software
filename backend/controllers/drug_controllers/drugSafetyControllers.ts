@@ -61,7 +61,6 @@ export const addNewDrugSafety = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findAllDrugSafety = async (req: Request, res: Response) => {
   try {
     const allDrugSafety = await DRUG_SAFETY.findAll({
@@ -72,18 +71,15 @@ export const findAllDrugSafety = async (req: Request, res: Response) => {
     let safetyAlongWithItsDrug = [];
 
     for (const safety of allDrugSafety) {
-      const findSafetyByPK = await DRUG_SAFETY.findByPk(
-        safety.drugSafetyID,
-        {
-          include: {
-            model: DRUGS,
-            as: "drug",
-            where: {
-              drugID: safety.drugID,
-            },
+      const findSafetyByPK = await DRUG_SAFETY.findByPk(safety.drugSafetyID, {
+        include: {
+          model: DRUGS,
+          as: "drug",
+          where: {
+            drugID: safety.drugID,
           },
-        }
-      );
+        },
+      });
       safetyAlongWithItsDrug.push(findSafetyByPK);
     }
 
@@ -108,7 +104,6 @@ export const findAllDrugSafety = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findSafetyByUUID = async (req: Request, res: Response) => {
   try {
     const { safetyID, drugID } = req.params;
@@ -143,7 +138,6 @@ export const findSafetyByUUID = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const updateDrugSafety = async (req: Request, res: Response) => {
   try {
     const { safetyID } = req.params;
@@ -205,7 +199,6 @@ export const updateDrugSafety = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const deleteDrugSafety = async (req: Request, res: Response) => {
   try {
     const { safetyID } = req.params;
@@ -253,7 +246,6 @@ export const deleteDrugSafety = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const undoDeletedDrugSafety = async (req: Request, res: Response) => {
   const { safetyID } = req.params;
   try {
@@ -304,8 +296,10 @@ export const undoDeletedDrugSafety = async (req: Request, res: Response) => {
     });
   }
 };
-
-export const fetchAllDeletedDrugSafety = async (req: Request, res: Response) => {
+export const fetchAllDeletedDrugSafety = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const allDeletedSafety = await DRUG_SAFETY.findAll({
       where: {
