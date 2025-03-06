@@ -6,7 +6,7 @@ dotenv.config();
 import syncDatabase from "./config/databaseSync";
 import userRoutes from "./routes/user_routes/userRoutes";
 import drugInventoryRoutes from "./routes/drug_routes/drugInventoryRoutes";
-import drugManufacturerRoutes from "./routes/drug_routes/drugManufacturerRoutes";
+import drugSupplierRoutes from "./routes/drug_routes/drugSupplierRoutes";
 import drugRoutes from "./routes/drug_routes/drugRoutes";
 import drugPricingRoutes from "./routes/drug_routes/drugPricingRoutes";
 import drugSafetyRoutes from "./routes/drug_routes/drugSafetyRoutes";
@@ -29,7 +29,7 @@ app.use(
 app.use(cookieParser());
 app.use("/pharmacy_user", userRoutes);
 app.use("/drug_inventory", drugInventoryRoutes);
-app.use("/drug_manufacturer", drugManufacturerRoutes);
+app.use("/drug_supplier", drugSupplierRoutes);
 app.use("/drugs", drugRoutes);
 app.use("/drug_pricing", drugPricingRoutes);
 app.use("/drug_safety", drugSafetyRoutes);

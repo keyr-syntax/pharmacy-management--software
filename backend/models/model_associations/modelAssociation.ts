@@ -1,5 +1,5 @@
 import DRUGS from "../drug_model/drugsModel";
-import DRUG_MANUFACTURERS from "../drug_model/drugManufacturersModel";
+import DRUG_MANUFACTURERS from "../drug_model/drugSupplierModel";
 import DRUG_INVENTORY from "../drug_model/drugInventory";
 import DRUG_PRICING from "../drug_model/drugPricingModel";
 import DRUG_SAFETY from "../drug_model/drugSafetyModel";
