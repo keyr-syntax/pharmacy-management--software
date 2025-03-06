@@ -34,11 +34,11 @@ const modelAssociation = () => {
       as: "drug",
     });
 
-    DRUGS.belongsTo(DRUG_SUPPLIER, {
+    DRUGS.hasOne(DRUG_SUPPLIER, {
       foreignKey: "supplierID",
       as: "supplier",
     });
-    DRUG_SUPPLIER.hasMany(DRUGS, {
+    DRUG_SUPPLIER.belongsTo(DRUGS, {
       foreignKey: "supplierID",
       as: "drug",
     });

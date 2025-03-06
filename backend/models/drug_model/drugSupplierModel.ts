@@ -3,6 +3,7 @@ import { sequelize } from "../../config/dbMySQLconfig";
 
 export interface drugSupplierInterface {
   supplierID?: string;
+  drugID: string;
   supplierName: string;
   contactPersonName: string;
   supplierEmail: string;
@@ -17,6 +18,7 @@ class DRUG_SUPPLIER
   implements drugSupplierInterface
 {
   public supplierID!: string;
+  public drugID!: string;
   public supplierName!: string;
   public contactPersonName!: string;
   public supplierEmail!: string;
@@ -33,6 +35,14 @@ DRUG_SUPPLIER.init(
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
+    },
+    drugID: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "DRUGS",
+        key: "drugID",
+      },
     },
     supplierName: {
       type: DataTypes.STRING,

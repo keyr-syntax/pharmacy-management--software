@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import DRUG_SUPPLIER from "../../models/drug_model/drugSupplierModel";
+import DRUGS from "../../models/drug_model/drugsModel";
 
 export const addNewDrugSupplier = async (req: Request, res: Response) => {
   const {
+    drugID,
     supplierName,
     contactPersonName,
     supplierEmail,
@@ -28,6 +30,7 @@ export const addNewDrugSupplier = async (req: Request, res: Response) => {
     }
 
     const newDrugSupplier = await DRUG_SUPPLIER.create({
+      drugID,
       supplierName,
       contactPersonName,
       supplierEmail,
@@ -91,19 +94,29 @@ export const findAllDrugSuppliers = async (req: Request, res: Response) => {
 };
 export const findSupplierByUUID = async (req: Request, res: Response) => {
   try {
-    const { supplierID } = req.params;
-    const supplier = await DRUG_SUPPLIER.findByPk(supplierID);
+    const { supplierID, drugID } = req.params;
+    const supplier = await DRUG_SUPPLIER.findByPk(supplierID, {
+      include: {
+        model: DRUGS,
+        as: "drug",
+        where: {
+          drugID: drugID,
+        },
+      },
+    });
 
     if (supplier && !supplier.softDeleted) {
       res.status(200).json({
         success: true,
-        supplier,
+        supplier: supplier,
       });
+      return;
     } else {
       res.status(404).json({
         success: false,
         message: "Supplier not found",
       });
+      return;
     }
   } catch (error) {
     console.log("Error while fetching supplier", error);
@@ -117,6 +130,7 @@ export const updateDrugSupplier = async (req: Request, res: Response) => {
   try {
     const { supplierID } = req.params;
     const {
+      drugID,
       supplierName,
       contactPersonName,
       supplierEmail,
@@ -128,6 +142,7 @@ export const updateDrugSupplier = async (req: Request, res: Response) => {
     const supplier = await DRUG_SUPPLIER.findByPk(supplierID);
 
     const isSupplierSame =
+      supplier?.drugID === drugID &&
       supplier?.supplierName === supplierName &&
       supplier?.contactPersonName === contactPersonName &&
       supplier?.supplierEmail === supplierEmail &&
@@ -137,6 +152,7 @@ export const updateDrugSupplier = async (req: Request, res: Response) => {
 
     if (supplier && !supplier.softDeleted && !isSupplierSame) {
       const updatedSupplier = await supplier.update({
+        drugID: drugID,
         supplierName,
         contactPersonName,
         supplierEmail,
@@ -193,11 +209,13 @@ export const deleteDrugSupplier = async (req: Request, res: Response) => {
         message: "Supplier deleted",
         allSuppliers: findAllSuppliers,
       });
+      return;
     } else {
       res.status(404).json({
         success: false,
         message: "Supplier not found",
       });
+      return;
     }
   } catch (error) {
     console.log("Error while deleting supplier", error);
