@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import DRUGS from "../../models/drug_model/drugsModel";
-import DRUG_MANUFACTURERS from "../../models/drug_model/drugSupplierModel";
+import DRUG_SUPPLIER from "../../models/drug_model/drugSupplierModel";
 
 export const addNewDrug = async (req: Request, res: Response) => {
   const {
@@ -12,7 +12,7 @@ export const addNewDrug = async (req: Request, res: Response) => {
     routeOfDrugAdministration,
     unitsPerPack,
     drugClass,
-    manufacturerID,
+    supplierID,
     status,
   } = req.body;
 
@@ -30,8 +30,8 @@ export const addNewDrug = async (req: Request, res: Response) => {
     !unitsPerPack ||
     !drugClass ||
     drugClass.trim() === "" ||
-    !manufacturerID ||
-    manufacturerID.trim() === "" ||
+    !supplierID ||
+    supplierID.trim() === "" ||
     !status ||
     status.trim() === "" ||
     !routeOfDrugAdministration ||
@@ -69,7 +69,7 @@ export const addNewDrug = async (req: Request, res: Response) => {
         routeOfDrugAdministration,
         unitsPerPack,
         drugClass,
-        manufacturerID,
+        supplierID,
         status,
         softDeleted: false,
       });
@@ -136,17 +136,10 @@ export const findDrugByUUID = async (req: Request, res: Response) => {
       const drugDetails = await DRUGS.findByPk(drugID, {
         include: [
           {
-            model: DRUG_MANUFACTURERS,
-            as: "manufacturer",
+            model: DRUG_SUPPLIER,
+            as: "supplier",
             where: {
-              manufacturerID: findDrugByPK.manufacturerID,
-            },
-          },
-          {
-            model: DRUG_MANUFACTURERS,
-            as: "manufacturer",
-            where: {
-              manufacturerID: findDrugByPK.manufacturerID,
+              supplierID: findDrugByPK.supplierID,
             },
           },
         ],
@@ -184,7 +177,7 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
       routeOfDrugAdministration,
       unitsPerPack,
       drugClass,
-      manufacturerID,
+      supplierID,
       status,
     } = req.body;
     const findDrugByPK = await DRUGS.findOne({
@@ -203,7 +196,7 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
       findDrugByPK?.routeOfDrugAdministration === routeOfDrugAdministration &&
       findDrugByPK?.unitsPerPack === unitsPerPack &&
       findDrugByPK?.drugClass === drugClass &&
-      findDrugByPK?.manufacturerID === manufacturerID &&
+      findDrugByPK?.supplierID === supplierID &&
       findDrugByPK?.status === status;
 
     if (findDrugByPK && !areDetailsTheSame) {
@@ -216,7 +209,7 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
         routeOfDrugAdministration: routeOfDrugAdministration,
         unitsPerPack: unitsPerPack,
         drugClass: drugClass,
-        manufacturerID: manufacturerID,
+        supplierID: supplierID,
         status: status,
       });
       const findAllDrugs = await DRUGS.findAll({

@@ -10,7 +10,7 @@ export interface drugsInterface {
   dosageStrength: string;
   routeOfDrugAdministration: string;
   unitsPerPack: number;
-  manufacturerID: string;
+  supplierID: string;
   drugClass: string;
   status: string;
   softDeleted: boolean;
@@ -25,7 +25,7 @@ class DRUGS extends Model<drugsInterface> implements drugsInterface {
   public dosageStrength!: string;
   public routeOfDrugAdministration!: string;
   public unitsPerPack!: number;
-  public manufacturerID!: string;
+  public supplierID!: string;
   public drugClass!: string;
   public status!: string;
   public softDeleted!: boolean;
@@ -68,12 +68,12 @@ DRUGS.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    manufacturerID: {
+    supplierID: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "DRUG_MANUFACTURERS",
-        key: "manufacturerID",
+        model: "DRUG_SUPPLIER",
+        key: "supplierID",
       },
     },
     drugClass: {

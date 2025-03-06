@@ -1,19 +1,11 @@
 import DRUGS from "../drug_model/drugsModel";
-import DRUG_MANUFACTURERS from "../drug_model/drugSupplierModel";
 import DRUG_INVENTORY from "../drug_model/drugInventory";
 import DRUG_PRICING from "../drug_model/drugPricingModel";
 import DRUG_SAFETY from "../drug_model/drugSafetyModel";
+import DRUG_SUPPLIER from "../drug_model/drugSupplierModel";
 
 const modelAssociation = () => {
   try {
-    DRUGS.belongsTo(DRUG_MANUFACTURERS, {
-      foreignKey: "manufacturerID",
-      as: "manufacturer",
-    });
-    DRUG_MANUFACTURERS.hasMany(DRUGS, {
-      foreignKey: "manufacturerID",
-      as: "drugs",
-    });
     DRUGS.hasMany(DRUG_INVENTORY, {
       foreignKey: "drugID",
       as: "inventory",
@@ -39,6 +31,15 @@ const modelAssociation = () => {
 
     DRUG_SAFETY.belongsTo(DRUGS, {
       foreignKey: "drugID",
+      as: "drug",
+    });
+
+    DRUGS.belongsTo(DRUG_SUPPLIER, {
+      foreignKey: "supplierID",
+      as: "supplier",
+    });
+    DRUG_SUPPLIER.hasMany(DRUGS, {
+      foreignKey: "supplierID",
       as: "drug",
     });
   } catch (error) {
