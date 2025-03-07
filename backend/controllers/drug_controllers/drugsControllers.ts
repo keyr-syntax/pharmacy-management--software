@@ -12,7 +12,6 @@ export const addNewDrug = async (req: Request, res: Response) => {
     routeOfDrugAdministration,
     unitsPerPack,
     drugClass,
-    supplierID,
     status,
   } = req.body;
 
@@ -30,8 +29,6 @@ export const addNewDrug = async (req: Request, res: Response) => {
     !unitsPerPack ||
     !drugClass ||
     drugClass.trim() === "" ||
-    !supplierID ||
-    supplierID.trim() === "" ||
     !status ||
     status.trim() === "" ||
     !routeOfDrugAdministration ||
@@ -69,7 +66,6 @@ export const addNewDrug = async (req: Request, res: Response) => {
         routeOfDrugAdministration,
         unitsPerPack,
         drugClass,
-        supplierID,
         status,
         softDeleted: false,
       });
@@ -139,7 +135,7 @@ export const findDrugByUUID = async (req: Request, res: Response) => {
             model: DRUG_SUPPLIER,
             as: "supplier",
             where: {
-              supplierID: findDrugByPK.supplierID,
+              drugID: drugID,
             },
           },
         ],
@@ -177,7 +173,6 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
       routeOfDrugAdministration,
       unitsPerPack,
       drugClass,
-      supplierID,
       status,
     } = req.body;
     const findDrugByPK = await DRUGS.findOne({
@@ -196,7 +191,6 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
       findDrugByPK?.routeOfDrugAdministration === routeOfDrugAdministration &&
       findDrugByPK?.unitsPerPack === unitsPerPack &&
       findDrugByPK?.drugClass === drugClass &&
-      findDrugByPK?.supplierID === supplierID &&
       findDrugByPK?.status === status;
 
     if (findDrugByPK && !areDetailsTheSame) {
@@ -209,7 +203,6 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
         routeOfDrugAdministration: routeOfDrugAdministration,
         unitsPerPack: unitsPerPack,
         drugClass: drugClass,
-        supplierID: supplierID,
         status: status,
       });
       const findAllDrugs = await DRUGS.findAll({

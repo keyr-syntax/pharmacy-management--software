@@ -10,7 +10,6 @@ export interface drugsInterface {
   dosageStrength: string;
   routeOfDrugAdministration: string;
   unitsPerPack: number;
-
   drugClass: string;
   status: string;
   softDeleted: boolean;
@@ -25,7 +24,6 @@ class DRUGS extends Model<drugsInterface> implements drugsInterface {
   public dosageStrength!: string;
   public routeOfDrugAdministration!: string;
   public unitsPerPack!: number;
-
   public drugClass!: string;
   public status!: string;
   public softDeleted!: boolean;

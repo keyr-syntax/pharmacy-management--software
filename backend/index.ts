@@ -10,6 +10,7 @@ import drugSupplierRoutes from "./routes/drug_routes/drugSupplierRoutes";
 import drugRoutes from "./routes/drug_routes/drugRoutes";
 import drugPricingRoutes from "./routes/drug_routes/drugPricingRoutes";
 import drugSafetyRoutes from "./routes/drug_routes/drugSafetyRoutes";
+import productConstantsRoutes from "./routes/product_constants/productConstantsRoute";
 import modelAssociation from "./models/model_associations/modelAssociation";
 const PORT = process.env.PORT || 8000;
 const app: Application = express();
@@ -33,7 +34,7 @@ app.use("/drug_supplier", drugSupplierRoutes);
 app.use("/drugs", drugRoutes);
 app.use("/drug_pricing", drugPricingRoutes);
 app.use("/drug_safety", drugSafetyRoutes);
-
+app.use("/product_constants", productConstantsRoutes);
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,

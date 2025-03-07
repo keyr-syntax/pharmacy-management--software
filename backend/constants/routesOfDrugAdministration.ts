@@ -1,4 +1,4 @@
-export const drugRoutes = [
+export const routesOfDrugAdministration = [
   { id: 1, route: "Oral" },
   { id: 2, route: "Intravenous (IV)" },
   { id: 3, route: "Intramuscular (IM)" },

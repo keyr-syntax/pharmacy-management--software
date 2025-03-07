@@ -1,7 +1,15 @@
 export type DosageFormType = {
+  id: number;
   dosageForm: string;
-  dosageFormID: string;
-  updatedAt: string;
+};
+
+export type DrugClassType = {
+  id: number;
+  class: string;
+};
+export type RoutesOfDrugAdministrationType = {
+  id: number;
+  class: string;
 };
 
 export type DrugManufacturer = {
