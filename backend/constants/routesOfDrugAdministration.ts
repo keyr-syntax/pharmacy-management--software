@@ -14,3 +14,20 @@ export const routesOfDrugAdministration = [
   { id: 13, route: "Otic (Ear)" },
   { id: 14, route: "Nasal" },
 ];
+
+// export const routesOfDrugAdministration = [
+//   { value: "Oral", label: "Oral" },
+//   { value: "Intravenous (IV)", label: "Intravenous (IV)" },
+//   { value: "Intramuscular (IM)", label: "Intramuscular (IM)" },
+//   { value: "Subcutaneous (SC)", label: "Subcutaneous (SC)" },
+//   { value: "Topical", label: "Topical" },
+//   { value: "Inhalation", label: "Inhalation" },
+//   { value: "Rectal", label: "Rectal" },
+//   { value: "Vaginal", label: "Vaginal" },
+//   { value: "Sublingual", label: "Sublingual" },
+//   { value: "Buccal", label: "Buccal" },
+//   { value: "Transdermal", label: "Transdermal" },
+//   { value: "Ophthalmic", label: "Ophthalmic" },
+//   { value: "Otic (Ear)", label: "Otic (Ear)" },
+//   { value: "Nasal", label: "Nasal" },
+// ];

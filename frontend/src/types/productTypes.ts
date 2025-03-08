@@ -9,7 +9,7 @@ export type DrugClassType = {
 };
 export type RoutesOfDrugAdministrationType = {
   id: number;
-  class: string;
+  route: string;
 };
 
 export type DrugManufacturer = {
