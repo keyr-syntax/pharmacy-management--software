@@ -26,7 +26,7 @@ export default function DeletedUsersList() {
     <>
       {deltedUsersList && deltedUsersList.length > 0 ? (
         <>
-          <Table>
+          <Table className="w-[90%] mt-[90px] mx-auto border ">
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
@@ -70,7 +70,7 @@ export default function DeletedUsersList() {
           </Table>
         </>
       ) : (
-        <div className="block text-center text-3xl">No Deleted users found</div>
+        <div className="block text-center text-3xl mt-[80px]">Empty</div>
       )}
     </>
   );

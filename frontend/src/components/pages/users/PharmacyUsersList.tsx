@@ -42,7 +42,7 @@ export default function PharmacyUsersList() {
   return (
     <>
       {usersList && usersList.length > 0 ? (
-        <Table>
+        <Table className="w-[90%] mt-[90px] mx-auto border ">
           <TableCaption>A list of Employees</TableCaption>
           <TableHeader>
             <TableRow>
@@ -294,7 +294,9 @@ export default function PharmacyUsersList() {
           </TableBody>
         </Table>
       ) : (
-        <div className="block text-center text-3xl">No Users found</div>
+        <div className="block text-center text-3xl">
+          No Employee record found
+        </div>
       )}
     </>
   );

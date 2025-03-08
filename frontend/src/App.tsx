@@ -4,24 +4,41 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { AppSidebar } from "./components/pages/dashboard/Dashboard";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import RegisterPharmacyUser from "./components/pages/auth/RegisterUser";
-import LoginPharmacyUser from "./components/pages/auth/LoginUser";
+import LoginPharmacyUser from "./components/pages/auth/HomeLoginUser";
 import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
 import UpdateUserProfile from "./components/pages/users/UpdateUserProfile";
-import TableForDosageForm from "./components/pages/products/dosage_form/TableForDosageForm";
 import DeletedUsersList from "./components/pages/recycleBin/RecycleBinForDeletedUsers";
 // import DeletedDosageForms from "./components/pages/recycleBin/RecycleBinForDeletedDosageForms";
 import { NewDrugManufacturer } from "./components/pages/products/drug_manufacturer/NewDrugManufacturer";
 import TableForDrugManufacturer from "./components/pages/products/drug_manufacturer/TableForDrugManufacturer";
-import RecycleBinForDeletedDrugManufacturers from "./components/pages/recycleBin/RecycleBinForDeletedDrugManufacturers";
+
 import NewDrugPage from "./components/pages/products/drugs/NewDrugPage";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<LoginPharmacyUser />} />
-        <Route path="/login" element={<LoginPharmacyUser />} />
-        <Route path="/register" element={<RegisterPharmacyUser />} />
+
+        <Route path="/workspace" element={<NavigationBar />}>
+          <Route
+            path="/workspace/register"
+            element={<RegisterPharmacyUser />}
+          />{" "}
+          <Route
+            path="/workspace/employees_list"
+            element={<PharmacyUsersList />}
+          />
+          <Route
+            path="/workspace/employees_recycle_bin"
+            element={<DeletedUsersList />}
+          />
+          <Route
+            path="/workspace/edit_my_account"
+            element={<UpdateUserProfile />}
+          />
+        </Route>
         <Route
           path="/dashboard"
           element={
@@ -39,23 +56,12 @@ function App() {
             path="/dashboard/register"
             element={<RegisterPharmacyUser />}
           />
-          <Route path="/dashboard/users" element={<PharmacyUsersList />} />
+
           <Route
             path="/dashboard/users_recycle_bin"
             element={<DeletedUsersList />}
           />
-          {/* <Route
-            path="/dashboard/dosage_form_recycle_bin"
-            element={<DeletedDosageForms />}
-          /> */}
-          <Route
-            path="/dashboard/edit_my_account"
-            element={<UpdateUserProfile />}
-          />
-          {/* <Route
-            path="/dashboard/dosage_form"
-            element={<TableForDosageForm />}
-          /> */}
+
           <Route
             path="/dashboard/drug_manufacturer"
             element={<NewDrugManufacturer />}

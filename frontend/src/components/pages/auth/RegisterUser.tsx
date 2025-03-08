@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RegisterUserformInput } from "../../../types/userTypes";
 import { Button } from "@/components/ui/button";
 import { HandleRegisterPharmacyUser } from "@/services/UserApiService";
@@ -22,50 +22,59 @@ export default function RegisterPharmacyUser() {
   ) => {
     const success = await HandleRegisterPharmacyUser(formData);
     if (success) {
-      navigate("/dashboard");
+      navigate("/workspace/employees_list");
     }
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center mt-1 mb-8 w-full">
+      <div className="flex flex-col justify-center items-center  mb-8 w-full mt-[65px]">
         <form
           onSubmit={handleSubmit(handleSubmitRegisterPharmacyUser)}
           className="flex flex-col gap-2 mx-auto mt-1 w-[90%] max-w-[500px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"
         >
-          <p className="text-center text-[24px] font-bold">Register User</p>
-          <div className="grid gap-2 ">
-            <Label className="text-md" htmlFor="name">
-              First Name
-            </Label>
-            <Input
-              className="block border border-solid border-[rgb(255,255,255,0.2)] rounded"
-              id="first_name"
-              type="text"
-              placeholder="First name"
-              {...register("firstName", {
-                required: "First name is required",
-              })}
-            />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm">{errors.firstName.message}</p>
-            )}
+          <p className="text-center text-[24px] font-bold mb-5 ">
+            Register User
+          </p>
+          <div className="flex flex-row  gap-5">
+            <div className="grid gap-2 w-1/2">
+              <Label className="text-md" htmlFor="name">
+                First Name
+              </Label>
+              <Input
+                className="block border border-solid border-[rgb(255,255,255,0.2)] rounded"
+                id="first_name"
+                type="text"
+                placeholder="First name"
+                {...register("firstName", {
+                  required: "First name is required",
+                })}
+              />
+              {errors.firstName && (
+                <p className="text-red-500 text-sm">
+                  {errors.firstName.message}
+                </p>
+              )}
+            </div>
+            <div className="grid gap-2 w-1/2">
+              <Label className="text-md" htmlFor="name">
+                Last Name
+              </Label>
+              <Input
+                className="block  border border-solid border-[rgb(255,255,255,0.2)] rounded"
+                type="text"
+                placeholder="Last name"
+                {...register("lastName", {
+                  required: "Last name is required",
+                })}
+              />
+              {errors.lastName && (
+                <p className="text-red-500 text-sm">
+                  {errors.lastName.message}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="grid gap-2 ">
-            <Label className="text-md" htmlFor="name">
-              Last Name
-            </Label>
-            <Input
-              className="block border border-solid border-[rgb(255,255,255,0.2)] rounded"
-              type="text"
-              placeholder="Last name"
-              {...register("lastName", {
-                required: "Last name is required",
-              })}
-            />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm">{errors.lastName.message}</p>
-            )}
-          </div>
+
           <div className="grid gap-2 ">
             <Label className="text-md" htmlFor="email">
               Email
@@ -108,57 +117,62 @@ export default function RegisterPharmacyUser() {
               </p>
             )}
           </div>
-          <div className="grid gap-2">
-            <Label className="text-md" htmlFor="role">
-              Role
-            </Label>
-            <select
-              id="role"
-              className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
-              {...register("role", { required: "Role is required" })}
-            >
-              <option className="text-white bg-[#151533]" value="">
-                Select a role
-              </option>
-              <option className="text-white bg-[#151533]" value="admin">
-                Admin
-              </option>
-              <option className="text-white bg-[#151533]" value="manager">
-                Manager
-              </option>
-              <option className="text-white bg-[#151533]" value="pharmacist">
-                Pharmacist
-              </option>
-            </select>
-            {errors.role && (
-              <p className="text-red-500 text-sm">{errors.role.message}</p>
-            )}
+          <div className="flex flex-row  gap-5">
+            <div className="grid gap-2 w-1/2">
+              <Label className="text-md" htmlFor="role">
+                Role
+              </Label>
+              <select
+                id="role"
+                className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
+                {...register("role", { required: "Role is required" })}
+              >
+                <option className="text-white bg-[#151533]" value="">
+                  Select a role
+                </option>
+                <option className="text-white bg-[#151533]" value="admin">
+                  Admin
+                </option>
+                <option className="text-white bg-[#151533]" value="manager">
+                  Manager
+                </option>
+                <option className="text-white bg-[#151533]" value="pharmacist">
+                  Pharmacist
+                </option>
+              </select>
+              {errors.role && (
+                <p className="text-red-500 text-sm">{errors.role.message}</p>
+              )}
+            </div>
+            <div className="grid gap-2 w-1/2">
+              <Label className="text-md" htmlFor="role">
+                Status
+              </Label>
+              <select
+                id="isBlocked"
+                className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
+                {...register("isBlocked", {
+                  required: "Block status is required",
+                })}
+              >
+                <option className="text-white bg-[#151533]" value="">
+                  Select status
+                </option>
+                <option className="text-white bg-[#151533]" value="Blocked">
+                  Blocked
+                </option>
+                <option className="text-white bg-[#151533]" value="Not Blocked">
+                  Not Blocked
+                </option>
+              </select>
+              {errors.isBlocked && (
+                <p className="text-red-500 text-sm">
+                  {errors.isBlocked.message}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="grid gap-2">
-            <Label className="text-md" htmlFor="role">
-              Status
-            </Label>
-            <select
-              id="isBlocked"
-              className="block  w-full border border-solid border-[rgb(255,255,255,0.2)]  p-2 bg-transparent rounded"
-              {...register("isBlocked", {
-                required: "Block status is required",
-              })}
-            >
-              <option className="text-white bg-[#151533]" value="">
-                Select status
-              </option>
-              <option className="text-white bg-[#151533]" value="Blocked">
-                Blocked
-              </option>
-              <option className="text-white bg-[#151533]" value="Not Blocked">
-                Not Blocked
-              </option>
-            </select>
-            {errors.isBlocked && (
-              <p className="text-red-500 text-sm">{errors.isBlocked.message}</p>
-            )}
-          </div>
+
           <div className="grid gap-2 ">
             <Label className="text-md" htmlFor="message">
               Password
@@ -196,9 +210,6 @@ export default function RegisterPharmacyUser() {
           >
             {loading ? "Please wait" : "Submit"}
           </Button>
-          <Link className="text-center mt-3 text-lg" to="/dashboard/login">
-            Login
-          </Link>
         </form>
       </div>
     </>

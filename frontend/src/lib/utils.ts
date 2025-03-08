@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const baseURL = "http://localhost:8000";
+export const baseURL = "http://localhost:5000";
 
 export const getFirstLetterOfName = (username: string) =>
   username.charAt(0).toUpperCase();

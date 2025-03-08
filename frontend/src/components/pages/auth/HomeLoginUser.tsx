@@ -7,7 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { baseURL } from "@/lib/utils";
 import { LoginformInput } from "../../../types/userTypes";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPharmacyUser() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -48,7 +48,7 @@ export default function LoginPharmacyUser() {
         reset();
         setLoading(false);
 
-        navigate("/dashboard");
+        navigate("/workspace");
       } else {
         toast.error(response.message);
         setLoading(false);
@@ -121,9 +121,9 @@ export default function LoginPharmacyUser() {
           >
             {loading ? "Please wait" : "Submit"}
           </Button>
-          <Link className="text-center mt-5 text-lg" to="/dashboard/register">
+          {/* <Link className="text-center mt-5 text-lg" to="/register">
             Create account
-          </Link>
+          </Link> */}
         </form>
       </div>
     </>
