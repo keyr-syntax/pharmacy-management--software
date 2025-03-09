@@ -11,6 +11,10 @@ import AllProductsList from "./components/pages/products/drugs/AllProductsList";
 import EditProduct from "./components/pages/products/drugs/EditProduct";
 import RecycleBinForDeletedProducts from "./components/pages/recycleBin/RecycleBinForDeletedProducts";
 import NewInventoryPage from "./components/pages/products/inventory/NewInventory";
+import AllInventoryList from "./components/pages/products/inventory/AllInventoryList";
+import EditInventory from "./components/pages/products/inventory/EditInventory";
+import RecycleBinForDeletedInventories from "./components/pages/recycleBin/RecycleBinForDeletedInventories";
+import AllRecycleBin from "./components/pages/recycleBin/AllRecycleBin";
 
 function App() {
   return (
@@ -48,6 +52,22 @@ function App() {
           <Route
             path="/workspace/new_inventory"
             element={<NewInventoryPage />}
+          />
+          <Route
+            path="/workspace/all_inventories"
+            element={<AllInventoryList />}
+          />
+          <Route
+            path="/workspace/edit_inventory/:drugInventoryID"
+            element={<EditInventory />}
+          />{" "}
+          <Route
+            path="/workspace/inventories_recycle_bin"
+            element={<RecycleBinForDeletedInventories />}
+          />
+          <Route
+            path="/workspace/all_recycle_bin"
+            element={<AllRecycleBin />}
           />
         </Route>
         {/* <Route

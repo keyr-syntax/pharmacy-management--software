@@ -1,4 +1,4 @@
-import { InventoryTypes } from "@/types/productTypes";
+import { InventoryTypes, ProductDetailsTypes } from "@/types/productTypes";
 import { create } from "zustand";
 
 interface InventoryApiResponse {
@@ -14,6 +14,7 @@ interface InventoryApiResponse {
   loading: boolean;
   inventoryList: InventoryTypes[] | null;
   deletedInventoryList: InventoryTypes[] | null;
+  drug?: ProductDetailsTypes;
 }
 
 export const InventoryGlobalState = create<InventoryApiResponse>(() => ({

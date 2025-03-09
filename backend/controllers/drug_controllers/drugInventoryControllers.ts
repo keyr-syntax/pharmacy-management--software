@@ -118,16 +118,8 @@ export const findAllDrugInventories = async (req: Request, res: Response) => {
 };
 export const findInventoryByUUID = async (req: Request, res: Response) => {
   try {
-    const { drugInventoryID, drugID } = req.params;
-    const inventoryByPK = await DRUG_INVENTORY.findByPk(drugInventoryID, {
-      include: {
-        model: DRUGS,
-        as: "drug",
-        where: {
-          drugID: drugID,
-        },
-      },
-    });
+    const { drugInventoryID } = req.params;
+    const inventoryByPK = await DRUG_INVENTORY.findByPk(drugInventoryID);
 
     if (inventoryByPK && !inventoryByPK.softDeleted) {
       res.status(200).json({
@@ -237,15 +229,33 @@ export const deleteDrugInventory = async (req: Request, res: Response) => {
       const softDeleteDosageForm = await inventoryByPK.update({
         softDeleted: true,
       });
-      const findAllDrugInventories = await DRUG_INVENTORY.findAll({
+      const allDrugInventories = await DRUG_INVENTORY.findAll({
         where: { softDeleted: false },
         order: [["createdAt", "ASC"]],
       });
+
+      let inventoryAlongWithItsDrug = [];
+
+      for (const inventory of allDrugInventories) {
+        const findInventoryByPK = await DRUG_INVENTORY.findByPk(
+          inventory.drugInventoryID,
+          {
+            include: {
+              model: DRUGS,
+              as: "drug",
+              where: {
+                drugID: inventory.drugID,
+              },
+            },
+          }
+        );
+        inventoryAlongWithItsDrug.push(findInventoryByPK);
+      }
       if (softDeleteDosageForm) {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          allInventories: findAllDrugInventories,
+          allInventories: inventoryAlongWithItsDrug,
         });
         return;
       } else {
@@ -286,16 +296,34 @@ export const undoDeletedDrugInventory = async (req: Request, res: Response) => {
       });
 
       if (undoSoftDeletedInventory) {
-        const findAllInventories = await DRUG_INVENTORY.findAll({
+        const allDeletedInventories = await DRUG_INVENTORY.findAll({
           where: {
             softDeleted: true,
           },
           order: [["createdAt", "ASC"]],
         });
+
+        let inventoryAlongWithItsDrug = [];
+
+        for (const inventory of allDeletedInventories) {
+          const findInventoryByPK = await DRUG_INVENTORY.findByPk(
+            inventory.drugInventoryID,
+            {
+              include: {
+                model: DRUGS,
+                as: "drug",
+                where: {
+                  drugID: inventory.drugID,
+                },
+              },
+            }
+          );
+          inventoryAlongWithItsDrug.push(findInventoryByPK);
+        }
         res.status(200).json({
           success: true,
           message: "Inventory restored",
-          allInventories: findAllInventories,
+          allInventories: inventoryAlongWithItsDrug,
         });
         return;
       } else {
@@ -332,10 +360,27 @@ export const fetchAllDeletedDrugInventory = async (
       order: [["createdAt", "ASC"]],
     });
 
+    let inventoryAlongWithItsDrug = [];
+
+    for (const inventory of allDeletedInventories) {
+      const findInventoryByPK = await DRUG_INVENTORY.findByPk(
+        inventory.drugInventoryID,
+        {
+          include: {
+            model: DRUGS,
+            as: "drug",
+            where: {
+              drugID: inventory.drugID,
+            },
+          },
+        }
+      );
+      inventoryAlongWithItsDrug.push(findInventoryByPK);
+    }
     if (allDeletedInventories) {
       res.status(200).json({
         success: true,
-        allInventories: allDeletedInventories,
+        allInventories: inventoryAlongWithItsDrug,
       });
       return;
     } else {

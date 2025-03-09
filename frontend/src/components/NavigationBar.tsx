@@ -109,21 +109,26 @@ export default function NavigationBar() {
                 </Menubar.Item>
               </Link>
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
-              <Link to={`/workspace/all_products`}>
+              <Link to={`/workspace/all_inventories`}>
                 <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
-                  Products list
+                  Inventory list
                 </Menubar.Item>
               </Link>
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
-              <Link to={`/workspace/products_recycle_bin`}>
+              <Link to={`/workspace/inventories_recycle_bin`}>
                 <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
-                  Products recycle bin
+                  Inventory recycle bin
                 </Menubar.Item>
               </Link>
 
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
             </Menubar.Content>
           </Menubar.Portal>
+        </Menubar.Menu>
+        <Menubar.Menu>
+          <Menubar.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
+            <Link to="/workspace/all_recycle_bin">Recycle Bin</Link>
+          </Menubar.Trigger>
         </Menubar.Menu>
         <div className="ml-auto">
           <Menubar.Menu>

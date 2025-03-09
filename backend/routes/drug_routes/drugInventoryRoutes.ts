@@ -32,7 +32,7 @@ router.put(
 );
 
 router.get(
-  "/admin/find_inventory/:drugInventoryID/:drugID",
+  "/admin/find_inventory/:drugInventoryID",
   adminAuthenticationMiddleware,
   findInventoryByUUID
 );

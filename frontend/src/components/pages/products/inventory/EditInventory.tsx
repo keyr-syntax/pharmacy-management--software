@@ -8,22 +8,30 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { useNavigate } from "react-router-dom";
-import { createNewInventory } from "@/services/InventoryApiService";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  findInventoryByID,
+  updateInventoryByAdmin,
+} from "@/services/InventoryApiService";
 import { InventoryTypes } from "../../../../types/productTypes";
 import { InventoryGlobalState } from "@/stores/product_state_store/InventoryGlobalState";
 import { CalendarIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getAllStorageConditions } from "@/services/ProductConstantsApiService";
 import { ProductConstantsGlobalState } from "@/stores/product_state_store/ProductConstantsGlobalState";
 import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
 import { getAllProducts } from "@/services/ProductDetailsApiService";
 
-export default function NewInventoryPage() {
-  const [expiryDate, setExpiryDate] = useState<Date | null>(null);
+export default function EditInventory() {
   const { storageConditionsList } = ProductConstantsGlobalState();
   const { productsList } = AddandEditProductDetailsGlobalState();
+  const { drugInventoryID } = useParams();
 
+  useEffect(() => {
+    if (drugInventoryID) {
+      findInventoryByID(drugInventoryID);
+    }
+  }, [drugInventoryID]);
   useEffect(() => {
     getAllProducts();
     getAllStorageConditions();
@@ -39,6 +47,7 @@ export default function NewInventoryPage() {
     minimumQuantityInStock,
     reorderStockLevel,
     loading,
+    expiryDate,
     drugID,
   } = InventoryGlobalState();
 
@@ -54,22 +63,24 @@ export default function NewInventoryPage() {
     reorderStockLevel: reorderStockLevel,
   };
 
-  const handleSubmitInventory = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdateInventory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const success = await createNewInventory(formData);
 
-    if (success) {
-      navigate("/workspace/all_inventories");
+    if (drugInventoryID) {
+      const success = await updateInventoryByAdmin(drugInventoryID, formData);
+      if (success) {
+        navigate("/workspace/all_inventories");
+      }
     }
   };
 
   return (
     <>
       <div className="w-[90%] mx-auto mt-[110px]">
-        <p className="text-center text-2xl my-5">Inventory Details</p>
+        <p className="text-center text-2xl my-5">Edit Inventory Details</p>
         <form
           className="flex flex-row gap-5 flex-wrap justify-start items-center "
-          onSubmit={handleSubmitInventory}
+          onSubmit={handleUpdateInventory}
         >
           <div className="w-[30%] grid gap-3">
             <Label htmlFor="Product">Product</Label>
@@ -110,11 +121,15 @@ export default function NewInventoryPage() {
                 <Button className="w-full border border-[rgb(255,255,255,0.2)] rounded pl-3 text-left font-normal">
                   <span>
                     {expiryDate ? (
-                      expiryDate.toDateString()
+                      new Date(expiryDate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "numeric",
+                      })
                     ) : (
                       <span>Pick expiry date</span>
                     )}
                   </span>
+
                   <CalendarIcon className="ml-auto" />
                 </Button>
               </PopoverTrigger>
@@ -123,7 +138,11 @@ export default function NewInventoryPage() {
                   className="bg-[#151533]"
                   mode="single"
                   selected={expiryDate || undefined}
-                  onSelect={(day) => setExpiryDate(day || null)}
+                  onSelect={(day: Date) =>
+                    InventoryGlobalState.setState({
+                      expiryDate: day,
+                    })
+                  }
                   initialFocus
                 />
               </PopoverContent>

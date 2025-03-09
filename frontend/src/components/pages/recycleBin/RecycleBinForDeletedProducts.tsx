@@ -67,7 +67,7 @@ export default function RecycleBinForDeletedProducts() {
           </TableBody>
         </Table>
       ) : (
-        <div className="block text-center text-3xl mt-[100px]">Empty</div>
+        <div className="block text-center text-3xl"></div>
       )}
     </>
   );

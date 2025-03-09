@@ -11,7 +11,10 @@ export type RoutesOfDrugAdministrationType = {
   id: number;
   route: string;
 };
-
+export type storageConditionsType = {
+  id: number;
+  condition: string;
+};
 export type ProductDetailsTypes = {
   genericName: string | null;
   brandName: string | null;
@@ -40,6 +43,7 @@ export type InventoryTypes = {
   reorderStockLevel: number | null;
   createdAt?: string;
   updatedAt?: string;
+  drug?: ProductDetailsTypes;
 };
 
 export type DrugManufacturer = {

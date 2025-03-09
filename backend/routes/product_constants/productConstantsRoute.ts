@@ -7,6 +7,7 @@ import {
   fetchDosageForms,
   fetchDrugClasses,
   fetchRoutesOfDrugAdministration,
+  fetchStorageConditions,
 } from "../../controllers/product_constant_controllers/productConstantsControllers";
 
 const router: Router = express.Router();
@@ -17,6 +18,12 @@ router.get(
   "/routes_of_drug_administration",
   userAuthenticationMiddleware,
   fetchRoutesOfDrugAdministration
+);
+
+router.get(
+  "/storage_conditions",
+  userAuthenticationMiddleware,
+  fetchStorageConditions
 );
 
 export default router;

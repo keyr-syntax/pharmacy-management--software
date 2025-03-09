@@ -1,0 +1,4 @@
+"drugID","genericName","brandName","dosageForm","drugType","dosageStrength","routeOfDrugAdministration","unitsPerPack","drugClass","status","softDeleted","createdAt","updatedAt"
+"2526cdba-9e54-45e5-a8ea-f14b3a583836","Amoxicillin ","Amoxa","Capsule","Prescription","250 mg","Oral",10,"Antibiotics","Active",1,"2025-03-08 22:20:23","2025-03-09 00:12:03"
+"971f7776-276f-441c-be51-fc0afa77daf3","Paracetamol","Panadol","Tablet","OTC","500 mg","Oral",10,"Analgesics","Active",0,"2025-03-08 22:15:21","2025-03-08 22:15:21"
+"d1b5e5b1-9aac-401d-b1fb-29a1fe54e8d0","Bevacizumab","Avastin","Infusion","Prescription","400 mg","Intravenous (IV)",1,"Antineoplastics","Active",0,"2025-03-08 22:50:28","2025-03-09 00:04:20"

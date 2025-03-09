@@ -76,3 +76,29 @@ export const getAllRoutesOfDrugAdministration = async () => {
     console.log("Error while fetching drug class", error);
   }
 };
+export const getAllStorageConditions = async () => {
+  try {
+    const data = await fetch(
+      `${baseURL}/product_constants/storage_conditions`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+
+    const response = await data.json();
+
+    if (response.success) {
+      ProductConstantsGlobalState.setState({
+        storageConditionsList: response.storageConditions,
+      });
+    } else {
+      toast.error(response.message);
+    }
+  } catch (error) {
+    console.log("Error while fetching storage conditions", error);
+  }
+};
