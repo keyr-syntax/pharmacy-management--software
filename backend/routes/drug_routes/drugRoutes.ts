@@ -27,15 +27,19 @@ router.put(
   adminAuthenticationMiddleware,
   updateDrugDetails
 );
-router.put("/admin/delete_drug", adminAuthenticationMiddleware, deleteDrug);
+router.put(
+  "/admin/delete_drug/:drugID",
+  adminAuthenticationMiddleware,
+  deleteDrug
+);
 
 router.put(
-  "/admin/restore_deleted_drug",
+  "/admin/restore_deleted_drug/:drugID",
   adminAuthenticationMiddleware,
   undoDeletedDrug
 );
 router.get(
-  "/find_all_deleted_drugs",
+  "/admin/find_all_deleted_drugs",
   userAuthenticationMiddleware,
   fetchAllDeletedDrugs
 );

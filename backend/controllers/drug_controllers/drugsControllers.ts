@@ -14,7 +14,7 @@ export const addNewDrug = async (req: Request, res: Response) => {
     drugClass,
     status,
   } = req.body;
-
+  console.log("req.body", req.body);
   if (
     !genericName ||
     genericName.trim() === "" ||
@@ -78,6 +78,7 @@ export const addNewDrug = async (req: Request, res: Response) => {
           success: true,
           newDrug: newDrug,
           allDrugs: findAllDrugs,
+          message: "Product added",
         });
         return;
       } else {
@@ -143,7 +144,8 @@ export const findDrugByUUID = async (req: Request, res: Response) => {
 
       res.status(200).json({
         success: true,
-        drug: drugDetails,
+        drug: findDrugByPK,
+        drugDetails: drugDetails,
       });
       return;
     } else {
@@ -214,6 +216,7 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
           success: true,
           drug: updateDrugDetails,
           allDrugs: findAllDrugs,
+          message: "Product updated",
         });
         return;
       } else {
@@ -225,7 +228,7 @@ export const updateDrugDetails = async (req: Request, res: Response) => {
       }
     } else {
       res.status(404).json({
-        success: false,
+        success: true,
         message: "You have made no changes",
       });
       return;
@@ -297,7 +300,7 @@ export const undoDeletedDrug = async (req: Request, res: Response) => {
 
         res.status(200).json({
           success: true,
-          message: "Drug restored",
+          message: "Product restored",
           allDrugs: findAllDrugs,
         });
         return;

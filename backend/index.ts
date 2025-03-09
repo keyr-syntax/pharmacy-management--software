@@ -12,7 +12,7 @@ import drugPricingRoutes from "./routes/drug_routes/drugPricingRoutes";
 import drugSafetyRoutes from "./routes/drug_routes/drugSafetyRoutes";
 import productConstantsRoutes from "./routes/product_constants/productConstantsRoute";
 import modelAssociation from "./models/model_associations/modelAssociation";
-
+const PORT = process.env.PORT || 7000;
 const app: Application = express();
 
 syncDatabase();
@@ -21,7 +21,7 @@ app.use(express());
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.FRONTEND_PORT!,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -42,4 +42,10 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen();
+app.listen(PORT, (error) => {
+  if (error) {
+    console.log("Error while starting server: ", error);
+  } else {
+    console.log(`Server is running on: http://localhost:${PORT}`);
+  }
+});

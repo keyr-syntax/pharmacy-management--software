@@ -12,6 +12,21 @@ export type RoutesOfDrugAdministrationType = {
   route: string;
 };
 
+export type ProductDetailsTypes = {
+  genericName: string | null;
+  brandName: string | null;
+  dosageForm: string | null;
+  drugType: string | null;
+  dosageStrength: string | null;
+  routeOfDrugAdministration: string | null;
+  unitsPerPack: number | null;
+  drugClass: string | null;
+  status: string | null;
+  drugID?: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type DrugManufacturer = {
   manufacturerID?: string;
   manufacturerName: string;

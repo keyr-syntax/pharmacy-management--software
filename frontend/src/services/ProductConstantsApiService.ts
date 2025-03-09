@@ -15,7 +15,6 @@ export const getAllDosageForms = async () => {
     const response = await data.json();
 
     if (response.success) {
-      console.log("Dosage forms", response.allDosageForms);
       ProductConstantsGlobalState.setState({
         dosageFormList: response.allDosageForms,
       });
@@ -40,7 +39,6 @@ export const getAllDrugClasses = async () => {
     const response = await data.json();
 
     if (response.success) {
-      console.log("Dosage class", response.allDrugClasses);
       ProductConstantsGlobalState.setState({
         drugClassList: response.allDrugClasses,
       });
@@ -68,10 +66,6 @@ export const getAllRoutesOfDrugAdministration = async () => {
     const response = await data.json();
 
     if (response.success) {
-      console.log(
-        "allRoutesOfDrugAdministration",
-        response.allRoutesOfDrugAdministration
-      );
       ProductConstantsGlobalState.setState({
         routesOfDrugAdministrationList: response.allRoutesOfDrugAdministration,
       });

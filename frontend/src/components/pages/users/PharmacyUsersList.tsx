@@ -286,7 +286,6 @@ export default function PharmacyUsersList() {
                           className="inline cursor-pointer text-red-700"
                         />{" "}
                       </TableCell>
-                      <TableCell></TableCell>
                     </>
                   )}
               </TableRow>
