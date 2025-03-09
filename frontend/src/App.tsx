@@ -1,15 +1,10 @@
 // import ThemeToggle from "./ThemeToggle";
-
-import { Outlet, Route, Routes } from "react-router-dom";
-import { AppSidebar } from "./components/pages/dashboard/Dashboard";
-import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
+import { Route, Routes } from "react-router-dom";
 import RegisterPharmacyUser from "./components/pages/auth/RegisterUser";
 import LoginPharmacyUser from "./components/pages/auth/HomeLoginUser";
 import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
 import UpdateUserProfile from "./components/pages/users/UpdateUserProfile";
 import DeletedUsersList from "./components/pages/recycleBin/RecycleBinForDeletedUsers";
-// import DeletedDosageForms from "./components/pages/recycleBin/RecycleBinForDeletedDosageForms";
-
 import NewDrugPage from "./components/pages/products/drugs/NewProduct";
 import NavigationBar from "./components/NavigationBar";
 import AllProductsList from "./components/pages/products/drugs/AllProductsList";
@@ -55,7 +50,7 @@ function App() {
             element={<NewInventoryPage />}
           />
         </Route>
-        <Route
+        {/* <Route
           path="/dashboard"
           element={
             <>
@@ -79,7 +74,7 @@ function App() {
           />
 
           <Route path="/dashboard/drugs" element={<NewDrugPage />} />
-        </Route>
+        </Route> */}
       </Routes>
     </>
   );

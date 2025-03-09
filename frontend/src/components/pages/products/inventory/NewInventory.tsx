@@ -1,12 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { createNewInventory } from "@/services/InventoryApiService";
 import { InventoryTypes } from "../../../../types/productTypes";
 import { InventoryGlobalState } from "@/stores/product_state_store/InventoryGlobalState";
+import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function NewInventoryPage() {
+  const [expiryDate, setExpiryDate] = useState<Date | null>(null);
   const { drugID } = useParams();
   const navigate = useNavigate();
   const {
@@ -14,7 +24,7 @@ export default function NewInventoryPage() {
     barCode,
     storageConditions,
     location,
-    expiryDate,
+    // expiryDate,
     quantityInStock,
     minimumQuantityInStock,
     reorderStockLevel,
@@ -52,17 +62,33 @@ export default function NewInventoryPage() {
         >
           <div className="w-[30%] grid gap-3">
             <Label htmlFor="name">Expiry Date</Label>
-            <Input
-              id="Expiry Date"
-              placeholder="Expiry Date of the product"
-              required
-              value={expiryDate ? expiryDate.toISOString().split("T")[0] : ""}
-              onChange={(e) => {
-                InventoryGlobalState.setState({
-                  expiryDate: new Date(e.target.value),
-                });
-              }}
-            />
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className="w-full pl-3 text-left font-normal"
+                >
+                  <span>
+                    {expiryDate ? (
+                      expiryDate.toDateString()
+                    ) : (
+                      <span>Pick expiry date</span>
+                    )}
+                  </span>
+                  <CalendarIcon className="ml-auto bg-red-500" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  className="bg-[#151533]"
+                  mode="single"
+                  selected={expiryDate || undefined}
+                  onSelect={(day) => setExpiryDate(day || null)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
           <div className="w-[30%] grid gap-3">
             <Label htmlFor="Batch Number">Batch Number</Label>
@@ -108,7 +134,7 @@ export default function NewInventoryPage() {
             />
           </div>
           <div className="w-[30%] grid gap-3">
-            <Label htmlFor="name">Minimum Quantity in stock</Label>
+            <Label htmlFor="name">Minimum Quantity to get notified</Label>
             <Input
               type="number"
               placeholder="Minimum Quantity in stock"
