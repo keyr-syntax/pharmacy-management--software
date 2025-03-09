@@ -190,16 +190,17 @@ export const updatePharmacyUserProfileByAdmin = async (
 
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(userID);
-
+    const isProfileSame =
+      findPharmacyUserByID?.firstName === firstName &&
+      findPharmacyUserByID?.lastName === lastName &&
+      findPharmacyUserByID?.email === email &&
+      findPharmacyUserByID?.phoneNumber === phoneNumber &&
+      findPharmacyUserByID?.role === role &&
+      findPharmacyUserByID?.isBlocked === isBlocked;
     if (
-      (findPharmacyUserByID &&
-        !findPharmacyUserByID.SoftDeleted &&
-        firstName !== findPharmacyUserByID?.firstName) ||
-      lastName !== findPharmacyUserByID?.lastName ||
-      email !== findPharmacyUserByID?.email ||
-      phoneNumber !== findPharmacyUserByID?.phoneNumber ||
-      role !== findPharmacyUserByID?.role ||
-      isBlocked !== findPharmacyUserByID?.isBlocked
+      findPharmacyUserByID &&
+      !findPharmacyUserByID.SoftDeleted &&
+      !isProfileSame
     ) {
       const updatePharmacyUser = await findPharmacyUserByID?.update({
         firstName: firstName,
@@ -222,6 +223,7 @@ export const updatePharmacyUserProfileByAdmin = async (
           message: "Profile updated",
           users: findAllUsers,
         });
+        return;
       } else {
         res.status(404).json({
           success: false,
@@ -294,14 +296,16 @@ export const updateUserProfile = async (req: Request, res: Response) => {
   }
   try {
     const findPharmacyUserByID = await pharmacyUser.findByPk(user.id);
+    const isProfileSame =
+      findPharmacyUserByID?.firstName === firstName &&
+      findPharmacyUserByID?.lastName === lastName &&
+      findPharmacyUserByID?.email === email &&
+      findPharmacyUserByID?.phoneNumber === phoneNumber &&
+      findPharmacyUserByID?.role === role;
     if (
-      (findPharmacyUserByID &&
-        !findPharmacyUserByID.SoftDeleted &&
-        firstName !== findPharmacyUserByID?.firstName) ||
-      lastName !== findPharmacyUserByID?.lastName ||
-      email !== findPharmacyUserByID?.email ||
-      phoneNumber !== findPharmacyUserByID?.phoneNumber ||
-      role !== findPharmacyUserByID?.role
+      findPharmacyUserByID &&
+      !findPharmacyUserByID.SoftDeleted &&
+      !isProfileSame
     ) {
       const updatePharmacyUser = await findPharmacyUserByID?.update({
         firstName: firstName,
@@ -327,7 +331,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
       }
     } else {
       res.status(404).json({
-        success: false,
+        success: true,
         message: "You have made no changes",
       });
       return;

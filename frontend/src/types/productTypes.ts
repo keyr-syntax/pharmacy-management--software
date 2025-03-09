@@ -27,6 +27,21 @@ export type ProductDetailsTypes = {
   updatedAt?: string;
 };
 
+export type InventoryTypes = {
+  drugInventoryID?: string | null;
+  drugID: string | null;
+  batchNumber: string | null;
+  barCode: string | null;
+  storageConditions: string | null;
+  location: string | null;
+  expiryDate: Date | null;
+  quantityInStock: number | null;
+  minimumQuantityInStock: number | null;
+  reorderStockLevel: number | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type DrugManufacturer = {
   manufacturerID?: string;
   manufacturerName: string;

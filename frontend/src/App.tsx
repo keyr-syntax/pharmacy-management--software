@@ -9,14 +9,13 @@ import PharmacyUsersList from "./components/pages/users/PharmacyUsersList";
 import UpdateUserProfile from "./components/pages/users/UpdateUserProfile";
 import DeletedUsersList from "./components/pages/recycleBin/RecycleBinForDeletedUsers";
 // import DeletedDosageForms from "./components/pages/recycleBin/RecycleBinForDeletedDosageForms";
-import { NewDrugManufacturer } from "./components/pages/products/drug_manufacturer/NewDrugManufacturer";
-import TableForDrugManufacturer from "./components/pages/products/drug_manufacturer/TableForDrugManufacturer";
 
 import NewDrugPage from "./components/pages/products/drugs/NewProduct";
 import NavigationBar from "./components/NavigationBar";
 import AllProductsList from "./components/pages/products/drugs/AllProductsList";
 import EditProduct from "./components/pages/products/drugs/EditProduct";
 import RecycleBinForDeletedProducts from "./components/pages/recycleBin/RecycleBinForDeletedProducts";
+import NewInventoryPage from "./components/pages/products/inventory/NewInventory";
 
 function App() {
   return (
@@ -51,6 +50,10 @@ function App() {
             path="/workspace/products_recycle_bin"
             element={<RecycleBinForDeletedProducts />}
           />
+          <Route
+            path="/workspace/new_inventory"
+            element={<NewInventoryPage />}
+          />
         </Route>
         <Route
           path="/dashboard"
@@ -73,15 +76,6 @@ function App() {
           <Route
             path="/dashboard/users_recycle_bin"
             element={<DeletedUsersList />}
-          />
-
-          <Route
-            path="/dashboard/drug_manufacturer"
-            element={<NewDrugManufacturer />}
-          />
-          <Route
-            path="/dashboard/drug_manufacturer_list"
-            element={<TableForDrugManufacturer />}
           />
 
           <Route path="/dashboard/drugs" element={<NewDrugPage />} />

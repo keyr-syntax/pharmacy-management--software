@@ -9,7 +9,6 @@ export const createNewProduct = async (
 ): Promise<boolean> => {
   AddandEditProductDetailsGlobalState.setState({ loading: true });
   try {
-    console.log("formData", formData);
     const data = await fetch(`${baseURL}/drugs/admin/new_drug`, {
       method: "POST",
       headers: {

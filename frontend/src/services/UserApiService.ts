@@ -350,6 +350,7 @@ export const updatePharmacyUserProfile = async (
 
     if (response.success) {
       toast.success(response.message);
+
       UpdatePharmacyUserProfileGlobalState.setState({
         firstName: response.user.firstName,
         lastName: response.user.lastName,
@@ -361,6 +362,7 @@ export const updatePharmacyUserProfile = async (
         "name",
         `${response.user.firstName} ${response.user.lastName}`
       );
+      
     } else {
       toast.error(response.message);
       UpdatePharmacyUserProfileGlobalState.setState({ loading: false });

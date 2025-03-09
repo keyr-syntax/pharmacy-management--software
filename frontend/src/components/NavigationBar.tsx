@@ -92,6 +92,39 @@ export default function NavigationBar() {
             </Menubar.Content>
           </Menubar.Portal>
         </Menubar.Menu>
+        <Menubar.Menu>
+          <Menubar.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
+            Inventory
+          </Menubar.Trigger>
+          <Menubar.Portal>
+            <Menubar.Content
+              className="min-w-[180px] bg-[#151533]  p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]"
+              align="start"
+              sideOffset={15}
+              alignOffset={-3}
+            >
+              <Link to={`/workspace/new_inventory`}>
+                <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5  text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                  Add new Inventory
+                </Menubar.Item>
+              </Link>
+              <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
+              <Link to={`/workspace/all_products`}>
+                <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                  Products list
+                </Menubar.Item>
+              </Link>
+              <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
+              <Link to={`/workspace/products_recycle_bin`}>
+                <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
+                  Products recycle bin
+                </Menubar.Item>
+              </Link>
+
+              <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
+            </Menubar.Content>
+          </Menubar.Portal>
+        </Menubar.Menu>
         <div className="ml-auto">
           <Menubar.Menu>
             <Menubar.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[20px]  leading-none text-violet11 outline-none data-[highlighted]:bg-violet4 data-[state=open]:bg-violet4">
