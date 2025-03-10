@@ -10,7 +10,7 @@ import {
 
 import { useEffect } from "react";
 
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 
 import {
   undoDeletedProducts,

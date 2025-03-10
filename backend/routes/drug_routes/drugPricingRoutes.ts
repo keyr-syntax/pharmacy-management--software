@@ -21,7 +21,7 @@ router.post(
   addNewDrugPricing
 );
 router.get(
-  "/find_all_pricing",
+  "/find_all_pricings",
   userAuthenticationMiddleware,
   findAllDrugPricing
 );
@@ -32,7 +32,7 @@ router.put(
 );
 
 router.get(
-  "/admin/find_pricing/:pricingID/:drugID",
+  "/admin/find_pricing/:pricingID",
   adminAuthenticationMiddleware,
   findPricingByUUID
 );

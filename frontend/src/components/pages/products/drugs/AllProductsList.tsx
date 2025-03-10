@@ -14,7 +14,7 @@ import {
   DeleteProduct,
   getAllProducts,
 } from "@/services/ProductDetailsApiService";
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { Link } from "react-router-dom";
 
 export default function AllProductsList() {

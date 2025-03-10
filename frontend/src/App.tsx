@@ -15,6 +15,7 @@ import AllInventoryList from "./components/pages/products/inventory/AllInventory
 import EditInventory from "./components/pages/products/inventory/EditInventory";
 import RecycleBinForDeletedInventories from "./components/pages/recycleBin/RecycleBinForDeletedInventories";
 import AllRecycleBin from "./components/pages/recycleBin/AllRecycleBin";
+import NewProductPricing from "./components/pages/products/pricing/NewProductPricing";
 
 function App() {
   return (
@@ -68,6 +69,10 @@ function App() {
           <Route
             path="/workspace/all_recycle_bin"
             element={<AllRecycleBin />}
+          />
+          <Route
+            path="/workspace/new_product_pricing"
+            element={<NewProductPricing />}
           />
         </Route>
         {/* <Route

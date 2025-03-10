@@ -63,7 +63,6 @@ export const addNewDrugPricing = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findAllDrugPricing = async (req: Request, res: Response) => {
   try {
     const allDrugPricing = await DRUG_PRICING.findAll({
@@ -107,19 +106,10 @@ export const findAllDrugPricing = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const findPricingByUUID = async (req: Request, res: Response) => {
   try {
-    const { pricingID, drugID } = req.params;
-    const pricingByPK = await DRUG_PRICING.findByPk(pricingID, {
-      include: {
-        model: DRUGS,
-        as: "drug",
-        where: {
-          drugID: drugID,
-        },
-      },
-    });
+    const { pricingID } = req.params;
+    const pricingByPK = await DRUG_PRICING.findByPk(pricingID);
 
     if (pricingByPK && !pricingByPK.softDeleted) {
       res.status(200).json({
@@ -222,15 +212,30 @@ export const deleteDrugPricing = async (req: Request, res: Response) => {
       const softDeletePricing = await pricingByPK.update({
         softDeleted: true,
       });
-      const findAllDrugPricing = await DRUG_PRICING.findAll({
+      const allDrugPricing = await DRUG_PRICING.findAll({
         where: { softDeleted: false },
         order: [["createdAt", "ASC"]],
       });
+
+      let pricingAlongWithItsDrug = [];
+
+      for (const pricing of allDrugPricing) {
+        const findPricingByPK = await DRUG_PRICING.findByPk(pricing.pricingID, {
+          include: {
+            model: DRUGS,
+            as: "drug",
+            where: {
+              drugID: pricing.drugID,
+            },
+          },
+        });
+        pricingAlongWithItsDrug.push(findPricingByPK);
+      }
       if (softDeletePricing) {
         res.status(200).json({
           success: true,
           message: "Deleted",
-          allPricing: findAllDrugPricing,
+          allPricing: pricingAlongWithItsDrug,
         });
         return;
       } else {
@@ -278,10 +283,27 @@ export const undoDeletedDrugPricing = async (req: Request, res: Response) => {
           },
           order: [["createdAt", "ASC"]],
         });
+        let pricingAlongWithItsDrug = [];
+
+        for (const pricing of findAllPricing) {
+          const findPricingByPK = await DRUG_PRICING.findByPk(
+            pricing.pricingID,
+            {
+              include: {
+                model: DRUGS,
+                as: "drug",
+                where: {
+                  drugID: pricing.drugID,
+                },
+              },
+            }
+          );
+          pricingAlongWithItsDrug.push(findPricingByPK);
+        }
         res.status(200).json({
           success: true,
           message: "Pricing restored",
-          allPricing: findAllPricing,
+          allPricing: pricingAlongWithItsDrug,
         });
         return;
       } else {
@@ -318,7 +340,20 @@ export const fetchAllDeletedDrugPricing = async (
       },
       order: [["createdAt", "ASC"]],
     });
+    let pricingAlongWithItsDrug = [];
 
+    for (const pricing of allDeletedPricing) {
+      const findPricingByPK = await DRUG_PRICING.findByPk(pricing.pricingID, {
+        include: {
+          model: DRUGS,
+          as: "drug",
+          where: {
+            drugID: pricing.drugID,
+          },
+        },
+      });
+      pricingAlongWithItsDrug.push(findPricingByPK);
+    }
     if (allDeletedPricing) {
       res.status(200).json({
         success: true,

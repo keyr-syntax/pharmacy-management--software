@@ -16,7 +16,7 @@ import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getAllStorageConditions } from "@/services/ProductConstantsApiService";
 import { ProductConstantsGlobalState } from "@/stores/product_state_store/ProductConstantsGlobalState";
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { getAllProducts } from "@/services/ProductDetailsApiService";
 
 export default function NewInventoryPage() {
@@ -123,7 +123,7 @@ export default function NewInventoryPage() {
                   className="bg-[#151533]"
                   mode="single"
                   selected={expiryDate || undefined}
-                  onSelect={(day) => setExpiryDate(day || null)}
+                  onSelect={(day: Date) => setExpiryDate(day || null)}
                   initialFocus
                 />
               </PopoverContent>

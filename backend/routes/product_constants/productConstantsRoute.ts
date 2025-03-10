@@ -19,7 +19,6 @@ router.get(
   userAuthenticationMiddleware,
   fetchRoutesOfDrugAdministration
 );
-
 router.get(
   "/storage_conditions",
   userAuthenticationMiddleware,

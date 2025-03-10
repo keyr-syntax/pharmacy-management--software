@@ -46,18 +46,12 @@ export type InventoryTypes = {
   drug?: ProductDetailsTypes;
 };
 
-export type DrugManufacturer = {
-  manufacturerID?: string;
-  manufacturerName: string;
-  contactName: string;
-  phoneNumber: string;
-  licenseNumber: string;
-  updatedAt?: string;
-};
-export type DrugManufacturerFormData = {
-  manufacturerID?: string;
-  manufacturerName: string;
-  contactName: string;
-  phoneNumber: string;
-  licenseNumber: string;
+export type ProductPricingTypes = {
+  pricingID?: string | null;
+  drugID: string | null;
+  purchasePrice: number | null;
+  sellingPrice: number | null;
+  taxRate: number | null;
+  margin?: number | null;
+  insuranceCoverage?: boolean;
 };

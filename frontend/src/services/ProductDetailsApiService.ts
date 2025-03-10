@@ -1,5 +1,5 @@
 import { baseURL } from "@/lib/utils";
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 
 import toast from "react-hot-toast";
 import { ProductDetailsTypes } from "../types/productTypes";

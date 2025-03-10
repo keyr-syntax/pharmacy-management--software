@@ -19,7 +19,7 @@ import { CalendarIcon } from "lucide-react";
 import { useEffect } from "react";
 import { getAllStorageConditions } from "@/services/ProductConstantsApiService";
 import { ProductConstantsGlobalState } from "@/stores/product_state_store/ProductConstantsGlobalState";
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { getAllProducts } from "@/services/ProductDetailsApiService";
 
 export default function EditInventory() {

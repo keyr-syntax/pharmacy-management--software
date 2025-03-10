@@ -35,9 +35,7 @@ export default function AllInventoryList() {
               <TableHead>Product name</TableHead>
               <TableHead>Expiry Date</TableHead>
               <TableHead>Batch No.</TableHead>
-
               <TableHead>Barcode </TableHead>
-
               <TableHead>Quantity </TableHead>
               <TableHead>Min. QTY </TableHead>
               <TableHead>Reorder QTY </TableHead>

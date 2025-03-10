@@ -10,7 +10,7 @@ import {
   findProductByID,
   updateProductByAdmin,
 } from "@/services/ProductDetailsApiService";
-import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/AddandEditProductDetailsGlobalState";
+import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { ProductConstantsGlobalState } from "@/stores/product_state_store/ProductConstantsGlobalState";
 import { ProductDetailsTypes } from "@/types/productTypes";
 
