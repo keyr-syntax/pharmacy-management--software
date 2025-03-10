@@ -27,7 +27,7 @@ export default function RegisterPharmacyUser() {
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center  mb-8 w-full mt-[65px]">
+      <div className="flex flex-col justify-center items-center  mb-8 w-full mt-[80px]">
         <form
           onSubmit={handleSubmit(handleSubmitRegisterPharmacyUser)}
           className="flex flex-col gap-2 mx-auto mt-1 w-[90%] max-w-[500px] border border-solid border-[rgb(255,255,255,0.2)] p-8 rounded"

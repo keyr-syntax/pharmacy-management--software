@@ -61,7 +61,7 @@ export default function AllProductsList() {
                     ? new Date(product.createdAt).toLocaleDateString()
                     : "N/A"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-nowrap">
                   <EyeIcon
                     size={32}
                     className="inline cursor-pointer mr-5 font-bold text-green-700"

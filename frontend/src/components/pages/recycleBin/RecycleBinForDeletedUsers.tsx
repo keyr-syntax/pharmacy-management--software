@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -27,8 +26,10 @@ export default function DeletedUsersList() {
     <>
       {deltedUsersList && deltedUsersList.length > 0 ? (
         <>
-          <Table className="w-[90%] mt-[90px] mx-auto border ">
-            <TableCaption>Deleted Employees</TableCaption>
+          <h1 className="text-center text-[20px] font-bold mb-3 mt-[90px]">
+            Deleted Employees List
+          </h1>
+          <Table className="w-[90%] mx-auto border ">
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
@@ -60,9 +61,9 @@ export default function DeletedUsersList() {
                     onClick={() => {
                       undoDeletedPharmacyUser(user.id);
                     }}
-                    className="text-red-700 cursor-pointer "
+                    className=" cursor-pointer text-nowrap"
                   >
-                    <span className="inline text-lg font-semibold">
+                    <span className="inline text-lg font-semibold text-red-700">
                       Undo Delete
                     </span>
                   </TableCell>

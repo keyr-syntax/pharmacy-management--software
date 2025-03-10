@@ -224,7 +224,7 @@ export default function PharmacyUsersList() {
                   isBlocked === null &&
                   role === null && (
                     <>
-                      <TableCell>
+                      <TableCell className="text-nowrap">
                         <Pencil
                           onClick={() => {
                             EditPharmacyUserGlobalState.setState({
@@ -254,7 +254,7 @@ export default function PharmacyUsersList() {
                   isBlocked &&
                   role && (
                     <>
-                      <TableCell>
+                      <TableCell className="text-nowrap">
                         <Check
                           onClick={() => {
                             updatePharmacyUserByAdmin(
