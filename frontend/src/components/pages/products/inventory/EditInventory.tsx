@@ -79,10 +79,10 @@ export default function EditInventory() {
       <div className="w-[90%] mx-auto mt-[110px]">
         <p className="text-center text-2xl my-5">Edit Inventory Details</p>
         <form
-          className="flex flex-row gap-5 flex-wrap justify-start items-center "
+          className="flex flex-row gap-5 flex-wrap sm:justify-start justify-center items-center "
           onSubmit={handleUpdateInventory}
         >
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="Product">Product</Label>
 
             <select
@@ -113,7 +113,7 @@ export default function EditInventory() {
               ))}
             </select>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Expiry Date</Label>
 
             <Popover>
@@ -138,17 +138,19 @@ export default function EditInventory() {
                   className="bg-[#151533]"
                   mode="single"
                   selected={expiryDate || undefined}
-                  onSelect={(day: Date) =>
-                    InventoryGlobalState.setState({
-                      expiryDate: day,
-                    })
-                  }
+                  onSelect={(day: Date | undefined) => {
+                    if (day) {
+                      InventoryGlobalState.setState({
+                        expiryDate: day,
+                      });
+                    }
+                  }}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="Batch Number">Batch Number</Label>
             <Input
               id="Batch Number"
@@ -162,7 +164,7 @@ export default function EditInventory() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="Barcode">Barcode</Label>
             <Input
               id="Barcode"
@@ -177,7 +179,7 @@ export default function EditInventory() {
             />
           </div>
 
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Quantity in stock</Label>
             <Input
               type="number"
@@ -191,7 +193,7 @@ export default function EditInventory() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Minimum Quantity to get notified</Label>
             <Input
               type="number"
@@ -205,7 +207,7 @@ export default function EditInventory() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="Re-order stock level">Re-order stock level</Label>
             <Input
               type="number"
@@ -219,7 +221,7 @@ export default function EditInventory() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="Storage Conditions">Storage Conditions</Label>
 
             <select
@@ -250,7 +252,7 @@ export default function EditInventory() {
               ))}
             </select>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Storage Location</Label>
             <Input
               id="Storage Conditions"
@@ -264,7 +266,7 @@ export default function EditInventory() {
               }}
             />
           </div>
-          <Button className="text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 w-[200px] rounded">
+          <Button className="text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 md:w-[200px] w-[60%] rounded">
             {loading ? "Please wait.." : "Submit"}
           </Button>
         </form>

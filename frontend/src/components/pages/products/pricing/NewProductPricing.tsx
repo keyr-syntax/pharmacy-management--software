@@ -51,10 +51,10 @@ export default function NewProductPricing() {
     <div className="w-[90%] mx-auto mt-[110px]">
       <p className="text-center text-2xl my-5">Product Pricing Details</p>
       <form
-        className="flex flex-row gap-5 flex-wrap justify-start items-center"
+        className="flex flex-row gap-5 flex-wrap sm:justify-start justify-center items-center"
         onSubmit={handleSubmitPricing}
       >
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="product">Product</Label>
           <select
             id="Product"
@@ -85,7 +85,7 @@ export default function NewProductPricing() {
           </select>
         </div>
 
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="purchasePrice">Purchase Price</Label>
           <Input
             id="purchasePrice"
@@ -101,7 +101,7 @@ export default function NewProductPricing() {
           />
         </div>
 
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="sellingPrice">Selling Price</Label>
           <Input
             id="sellingPrice"
@@ -117,7 +117,7 @@ export default function NewProductPricing() {
           />
         </div>
 
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="taxRate">Tax Rate</Label>
           <Input
             id="taxRate"
@@ -133,7 +133,7 @@ export default function NewProductPricing() {
           />
         </div>
 
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="margin">Margin</Label>
           <Input
             id="margin"
@@ -148,7 +148,7 @@ export default function NewProductPricing() {
           />
         </div>
 
-        <div className="w-[30%] grid gap-3">
+        <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
           <Label htmlFor="insuranceCoverage">Insurance Coverage</Label>
           <select
             title="insurance coverage"
@@ -167,7 +167,7 @@ export default function NewProductPricing() {
           </select>
         </div>
 
-        <Button className="text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 w-[200px] rounded">
+        <Button className="text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 md:w-[200px] w-[60%] rounded">
           {loading ? "Please wait..." : "Submit"}
         </Button>
       </form>
