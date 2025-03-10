@@ -69,10 +69,10 @@ export default function NewDrugPage() {
       <div className="w-[90%] mx-auto mt-[110px]">
         <p className="text-center text-2xl my-5">Product Details</p>
         <form
-          className="flex flex-row gap-5 flex-wrap justify-start items-center "
+          className="flex flex-row gap-5 flex-wrap sm:justify-start justify-center items-center "
           onSubmit={handleSubmitProductDetails}
         >
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Generic name</Label>
 
             <Input
@@ -87,7 +87,7 @@ export default function NewDrugPage() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Brand name</Label>
             <Input
               id="Brand name"
@@ -101,7 +101,7 @@ export default function NewDrugPage() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Drug class</Label>
             <select
               id="Drug class"
@@ -132,7 +132,7 @@ export default function NewDrugPage() {
               ))}
             </select>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Dosage strength</Label>
             <Input
               id="Dosage strength"
@@ -147,7 +147,7 @@ export default function NewDrugPage() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Dosage form</Label>
             <select
               id="dosage form"
@@ -178,7 +178,7 @@ export default function NewDrugPage() {
               ))}
             </select>
           </div>{" "}
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="phone">Route of drug administration</Label>
             <select
               id="Route of drug administration"
@@ -209,7 +209,7 @@ export default function NewDrugPage() {
               ))}
             </select>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Prescription requirement</Label>
             <select
               id="Prescription requirement"
@@ -243,7 +243,7 @@ export default function NewDrugPage() {
               </option>
             </select>
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%] grid gap-3">
             <Label htmlFor="name">Units per pack</Label>
             <Input
               id="contact"
@@ -258,7 +258,7 @@ export default function NewDrugPage() {
               }}
             />
           </div>
-          <div className="w-[30%] grid gap-3">
+          <div className="md:w-[30%] sm:w-[45%] w-[80%]  grid gap-3">
             <Label htmlFor="name">Status</Label>
             <select
               id="status"
@@ -298,7 +298,10 @@ export default function NewDrugPage() {
               </option>
             </select>
           </div>
-          <Button className="text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 w-[200px] rounded">
+          <Button
+            type="submit"
+            className=" text-center block mx-auto bg-[#00C8FF] hover:bg-[#0099ff] text-black font-semibold text-md my-5 md:w-[200px] w-[60%] rounded"
+          >
             {loading ? "Please wait.." : "Submit"}
           </Button>
         </form>
