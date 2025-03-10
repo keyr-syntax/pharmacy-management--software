@@ -163,15 +163,11 @@ export const updateDrugPricing = async (req: Request, res: Response) => {
         margin: margin,
         insuranceCoverage: insuranceCoverage,
       });
-      const findAllDrugPricing = await DRUG_PRICING.findAll({
-        where: { softDeleted: false },
-        order: [["createdAt", "ASC"]],
-      });
+
       if (updatePricing) {
         res.status(200).json({
           success: true,
           pricing: updatePricing,
-          allPricing: findAllDrugPricing,
           message: "Pricing updated",
         });
         return;
@@ -184,7 +180,7 @@ export const updateDrugPricing = async (req: Request, res: Response) => {
       }
     } else {
       res.status(404).json({
-        success: false,
+        success: true,
         message: "You have made no changes",
       });
       return;
@@ -357,7 +353,7 @@ export const fetchAllDeletedDrugPricing = async (
     if (allDeletedPricing) {
       res.status(200).json({
         success: true,
-        allPricing: allDeletedPricing,
+        allPricing: pricingAlongWithItsDrug,
       });
       return;
     } else {

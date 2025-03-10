@@ -303,3 +303,18 @@ export const undoDeletedProducts = async (drugID: string): Promise<void> => {
     return;
   }
 };
+
+export const resetProductDetailsGlobalState = () => {
+  AddandEditProductDetailsGlobalState.setState({
+    loading: false,
+    genericName: null,
+    brandName: null,
+    dosageForm: null,
+    drugType: null,
+    dosageStrength: null,
+    routeOfDrugAdministration: null,
+    unitsPerPack: null,
+    drugClass: null,
+    status: null,
+  });
+};

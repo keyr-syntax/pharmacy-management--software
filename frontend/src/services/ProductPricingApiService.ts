@@ -71,7 +71,7 @@ export const getAllProductPricings = async () => {
     if (response.success) {
       console.log("Product Pricing", response);
       ProductPricingGlobalState.setState({
-        pricingList: response.allProductPricings,
+        pricingList: response.allDrugPricing,
         loading: false,
       });
     } else {
@@ -173,7 +173,6 @@ export const updateProductPricingByAdmin = async (
     if (response.success) {
       toast.success(response.message);
       ProductPricingGlobalState.setState({
-        pricingList: response.allPricings,
         drugID: null,
         purchasePrice: null,
         sellingPrice: null,
@@ -219,7 +218,7 @@ export const deleteProductPricing = async (
       if (response.success) {
         toast.success(response.message);
         ProductPricingGlobalState.setState({
-          pricingList: response.allPricings,
+          pricingList: response.allPricing,
         });
       } else {
         toast.error(response.message);
@@ -239,7 +238,7 @@ export const getAllDeletedProductPricings = async () => {
       loading: true,
     });
     const data = await fetch(
-      `${baseURL}/drug_pricing/admin/deleted_drug_pricings`,
+      `${baseURL}/drug_pricing/admin/deleted_drug_pricing`,
       {
         method: "GET",
         headers: {
@@ -252,7 +251,7 @@ export const getAllDeletedProductPricings = async () => {
     const response = await data.json();
     if (response.success) {
       ProductPricingGlobalState.setState({
-        deletedPricingList: response.allPricings,
+        deletedPricingList: response.allPricing,
         loading: false,
       });
     } else {
@@ -290,7 +289,7 @@ export const undoDeletedProductPricing = async (
       if (response.success) {
         toast.success(response.message);
         ProductPricingGlobalState.setState({
-          deletedPricingList: response.allPricings,
+          deletedPricingList: response.allPricing,
           loading: false,
         });
       } else {
@@ -309,4 +308,16 @@ export const undoDeletedProductPricing = async (
   } else {
     return;
   }
+};
+
+export const resetPricingGlobalState = async () => {
+  ProductPricingGlobalState.setState({
+    drugID: null,
+    purchasePrice: null,
+    sellingPrice: null,
+    taxRate: null,
+    margin: null,
+    insuranceCoverage: false,
+    loading: false,
+  });
 };

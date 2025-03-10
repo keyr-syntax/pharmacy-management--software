@@ -27,13 +27,20 @@ export default function AllProductsList() {
   return (
     <>
       {!loading && productsList && productsList.length > 0 ? (
-        <Table className="w-[90%] mt-[90px] mx-auto border">
+        <Table className="w-[95%] mt-[90px] mx-auto border">
           <TableCaption>All Products</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Generic name</TableHead>
               <TableHead>Brand name</TableHead>
-              <TableHead>Status </TableHead> <TableHead>Added on </TableHead>
+              <TableHead>Dosage form</TableHead>
+              <TableHead>Strength</TableHead>
+              <TableHead>Class</TableHead>
+              <TableHead>Prescription</TableHead>
+              <TableHead>Route</TableHead>
+              <TableHead>Units/pack</TableHead>
+              <TableHead>Status </TableHead>
+              <TableHead>Added on </TableHead>
               <TableHead>Actions </TableHead>
             </TableRow>
           </TableHeader>
@@ -42,6 +49,12 @@ export default function AllProductsList() {
               <TableRow key={product.drugID}>
                 <TableCell>{product.genericName}</TableCell>
                 <TableCell>{product.brandName}</TableCell>
+                <TableCell>{product.dosageForm}</TableCell>
+                <TableCell>{product.dosageStrength}</TableCell>
+                <TableCell>{product.drugClass}</TableCell>
+                <TableCell>{product.drugType}</TableCell>
+                <TableCell>{product.routeOfDrugAdministration}</TableCell>
+                <TableCell>{product.unitsPerPack}</TableCell>
                 <TableCell>{product.status}</TableCell>
                 <TableCell>
                   {product.createdAt

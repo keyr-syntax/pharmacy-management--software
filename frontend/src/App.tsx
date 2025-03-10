@@ -16,6 +16,9 @@ import EditInventory from "./components/pages/products/inventory/EditInventory";
 import RecycleBinForDeletedInventories from "./components/pages/recycleBin/RecycleBinForDeletedInventories";
 import AllRecycleBin from "./components/pages/recycleBin/AllRecycleBin";
 import NewProductPricing from "./components/pages/products/pricing/NewProductPricing";
+import ProductPricingsList from "./components/pages/products/pricing/ProductPricingList";
+import EditProductPricing from "./components/pages/products/pricing/EditProductPricing";
+import RecycleBinForProductPricing from "./components/pages/recycleBin/RecycleBinForProductPricing";
 
 function App() {
   return (
@@ -73,6 +76,18 @@ function App() {
           <Route
             path="/workspace/new_product_pricing"
             element={<NewProductPricing />}
+          />
+          <Route
+            path="/workspace/all_pricing"
+            element={<ProductPricingsList />}
+          />
+          <Route
+            path="/workspace/edit_pricing/:pricingID"
+            element={<EditProductPricing />}
+          />
+          <Route
+            path="/workspace/pricing_recycle_bin"
+            element={<RecycleBinForProductPricing />}
           />
         </Route>
         {/* <Route

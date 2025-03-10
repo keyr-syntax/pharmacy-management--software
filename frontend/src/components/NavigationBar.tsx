@@ -142,13 +142,13 @@ export default function NavigationBar() {
                 </Menubar.Item>
               </Link>
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
-              <Link to={`/workspace/all_inventories`}>
+              <Link to={`/workspace/all_pricing`}>
                 <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
                   Pricing list
                 </Menubar.Item>
               </Link>
               <Menubar.Separator className="m-[5px] h-px bg-[rgb(255,255,255,0.2)]" />
-              <Link to={`/workspace/inventories_recycle_bin`}>
+              <Link to={`/workspace/pricing_recycle_bin`}>
                 <Menubar.Item className="group hover:bg-[#26265f] relative flex h-[35px] select-none items-center rounded px-2.5 text-[18px] leading-none text-white outline-none data-[disabled]:pointer-events-none    data-[highlighted]:data-[state=open]:text-white data-[highlighted]:text-white data-[state=open]:text-white">
                   Pricing recycle bin
                 </Menubar.Item>

@@ -326,3 +326,18 @@ export const undoDeletedInventory = async (
     return;
   }
 };
+
+export const resetInventoryGlobalState = () => {
+  InventoryGlobalState.setState({
+    drugID: null,
+    batchNumber: null,
+    barCode: null,
+    storageConditions: null,
+    location: null,
+    expiryDate: null,
+    quantityInStock: null,
+    minimumQuantityInStock: null,
+    reorderStockLevel: null,
+    loading: false,
+  });
+};

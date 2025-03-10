@@ -6,7 +6,10 @@ import {
   getAllDrugClasses,
   getAllRoutesOfDrugAdministration,
 } from "@/services/ProductConstantsApiService";
-import { createNewProduct } from "@/services/ProductDetailsApiService";
+import {
+  createNewProduct,
+  resetProductDetailsGlobalState,
+} from "@/services/ProductDetailsApiService";
 import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { ProductConstantsGlobalState } from "@/stores/product_state_store/ProductConstantsGlobalState";
 import { ProductDetailsTypes } from "@/types/productTypes";
@@ -44,6 +47,7 @@ export default function NewDrugPage() {
   };
 
   useEffect(() => {
+    resetProductDetailsGlobalState();
     getAllDosageForms();
     getAllDrugClasses();
     getAllRoutesOfDrugAdministration();

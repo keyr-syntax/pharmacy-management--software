@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  createNewProductPricing,
-  resetPricingGlobalState,
+  findProductPricingByID,
+  updateProductPricingByAdmin,
 } from "@/services/ProductPricingApiService";
 import { ProductPricingGlobalState } from "@/stores/product_state_store/ProductPricingGlobalState";
 import { ProductPricingTypes } from "@/types/productTypes";
@@ -12,8 +12,9 @@ import { useEffect } from "react";
 import { getAllProducts } from "@/services/ProductDetailsApiService";
 import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 
-export default function NewProductPricing() {
+export default function EditProductPricing() {
   const navigate = useNavigate();
+  const { pricingID } = useParams();
   const {
     drugID,
     purchasePrice,
@@ -26,7 +27,12 @@ export default function NewProductPricing() {
   const { productsList } = AddandEditProductDetailsGlobalState();
 
   useEffect(() => {
-    resetPricingGlobalState();
+    if (pricingID) {
+      findProductPricingByID(pricingID);
+    }
+  }, [pricingID]);
+
+  useEffect(() => {
     getAllProducts();
   }, []);
 
@@ -39,20 +45,22 @@ export default function NewProductPricing() {
     insuranceCoverage: insuranceCoverage,
   };
 
-  const handleSubmitPricing = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdatePricing = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const success = await createNewProductPricing(formData);
-    if (success) {
-      navigate("/workspace/all_pricing");
+    if (pricingID) {
+      const success = await updateProductPricingByAdmin(pricingID, formData);
+      if (success) {
+        navigate("/workspace/all_pricing");
+      }
     }
   };
 
   return (
     <div className="w-[90%] mx-auto mt-[110px]">
-      <p className="text-center text-2xl my-5">Product Pricing Details</p>
+      <p className="text-center text-2xl my-5">Edit Product Pricing</p>
       <form
         className="flex flex-row gap-5 flex-wrap justify-start items-center"
-        onSubmit={handleSubmitPricing}
+        onSubmit={handleUpdatePricing}
       >
         <div className="w-[30%] grid gap-3">
           <Label htmlFor="product">Product</Label>

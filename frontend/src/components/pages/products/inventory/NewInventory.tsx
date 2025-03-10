@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/popover";
 
 import { useNavigate } from "react-router-dom";
-import { createNewInventory } from "@/services/InventoryApiService";
+import {
+  createNewInventory,
+  resetInventoryGlobalState,
+} from "@/services/InventoryApiService";
 import { InventoryTypes } from "../../../../types/productTypes";
 import { InventoryGlobalState } from "@/stores/product_state_store/InventoryGlobalState";
 import { CalendarIcon } from "lucide-react";
@@ -25,6 +28,7 @@ export default function NewInventoryPage() {
   const { productsList } = AddandEditProductDetailsGlobalState();
 
   useEffect(() => {
+    resetInventoryGlobalState();
     getAllProducts();
     getAllStorageConditions();
   }, []);

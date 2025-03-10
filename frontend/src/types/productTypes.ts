@@ -54,4 +54,5 @@ export type ProductPricingTypes = {
   taxRate: number | null;
   margin?: number | null;
   insuranceCoverage?: boolean;
+  drug?: ProductDetailsTypes;
 };
