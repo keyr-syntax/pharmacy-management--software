@@ -203,6 +203,9 @@ export const deleteProductPricing = async (
 ): Promise<void> => {
   if (window.confirm("Are you sure you want to delete this Product Pricing?")) {
     try {
+      ProductPricingGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(
         `${baseURL}/drug_pricing/admin/delete_drug_pricing/${pricingID}`,
         {
@@ -219,12 +222,19 @@ export const deleteProductPricing = async (
         toast.success(response.message);
         ProductPricingGlobalState.setState({
           pricingList: response.allPricing,
+          loading: false,
         });
       } else {
         toast.error(response.message);
+        ProductPricingGlobalState.setState({
+          loading: false,
+        });
       }
     } catch (error) {
       toast.error("Failed to delete Product Pricing");
+      ProductPricingGlobalState.setState({
+        loading: false,
+      });
       console.log("Error while deleting Product Pricing", error);
     }
   } else {
@@ -275,6 +285,9 @@ export const undoDeletedProductPricing = async (
     window.confirm("Are you sure you want to restore this Product Pricing?")
   ) {
     try {
+      ProductPricingGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(
         `${baseURL}/drug_pricing/admin/restore_deleted_pricing/${pricingID}`,
         {

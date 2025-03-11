@@ -14,6 +14,7 @@ import {
 } from "@/services/InventoryApiService";
 
 import { InventoryGlobalState } from "@/stores/product_state_store/InventoryGlobalState";
+import Loading from "@/components/ui/loading";
 
 export default function RecycleBinForDeletedInventories() {
   const { deletedInventoryList, loading } = InventoryGlobalState();
@@ -24,6 +25,7 @@ export default function RecycleBinForDeletedInventories() {
 
   return (
     <>
+      {loading && <Loading />}
       {!loading && deletedInventoryList && deletedInventoryList.length > 0 ? (
         <>
           <h1 className="text-center text-[20px] font-bold mb-3 mt-[90px]">

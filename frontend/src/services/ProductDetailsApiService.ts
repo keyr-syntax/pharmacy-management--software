@@ -188,7 +188,6 @@ export const updateProductByAdmin = async (
         unitsPerPack: null,
         drugClass: null,
         status: null,
-        loading: false,
       });
       return true;
     } else {
@@ -209,6 +208,9 @@ export const updateProductByAdmin = async (
 export const DeleteProduct = async (drugID: string): Promise<void> => {
   if (window.confirm("Are you sure you want to delete this product?")) {
     try {
+      AddandEditProductDetailsGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(`${baseURL}/drugs/admin/delete_drug/${drugID}`, {
         method: "PUT",
         headers: {
@@ -222,13 +224,20 @@ export const DeleteProduct = async (drugID: string): Promise<void> => {
         toast.success(response.message);
         AddandEditProductDetailsGlobalState.setState({
           productsList: response.allDrugs,
+          loading: false,
         });
       } else {
         toast.error(response.message);
+        AddandEditProductDetailsGlobalState.setState({
+          loading: false,
+        });
       }
     } catch (error) {
       toast.error("Failed to delete product");
       console.log("Error while deleting product", error);
+      AddandEditProductDetailsGlobalState.setState({
+        loading: false,
+      });
     }
   } else {
     return;
@@ -269,6 +278,9 @@ export const getAllDeletedProducts = async () => {
 export const undoDeletedProducts = async (drugID: string): Promise<void> => {
   if (window.confirm("Are you sure you want to undo this product?")) {
     try {
+      AddandEditProductDetailsGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(
         `${baseURL}/drugs/admin/restore_deleted_drug/${drugID}`,
         {

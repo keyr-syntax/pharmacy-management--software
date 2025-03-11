@@ -224,6 +224,9 @@ export const DeleteInventory = async (
 ): Promise<void> => {
   if (window.confirm("Are you sure you want to delete this Inventory?")) {
     try {
+      InventoryGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(
         `${baseURL}/drug_inventory/admin/delete_drug_inventory/${drugInventoryID}`,
         {
@@ -240,12 +243,19 @@ export const DeleteInventory = async (
         toast.success(response.message);
         InventoryGlobalState.setState({
           inventoryList: response.allInventories,
+          loading: false,
         });
       } else {
         toast.error(response.message);
+        InventoryGlobalState.setState({
+          loading: false,
+        });
       }
     } catch (error) {
       toast.error("Failed to delete Inventory");
+      InventoryGlobalState.setState({
+        loading: false,
+      });
       console.log("Error while deleting Inventory", error);
     }
   } else {
@@ -292,6 +302,9 @@ export const undoDeletedInventory = async (
 ): Promise<void> => {
   if (window.confirm("Are you sure you want to restore this Inventory?")) {
     try {
+      InventoryGlobalState.setState({
+        loading: true,
+      });
       const data = await fetch(
         `${baseURL}/drug_inventory//admin/restore_deleted_inventory/${drugInventoryID}`,
         {

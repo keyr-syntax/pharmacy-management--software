@@ -17,6 +17,7 @@ import {
 
 import { Link } from "react-router-dom";
 import { InventoryGlobalState } from "@/stores/product_state_store/InventoryGlobalState";
+import Loading from "@/components/ui/loading";
 
 export default function AllInventoryList() {
   const { inventoryList, loading } = InventoryGlobalState();
@@ -27,6 +28,7 @@ export default function AllInventoryList() {
 
   return (
     <>
+      {loading && <Loading />}
       {!loading && inventoryList && inventoryList.length > 0 ? (
         <Table className="w-[90%] mt-[90px] mx-auto border">
           <TableCaption>All Inventories</TableCaption>

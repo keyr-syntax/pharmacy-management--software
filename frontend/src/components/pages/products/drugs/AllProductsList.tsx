@@ -16,6 +16,7 @@ import {
 } from "@/services/ProductDetailsApiService";
 import { AddandEditProductDetailsGlobalState } from "@/stores/product_state_store/ProductDetailsGlobalState";
 import { Link } from "react-router-dom";
+import Loading from "@/components/ui/loading";
 
 export default function AllProductsList() {
   const { productsList, loading } = AddandEditProductDetailsGlobalState();
@@ -26,6 +27,7 @@ export default function AllProductsList() {
 
   return (
     <>
+      {loading && <Loading />}
       {!loading && productsList && productsList.length > 0 ? (
         <Table className="w-[95%] mt-[90px] mx-auto border">
           <TableCaption>All Products</TableCaption>

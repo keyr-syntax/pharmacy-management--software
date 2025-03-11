@@ -16,6 +16,7 @@ import {
 } from "@/services/ProductPricingApiService";
 import { ProductPricingGlobalState } from "@/stores/product_state_store/ProductPricingGlobalState";
 import { Link } from "react-router-dom";
+import Loading from "@/components/ui/loading";
 
 export default function ProductPricingsList() {
   const { pricingList, loading } = ProductPricingGlobalState();
@@ -26,7 +27,8 @@ export default function ProductPricingsList() {
 
   return (
     <>
-      {!loading && pricingList && pricingList.length > 0 ? (
+      {loading && <Loading />}
+      {!loading && pricingList && pricingList.length > 0 && (
         <Table className="w-[90%] mt-[90px] mx-auto border">
           <TableCaption>All Product Pricings</TableCaption>
           <TableHeader>
@@ -72,7 +74,8 @@ export default function ProductPricingsList() {
             ))}
           </TableBody>
         </Table>
-      ) : (
+      )}
+      {!loading && pricingList && pricingList.length === 0 && (
         <div className="block text-center text-2xl mt-[90px]">
           No Product Pricing found
         </div>

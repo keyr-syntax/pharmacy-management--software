@@ -13,6 +13,7 @@ import {
   undoDeletedProductPricing,
 } from "@/services/ProductPricingApiService";
 import { ProductPricingGlobalState } from "@/stores/product_state_store/ProductPricingGlobalState";
+import Loading from "@/components/ui/loading";
 
 export default function RecycleBinForProductPricing() {
   const { deletedPricingList, loading } = ProductPricingGlobalState();
@@ -23,6 +24,7 @@ export default function RecycleBinForProductPricing() {
 
   return (
     <>
+      {loading && <Loading />}
       {!loading && deletedPricingList && deletedPricingList.length > 0 ? (
         <>
           <h1 className="text-center text-[20px] font-bold mb-3 mt-[90px]">

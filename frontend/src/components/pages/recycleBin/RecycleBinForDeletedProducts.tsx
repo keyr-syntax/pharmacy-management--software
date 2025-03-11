@@ -15,6 +15,7 @@ import {
   undoDeletedProducts,
   getAllDeletedProducts,
 } from "@/services/ProductDetailsApiService";
+import Loading from "@/components/ui/loading";
 
 export default function RecycleBinForDeletedProducts() {
   const { deletedProductsList, loading } =
@@ -26,6 +27,7 @@ export default function RecycleBinForDeletedProducts() {
 
   return (
     <>
+      {loading && <Loading />}
       {!loading && deletedProductsList && deletedProductsList.length > 0 ? (
         <>
           <h1 className="text-center text-[20px] font-bold mb-3 mt-[90px]">
