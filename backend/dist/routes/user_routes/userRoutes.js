@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const pharmacyUserControllers_1 = require("../../controllers/user_controllers/pharmacyUserControllers");
+const pharmacyUserMiddleware_1 = require("../../middleware/pharmacyUserMiddleware");
+const router = express_1.default.Router();
+router.post("/create_user", pharmacyUserControllers_1.createPharmacyUser);
+router.post("/login", pharmacyUserControllers_1.loginPharmacyUser);
+router.get("/logout", pharmacyUserMiddleware_1.userAuthenticationMiddleware, pharmacyUserControllers_1.logoutUser);
+router.put("/admin/update_user_profile/:userID", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.updatePharmacyUserProfileByAdmin);
+router.put("/update_user_profile", pharmacyUserMiddleware_1.userAuthenticationMiddleware, pharmacyUserControllers_1.updateUserProfile);
+router.get("/admin/fetch_all_users", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.fetchAllPharmacyUsers);
+router.get("/admin/fetch_user_byid/:userID", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.fetchOneUserByID);
+router.get("/fetch_user_byid/:userID", pharmacyUserMiddleware_1.userAuthenticationMiddleware, pharmacyUserControllers_1.fetchOneUserByID);
+router.get("/fetch_user_byid_for_profile_update", pharmacyUserMiddleware_1.userAuthenticationMiddleware, pharmacyUserControllers_1.fetchOneUserByIDForProfileUpdate);
+router.delete("/admin/delete_user/:userID", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.deleteUser);
+router.get("/admin/deleted_items", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.fetchAllDeletedItems);
+router.put("/admin/undo_deleted_user/:userID", pharmacyUserMiddleware_1.adminAuthenticationMiddleware, pharmacyUserControllers_1.undoDeletedUser);
+exports.default = router;

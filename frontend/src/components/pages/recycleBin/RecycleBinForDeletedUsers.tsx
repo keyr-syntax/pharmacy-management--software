@@ -14,9 +14,10 @@ import {
 
 import { useEffect } from "react";
 import { DeletedItemsGlobalState } from "@/stores/user_state_store/UserGlobalState";
+import Loading from "@/components/ui/loading";
 
 export default function DeletedUsersList() {
-  const { deltedUsersList } = DeletedItemsGlobalState();
+  const { deltedUsersList, loading } = DeletedItemsGlobalState();
 
   useEffect(() => {
     getAllDeletedUsers();
@@ -24,7 +25,8 @@ export default function DeletedUsersList() {
 
   return (
     <>
-      {deltedUsersList && deltedUsersList.length > 0 ? (
+      {loading && <Loading />}
+      {!loading && deltedUsersList && deltedUsersList.length > 0 ? (
         <>
           <h1 className="text-center text-[20px] font-bold mb-3 mt-[90px]">
             Deleted Employees List

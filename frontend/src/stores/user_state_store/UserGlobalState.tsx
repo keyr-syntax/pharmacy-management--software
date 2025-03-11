@@ -9,6 +9,7 @@ import {
 
 interface PharmacyUserApiResponse {
   usersList: PharmacyUser[] | null;
+  loading: boolean;
 }
 
 interface RegisterPharmacyUserApiResponse {
@@ -25,10 +26,12 @@ interface EditPharmacyUserApiResponse {
   phoneNumber: string | null;
   role: string | null;
   isBlocked: string | null;
+  loading: boolean;
 }
 
 interface DeletedItemsApiResponse {
   deltedUsersList: PharmacyUser[] | null;
+  loading: boolean;
 }
 
 interface UpdateUserProfileApiResponse {
@@ -42,6 +45,7 @@ interface UpdateUserProfileApiResponse {
 
 export const PharmacyUserGlobalState = create<PharmacyUserApiResponse>(() => ({
   usersList: null,
+  loading: false,
 }));
 
 export const EditPharmacyUserGlobalState = create<EditPharmacyUserApiResponse>(
@@ -54,11 +58,13 @@ export const EditPharmacyUserGlobalState = create<EditPharmacyUserApiResponse>(
     phoneNumber: null,
     role: null,
     isBlocked: null,
+    loading: false,
   })
 );
 
 export const DeletedItemsGlobalState = create<DeletedItemsApiResponse>(() => ({
   deltedUsersList: null,
+  loading: false,
 }));
 
 export const RegisterPharmacyUserGlobalState =

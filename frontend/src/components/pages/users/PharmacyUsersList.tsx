@@ -22,9 +22,10 @@ import {
 
 import { useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import Loading from "@/components/ui/loading";
 
 export default function PharmacyUsersList() {
-  const { usersList } = PharmacyUserGlobalState();
+  const { usersList, loading } = PharmacyUserGlobalState();
   const {
     userEditID,
     firstName,
@@ -41,7 +42,8 @@ export default function PharmacyUsersList() {
 
   return (
     <>
-      {usersList && usersList.length > 0 ? (
+      {loading && <Loading />}
+      {!loading && usersList && usersList.length > 0 ? (
         <Table className="w-[90%] mt-[90px] mx-auto border ">
           <TableCaption>A list of Employees</TableCaption>
           <TableHeader>

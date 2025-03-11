@@ -1,0 +1,12 @@
+import { Request, Response } from "express";
+export declare const createPharmacyUser: (req: Request, res: Response) => Promise<void>;
+export declare const loginPharmacyUser: (req: Request, res: Response) => Promise<void>;
+export declare const updatePharmacyUserProfileByAdmin: (req: Request, res: Response) => Promise<void>;
+export declare const fetchOneUserByIDForProfileUpdate: (req: Request, res: Response) => Promise<void>;
+export declare const updateUserProfile: (req: Request, res: Response) => Promise<void>;
+export declare const logoutUser: (req: Request, res: Response) => void;
+export declare const fetchAllPharmacyUsers: (req: Request, res: Response) => Promise<void>;
+export declare const fetchAllDeletedItems: (req: Request, res: Response) => Promise<void>;
+export declare const fetchOneUserByID: (req: Request, res: Response) => Promise<void>;
+export declare const deleteUser: (req: Request, res: Response) => Promise<void>;
+export declare const undoDeletedUser: (req: Request, res: Response) => Promise<void>;
