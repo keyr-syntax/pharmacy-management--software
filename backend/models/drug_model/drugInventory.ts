@@ -9,6 +9,8 @@ export interface drugInventoryInterface {
   storageConditions: string;
   location: string;
   expiryDate: Date;
+  hasProductExpired: boolean;
+  isProductExpiryNotified: boolean;
   quantityInStock: number;
   minimumQuantityInStock: number;
   reorderStockLevel: number;
@@ -26,6 +28,8 @@ class DRUG_INVENTORY
   public storageConditions!: string;
   public location!: string;
   public expiryDate!: Date;
+  public hasProductExpired!: boolean;
+  public isProductExpiryNotified!: boolean;
   public quantityInStock!: number;
   public minimumQuantityInStock!: number;
   public reorderStockLevel!: number;
@@ -80,6 +84,16 @@ DRUG_INVENTORY.init(
     expiryDate: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    hasProductExpired: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    isProductExpiryNotified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     softDeleted: {
       type: DataTypes.BOOLEAN,

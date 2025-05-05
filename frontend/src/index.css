@@ -7,22 +7,24 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #151533;
+  background-color: #09090b;
   color: white;
 }
 
-body.dark-mode {
+body.dark {
   background-color: white;
   color: black;
 }
 
 @media (max-width: 768px) {
   body {
-    background-color: #151533; /* Ensure the same background color for small screens */
+    background-color: #09090b;
+    color: white;
   }
 
-  body.dark-mode {
-    background-color: white; /* Ensure the same background color for small screens in dark mode */
+  body.dark {
+    background-color: white;
+    color: black;
   }
 }
 @layer base {
@@ -81,8 +83,6 @@ body.dark-mode {
     @apply border-border outline-ring/50;
   }
 }
-
-
 
 @layer base {
   * {

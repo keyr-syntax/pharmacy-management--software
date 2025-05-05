@@ -11,6 +11,9 @@ export const addNewDrugPricing = async (req: Request, res: Response) => {
     margin,
     insuranceCoverage,
   } = req.body;
+
+  // validation
+
   try {
     const doesDrugPricingExist = await DRUG_PRICING.findOne({
       where: {
